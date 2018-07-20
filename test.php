@@ -1,11 +1,20 @@
 <!doctype html>
 <html lang="en">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="css" href="assets/Carousel.css">
+
+
+
+
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
+
 
     <title>Jumbotron Template for Bootstrap</title>
 
@@ -63,28 +72,186 @@
       </div>
 
       <div class="container">
-        <!-- Example row of columns -->
-        <div class="row">
-          <div class="col-md-4">
-            <h2>Heading</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-          </div>
-          <div class="col-md-4">
-            <h2>Heading</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-          </div>
-          <div class="col-md-4">
-            <h2>Heading</h2>
-            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-          </div>
-        </div>
+      <div class="col-xs-12">
 
-        <hr>
+          <div class="page-header">
+              <h3>Ofertas Descatadas</h3>
+          </div>
 
-      </div> <!-- /container -->
+          <div class="carousel slide" id="myCarousel">
+              <div class="carousel-inner">
+                  <div class="item active">
+                          <ul class="thumbnails">
+                              <li class="col-sm-3">
+          						<div class="fff">
+      								<div class="thumbnail">
+      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+      								</div>
+      								<div class="caption">
+      									<h4>Praesent commodo</h4>
+      									<p>Nullam Condimentum Nibh Etiam Sem</p>
+      									<a class="btn btn-mini" href="#">» Read More</a>
+      								</div>
+                                  </div>
+                              </li>
+                              <li class="col-sm-3">
+      							<div class="fff">
+      								<div class="thumbnail">
+      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+      								</div>
+      								<div class="caption">
+      									<h4>Praesent commodo</h4>
+      									<p>Nullam Condimentum Nibh Etiam Sem</p>
+      									<a class="btn btn-mini" href="#">» Read More</a>
+      								</div>
+                                  </div>
+                              </li>
+                              <li class="col-sm-3">
+      							<div class="fff">
+      								<div class="thumbnail">
+      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+      								</div>
+      								<div class="caption">
+      									<h4>Praesent commodo</h4>
+      									<p>Nullam Condimentum Nibh Etiam Sem</p>
+      									<a class="btn btn-mini" href="#">» Read More</a>
+      								</div>
+                                  </div>
+                              </li>
+                              <li class="col-sm-3">
+      							<div class="fff">
+      								<div class="thumbnail">
+      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+      								</div>
+      								<div class="caption">
+      									<h4>Praesent commodo</h4>
+      									<p>Nullam Condimentum Nibh Etiam Sem</p>
+      									<a class="btn btn-mini" href="#">» Read More</a>
+      								</div>
+                                  </div>
+                              </li>
+                          </ul>
+                    </div><!-- /Slide1 -->
+                  <div class="item">
+                          <ul class="thumbnails">
+                              <li class="col-sm-3">
+      							<div class="fff">
+      								<div class="thumbnail">
+      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+      								</div>
+      								<div class="caption">
+      									<h4>Praesent commodo</h4>
+      									<p>Nullam Condimentum Nibh Etiam Sem</p>
+      									<a class="btn btn-mini" href="#">» Read More</a>
+      								</div>
+                                  </div>
+                              </li>
+                              <li class="col-sm-3">
+      							<div class="fff">
+      								<div class="thumbnail">
+      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+      								</div>
+      								<div class="caption">
+      									<h4>Praesent commodo</h4>
+      									<p>Nullam Condimentum Nibh Etiam Sem</p>
+      									<a class="btn btn-mini" href="#">» Read More</a>
+      								</div>
+                                  </div>
+                              </li>
+                              <li class="col-sm-3">
+      							<div class="fff">
+      								<div class="thumbnail">
+      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+      								</div>
+      								<div class="caption">
+      									<h4>Praesent commodo</h4>
+      									<p>Nullam Condimentum Nibh Etiam Sem</p>
+      									<a class="btn btn-mini" href="#">» Read More</a>
+      								</div>
+                                  </div>
+                              </li>
+                              <li class="col-sm-3">
+      							<div class="fff">
+      								<div class="thumbnail">
+      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+      								</div>
+      								<div class="caption">
+      									<h4>Praesent commodo</h4>
+      									<p>Nullam Condimentum Nibh Etiam Sem</p>
+      									<a class="btn btn-mini" href="#">» Read More</a>
+      								</div>
+                                  </div>
+                              </li>
+                          </ul>
+                    </div><!-- /Slide2 -->
+                  <div class="item">
+                          <ul class="thumbnails">
+                              <li class="col-sm-3">
+      							<div class="fff">
+      								<div class="thumbnail">
+      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+      								</div>
+      								<div class="caption">
+      									<h4>Praesent commodo</h4>
+      									<p>Nullam Condimentum Nibh Etiam Sem</p>
+      									<a class="btn btn-mini" href="#">» Read More</a>
+      								</div>
+                                  </div>
+                              </li>
+                              <li class="col-sm-3">
+      							<div class="fff">
+      								<div class="thumbnail">
+      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+      								</div>
+      								<div class="caption">
+      									<h4>Praesent commodo</h4>
+      									<p>Nullam Condimentum Nibh Etiam Sem</p>
+      									<a class="btn btn-mini" href="#">» Read More</a>
+      								</div>
+                                  </div>
+                              </li>
+                              <li class="col-sm-3">
+      							<div class="fff">
+      								<div class="thumbnail">
+      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+      								</div>
+      								<div class="caption">
+      									<h4>Praesent commodo</h4>
+      									<p>Nullam Condimentum Nibh Etiam Sem</p>
+      									<a class="btn btn-mini" href="#">» Read More</a>
+      								</div>
+                                  </div>
+                              </li>
+                              <li class="col-sm-3">
+      							<div class="fff">
+      								<div class="thumbnail">
+      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+      								</div>
+      								<div class="caption">
+      									<h4>Praesent commodo</h4>
+      									<p>Nullam Condimentum Nibh Etiam Sem</p>
+      									<a class="btn btn-mini" href="#">» Read More</a>
+      								</div>
+                                  </div>
+                              </li>
+                          </ul>
+                    </div><!-- /Slide3 -->
+              </div>
+
+
+      	   <nav>
+      			<ul class="control-box pager">
+      				<li><a data-slide="prev" href="#myCarousel" class=""><i class="glyphicon glyphicon-chevron-left"></i></a></li>
+      				<li><a data-slide="next" href="#myCarousel" class=""><i class="glyphicon glyphicon-chevron-right"></i></li>
+      			</ul>
+      		</nav>
+      	   <!-- /.control-box -->
+
+          </div><!-- /#myCarousel -->
+
+      </div><!-- /.col-xs-12 -->
+
+      </div><!-- /.container -->
 
     </main>
 
