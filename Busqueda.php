@@ -2,7 +2,7 @@
 <html lang="en">
 
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
 <link rel="stylesheet" type="text/css" href="assets/css/shop-homepage.css">
 
 
@@ -24,6 +24,12 @@
     <!-- Custom styles for this template -->
     <link href="assets/css/jumbotron.css" rel="stylesheet">
   </head>
+
+  <style>
+div {
+    padding-bottom: 10px;
+}
+</style>
 
   <body>
 
@@ -67,8 +73,8 @@
           <div class="row">
 
             <div class="col-lg-4 col-md-6 mb-4">
-              <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="" alt=""></a>
+              <div class="table-bordered">
+                <a href="#"><img class="img-responsive" src="http://placehold.it/700x400" alt=""></a>
                 <div class="card-body">
                   <h4 class="card-title">
                     <a href="#">Item One</a>
@@ -83,8 +89,8 @@
             </div>
 
             <div class="col-lg-4 col-md-6 mb-4">
-              <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="" alt=""></a>
+              <div class="table-bordered">
+                <a href="#"><img class="img-responsive" src="http://placehold.it/700x400" alt=""></a>
                 <div class="card-body">
                   <h4 class="card-title">
                     <a href="#">Item Two</a>
@@ -99,8 +105,8 @@
             </div>
 
             <div class="col-lg-4 col-md-6 mb-4">
-              <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="" alt=""></a>
+              <div class="table-bordered">
+                <a href="#"><img class="img-responsive" src="http://placehold.it/700x400" alt=""></a>
                 <div class="card-body">
                   <h4 class="card-title">
                     <a href="#">Item Three</a>
@@ -115,8 +121,8 @@
             </div>
 
             <div class="col-lg-4 col-md-6 mb-4">
-              <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="" alt=""></a>
+              <div class="table-bordered">
+                <a href="#"><img class="img-responsive" src="http://placehold.it/700x400" alt=""></a>
                 <div class="card-body">
                   <h4 class="card-title">
                     <a href="#">Item Four</a>
@@ -131,8 +137,8 @@
             </div>
 
             <div class="col-lg-4 col-md-6 mb-4">
-              <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="" alt=""></a>
+              <div class="table-bordered">
+                <a href="#"><img class="img-responsive" src="http://placehold.it/700x400" alt=""></a>
                 <div class="card-body">
                   <h4 class="card-title">
                     <a href="#">Item Five</a>
@@ -147,8 +153,8 @@
             </div>
 
             <div class="col-lg-4 col-md-6 mb-4">
-              <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="" alt=""></a>
+              <div class="table-bordered">
+                <a href="#"><img class="img-responsive" src="http://placehold.it/700x400" alt=""></a>
                 <div class="card-body">
                   <h4 class="card-title">
                     <a href="#">Item Six</a>
@@ -181,6 +187,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="assets/js/jquery-slim.min.js"><\/script>')</script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
   </body>
