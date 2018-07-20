@@ -19,7 +19,7 @@
 
     </ul>
 
-    <form class="navbar-form navbar-left" action="#" style="width:40%">
+    <form class="navbar-form navbar-left" action="Busqueda.php" style="width:40%">
       <div class="form-group" style="width:75%">
         <input type="text" class="form-control" placeholder="¿Qué estás buscando?" style="width:100%">
       </div>
