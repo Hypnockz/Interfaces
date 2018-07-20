@@ -176,21 +176,27 @@ div {
 
       </div>
       <!-- /.row -->
-      <div class="text-center">
-  <ul class="pagination justify-content-center">
-    <li class="page-item disabled">
-      <a class="page-link" href="#" tabindex="-1">Previous</a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
 
-    <li class="page-item disabled">
-      <a class="page-link" href="#">Next</a>
-    </li>
-  </ul>
-</div>
+      <!-- Number Navigator-->
+
+      <div class="text-center">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">Previous</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+
+          <li class="page-item disabled">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </div>
+
+<!--END Number Navigator-->
+
     </div>
 
-    <!-- Number Navigator-->
+
 
 
     <footer class="container">
