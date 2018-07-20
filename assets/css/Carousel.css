@@ -50,6 +50,7 @@ ul.thumbnails {
 }
 
 #sales{
+    width: auto;
     margin-top: 50px;
     margin-bottom: 50px;
 }
