@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header" style="width:15%">
-      <a class="navbar-brand" href="#">DealsWatcher</a>
+      <a class="navbar-brand" href="index.php">DealsWatcher</a>
     </div>
     <ul class="nav navbar-nav" style="width:15%">
 
