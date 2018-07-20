@@ -27,6 +27,7 @@
     </form>
 
     <ul class="nav navbar-nav navbar-right">
+      <li><a href="index.php"><span class="glyphicon glyphicon-home"></span> inicio</a></li>
       <li><a href="#"><span class="glyphicon glyphicon-list-alt"></span> Mis Listas</a></li>
       <li><a href="#"><span class="glyphicon glyphicon-user"></span> Mi Cuenta</a></li>
     </ul>
