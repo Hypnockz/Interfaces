@@ -30,18 +30,19 @@ data:{
   {id:5,nombre:'Unimarc'}
   ],
 
+  paginate:['productos'],
 
-  productos :[
+  productosQuery :[
 {id:'1', nombre:'Leche1', marca:'Colun', precio:'1100'},
-{id:'2', nombre:'Leche1', marca:'Colun', precio:'1100'},
-{id:'3', nombre:'Leche1', marca:'Colun', precio:'1100'},
-{id:'4', nombre:'Leche1', marca:'Colun', precio:'1100'},
-{id:'5', nombre:'Leche1', marca:'Colun', precio:'1100'},
-{id:'6', nombre:'Leche1', marca:'Colun', precio:'1100'},
-{id:'7', nombre:'Leche1', marca:'Colun', precio:'1100'},
-{id:'8', nombre:'Leche1', marca:'Colun', precio:'1100'},
-{id:'9', nombre:'Leche1', marca:'Colun', precio:'1100'},
-{id:'10', nombre:'Leche1', marca:'Colun', precio:'1100'}
+{id:'2', nombre:'Leche2', marca:'Colun', precio:'1100'},
+{id:'3', nombre:'Leche3', marca:'Colun', precio:'1100'},
+{id:'4', nombre:'Leche4', marca:'Colun', precio:'1100'},
+{id:'5', nombre:'Leche5', marca:'Colun', precio:'1100'},
+{id:'6', nombre:'Leche6', marca:'Colun', precio:'1100'},
+{id:'7', nombre:'Leche7', marca:'Colun', precio:'1100'},
+{id:'8', nombre:'Leche8', marca:'Colun', precio:'1100'},
+{id:'9', nombre:'Leche9', marca:'Colun', precio:'1100'},
+{id:'10', nombre:'Leche10', marca:'Colun', precio:'1100'}
 
 
   ]
