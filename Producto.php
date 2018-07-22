@@ -5,6 +5,7 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <link rel="stylesheet" type="text/css" href="assets/css/grids.css">
 <link rel="stylesheet" type="text/css" href="assets/css/Carousel.css">
 
@@ -28,9 +29,40 @@
     <link href="assets/css/jumbotron.css" rel="stylesheet">
   </head>
 
-  <style>
 
-</style>
+  <?php
+  $db = pg_connect("host=plop.inf.udec.cl port=5432 dbname=bdi2017d user=bdi2017d password=bdi2017d");
+
+  if(isset($_GET["id"])){
+     // echo $_GET["nombre_D"];
+      $id_producto = $_GET["id"];
+  }
+  else echo "ERROR";
+
+  $Productos=pg_query($db,  "select *
+                                   from interfaces.producto as p
+                                  " );
+
+  $consulta=pg_query_params($db,  "select *
+                                   from interfaces.precios as p , interfaces.supermercado as s
+                                   where p.id_producto = $1 and s.id = p.id_super",array($id_producto));
+
+  $n_supermercados= pg_num_rows($consulta);
+
+  $n_productos = pg_num_rows($Productos);
+
+  $dataPoints_lider = array();
+  $dataPoints_jumbo = array();
+  $dataPoints_santaisabel = array();
+  $dataPoints_tottus = array();
+  $dataPoints_unimarc = array();
+
+
+
+
+  ?>
+
+
 
   <body>
 
@@ -45,22 +77,22 @@
 
       <div class="col-md-4">
         <div class="row row-no-margin">
-          <img class="img-responsive" src="http://placehold.it/700x400" alt=""></a>
+          <img class="img-responsive" src="<?php  echo"assets/img/{$id_producto}.png"; ?> " alt=""></a>
         </div>
 
         <div class="row row-no-margin">
 
           <div class="col-xs-6 col-sm-6 col-no-padding">
-              <img class="thumbnail img-responsive" src="http://placehold.it/100x100" style="margin-top: 10px;">
+              <img class="thumbnail img-responsive" src="assets/img/like.png" style="margin-top: 10px;">
           </div>
           <div class="col-xs-6 col-sm-6 col-no-padding">
-              <img class="thumbnail img-responsive" src="http://placehold.it/100x100" style="margin-top: 10px;">
+              <img class="thumbnail img-responsive" src="assets/img/add_list.png" style="margin-top: 10px;">
           </div>
         </div>
 
         <div class="row row-no-margin">
 
-          <img class="center-block" src="http://placehold.it/300x50">
+          <img class="center-block" src="assets/img/Redes_Sociales.png">
 
         </div>
 
@@ -74,48 +106,75 @@
                   <thead>
                     <tr>
                       <th scope="col">#</th>
-                      <th scope="col">First</th>
-                      <th scope="col">Last</th>
-                      <th scope="col">Handle</th>
+                      <th scope="col">Supermercado</th>
+                      <th scope="col">Precio Oferta</th>
+                      <th scope="col">Precio Normal</th>
                     </tr>
                   </thead>
                   <tbody>
+                  <?php
+                  for($i=0;$i<$n_supermercados;$i++){
+                    $row = pg_fetch_array ( $consulta,$i );
+                    $auxx= $row[1]-1;
+                    $maxprice = $row[3] + 200;
+                    $minprice = $row [3] - 100;
+
+
+                    switch ($auxx) {
+                        case 0:
+                            for($j=25;$j<=31;$j++) {
+                              if ($j==31 ){$dataPoints_lider[] = array("y"=> $row[3], "label"=> "Jul {$j}"); continue; }
+                              $dataPoints_lider[] = array("y"=> rand($minprice,$maxprice) , "label"=> "Jul {$j}");
+                            }
+                            break;
+                        case 1:
+                            for($j=25;$j<=31;$j++) {
+                              if ($j==31 ){$dataPoints_jumbo[] = array("y"=> $row[3], "label"=> "Jul {$j}"); continue; }
+                              $dataPoints_jumbo[] = array("y"=> rand($minprice,$maxprice) , "label"=> "Jul {$j}");
+                            }
+                            break;
+                        case 2:
+                            for($j=25;$j<=31;$j++) {
+                              if ($j==31 ){$dataPoints_santaisabel[] = array("y"=> $row[3], "label"=> "Jul {$j}"); continue; }
+                              $dataPoints_santaisabel[] = array("y"=> rand($minprice,$maxprice) , "label"=> "Jul {$j}");
+                            }
+                            break;
+                        case 3:
+                            for($j=25;$j<=31;$j++) {
+                              if ($j==31 ){$dataPoints_tottus[] = array("y"=> $row[3], "label"=> "Jul {$j}"); continue; }
+                              $dataPoints_tottus[] = array("y"=> rand($minprice,$maxprice) , "label"=> "Jul {$j}");
+                            }
+                            break;
+                        case 4:
+                            for($j=25;$j<=31;$j++) {
+                              if ($j==31 ){$dataPoints_unimarc[] = array("y"=> $row[3], "label"=> "Jul {$j}"); continue; }
+                              $dataPoints_unimarc[] = array("y"=> rand($minprice,$maxprice) , "label"=> "Jul {$j}");
+                            }
+                            break;
+
+                    }
+
+
+
+
+
+                    $aux = $i+1;
+                    $text = "
                     <tr>
-                      <th scope="row">1</th>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
+                      <th scope=\"row\">{$aux}</th>
+                      <td>{$row[5]}</td>
+                      <td>{$row[3]}</td>
+                      <td>{$row[2]}</td>
                     </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>Jacob</td>
-                      <td>Thornton</td>
-                      <td>@fat</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>Larry</td>
-                      <td>the Bird</td>
-                      <td>@twitter</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">4</th>
-                      <td>Larry</td>
-                      <td>the Bird</td>
-                      <td>@twitter</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">5</th>
-                      <td>Larry</td>
-                      <td>the Bird</td>
-                      <td>@twitter</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">6 </th>
-                      <td>Larry</td>
-                      <td>the Bird</td>
-                      <td>@twitter</td>
-                    </tr>
+                    ";
+
+                    echo $text;
+
+                    }
+
+                  ?>
+
+
                   </tbody>
                 </table>
             </div>
@@ -138,8 +197,85 @@
 
         <div class="row row-no-margin" style="margin: 0; margin-top: 40px;">
 
-         <img class="img-responsive" src="http://placehold.it/1100x300" alt=""></a>
+         <!--<img class="img-responsive" src="http://placehold.it/1100x300" alt=""></a>-->
 
+
+
+
+         <?php
+
+           $encode1 = json_encode($dataPoints_lider, JSON_NUMERIC_CHECK);
+           $encode2 = json_encode($dataPoints_jumbo, JSON_NUMERIC_CHECK);
+           $encode3 = json_encode($dataPoints_santaisabel, JSON_NUMERIC_CHECK);
+           $encode4 = json_encode($dataPoints_tottus, JSON_NUMERIC_CHECK);
+           $encode5 = json_encode($dataPoints_unimarc, JSON_NUMERIC_CHECK);
+
+
+
+
+
+
+         echo"
+
+           <script>
+           window.onload = function () {
+
+           var chart = new CanvasJS.Chart(\"chartContainer\", {
+             animationEnabled: true,
+           	title: {
+           		text: \"Precio histórico\"
+           	},
+           	subtitles: [{
+           		text: \"\"
+           	}],
+           	axisY: {
+           		title: \"Precio (Pesos)\",
+           		includeZero: false,
+              suffix: \" $\"
+           	},
+            toolTip:{
+            		shared: true
+            },
+           	data: [{
+              name : \"Lider\",
+           		type: \"spline\",
+              showInLegend: true,
+           		dataPoints: {$encode1}
+           	},
+            {
+              name : \"Jumbo\",
+              type: \"spline\",
+              dataPoints: {$encode2}
+            },
+            {
+              name : \"Santa Isabel\",
+              type: \"spline\",
+              dataPoints: {$encode3}
+            },
+            {
+              name : \"Tottus\",
+              type: \"spline\",
+              dataPoints: {$encode4}
+            },
+            {
+              name : \"Unimarc\",
+              type: \"spline\",
+              dataPoints: {$encode5}
+            }
+          ]
+           });
+           chart.render();
+
+           }
+           </script>
+
+
+         ";
+
+         ?>
+
+        <!-- <canvas id="speedChart" width="1100" height="300"></canvas>-->
+         <div id="chartContainer" style="height: 300px; width: 100%;"></div>
         </div>
        </div>
 
@@ -156,158 +292,84 @@
                <div class="carousel-inner">
                    <div class="item active">
                            <ul class="thumbnails">
-                               <li class="col-sm-3">
-           						<div class="fff">
-       								<div class="thumbnail">
-       									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-       								</div>
-       								<div class="caption">
-       									<h4>Praesent commodo</h4>
-       									<p>Nullam Condimentum Nibh Etiam Sem</p>
-       									<a class="btn btn-mini" href="#">» Ver detalles</a>
-       								</div>
-                                   </div>
-                               </li>
-                               <li class="col-sm-3">
-       							<div class="fff">
-       								<div class="thumbnail">
-       									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-       								</div>
-       								<div class="caption">
-       									<h4>Praesent commodo</h4>
-       									<p>Nullam Condimentum Nibh Etiam Sem</p>
-       									<a class="btn btn-mini" href="#">» Ver detalles</a>
-       								</div>
-                                   </div>
-                               </li>
-                               <li class="col-sm-3">
-       							<div class="fff">
-       								<div class="thumbnail">
-       									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-       								</div>
-       								<div class="caption">
-       									<h4>Praesent commodo</h4>
-       									<p>Nullam Condimentum Nibh Etiam Sem</p>
-       									<a class="btn btn-mini" href="#">» Ver detalles</a>
-       								</div>
-                                   </div>
-                               </li>
-                               <li class="col-sm-3">
-       							<div class="fff">
-       								<div class="thumbnail">
-       									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-       								</div>
-       								<div class="caption">
-       									<h4>Praesent commodo</h4>
-       									<p>Nullam Condimentum Nibh Etiam Sem</p>
-       									<a class="btn btn-mini" href="#">» Ver detalles</a>
-       								</div>
-                                   </div>
-                               </li>
+
+                             <?php
+
+                             for($i=0;$i<4;$i++){
+                               $rand=rand(1,$n_productos)-1;
+                               $row = pg_fetch_array ( $Productos,$rand );
+                                 echo "
+                                     <li class=\"col-sm-3\">
+                                        <div class=\"fff\">
+                                          <div class=\"thumbnail\"  >
+                                            <a href=\"Producto.php?id={$row[0]}\"><img class=\"img-responsive\" style=\"max-width:360px; max-height:240px;\" src=\"assets/img/{$row[0]}.png\" alt=\"\"></a>
+                                          </div>
+                                          <div class=\"caption\">
+                                            <h4>{$row[1]}</h4>
+                                            <p>{$row[3]}</p>
+                                            <a class=\"btn btn-mini\" href=\"Producto.php?id={$row[0]}\">» Ver detalles</a>
+                                          </div>
+                                        </div>
+                                     </li>
+                                 ";
+                              }
+                             ?>
+
+
+
                            </ul>
                      </div><!-- /Slide1 -->
                    <div class="item">
                            <ul class="thumbnails">
-                               <li class="col-sm-3">
-       							<div class="fff">
-       								<div class="thumbnail">
-       									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-       								</div>
-       								<div class="caption">
-       									<h4>Praesent commodo</h4>
-       									<p>Nullam Condimentum Nibh Etiam Sem</p>
-       									<a class="btn btn-mini" href="#">» Ver detalles</a>
-       								</div>
-                                   </div>
-                               </li>
-                               <li class="col-sm-3">
-       							<div class="fff">
-       								<div class="thumbnail">
-       									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-       								</div>
-       								<div class="caption">
-       									<h4>Praesent commodo</h4>
-       									<p>Nullam Condimentum Nibh Etiam Sem</p>
-       									<a class="btn btn-mini" href="#">» Ver detalles</a>
-       								</div>
-                                   </div>
-                               </li>
-                               <li class="col-sm-3">
-       							<div class="fff">
-       								<div class="thumbnail">
-       									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-       								</div>
-       								<div class="caption">
-       									<h4>Praesent commodo</h4>
-       									<p>Nullam Condimentum Nibh Etiam Sem</p>
-       									<a class="btn btn-mini" href="#">» Ver detalles</a>
-       								</div>
-                                   </div>
-                               </li>
-                               <li class="col-sm-3">
-       							<div class="fff">
-       								<div class="thumbnail">
-       									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-       								</div>
-       								<div class="caption">
-       									<h4>Praesent commodo</h4>
-       									<p>Nullam Condimentum Nibh Etiam Sem</p>
-       									<a class="btn btn-mini" href="#">» Ver detalles</a>
-       								</div>
-                                   </div>
-                               </li>
+
+                             <?php
+
+                             for($i=0;$i<4;$i++){
+                               $rand=rand(1,$n_productos)-1;
+                               $row = pg_fetch_array ( $Productos,$rand );
+                                 echo "
+                                     <li class=\"col-sm-3\">
+                                        <div class=\"fff\">
+                                          <div class=\"thumbnail\"  >
+                                            <a href=\"Producto.php?id={$row[0]}\"><img class=\"img-responsive\" style=\"max-width:360px; max-height:240px;\" src=\"assets/img/{$row[0]}.png\" alt=\"\"></a>
+                                          </div>
+                                          <div class=\"caption\">
+                                            <h4>{$row[1]}</h4>
+                                            <p>{$row[3]}</p>
+                                            <a class=\"btn btn-mini\" href=\"Producto.php?id={$row[0]}\">» Ver detalles</a>
+                                          </div>
+                                        </div>
+                                     </li>
+                                 ";
+                              }
+                             ?>
+
                            </ul>
                      </div><!-- /Slide2 -->
                    <div class="item">
                            <ul class="thumbnails">
-                               <li class="col-sm-3">
-       							<div class="fff">
-       								<div class="thumbnail">
-       									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-       								</div>
-       								<div class="caption">
-       									<h4>Praesent commodo</h4>
-       									<p>Nullam Condimentum Nibh Etiam Sem</p>
-       									<a class="btn btn-mini" href="#">» Ver detalles</a>
-       								</div>
-                                   </div>
-                               </li>
-                               <li class="col-sm-3">
-       							<div class="fff">
-       								<div class="thumbnail">
-       									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-       								</div>
-       								<div class="caption">
-       									<h4>Praesent commodo</h4>
-       									<p>Nullam Condimentum Nibh Etiam Sem</p>
-       									<a class="btn btn-mini" href="#">» Ver detalles</a>
-       								</div>
-                                   </div>
-                               </li>
-                               <li class="col-sm-3">
-       							<div class="fff">
-       								<div class="thumbnail">
-       									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-       								</div>
-       								<div class="caption">
-       									<h4>Praesent commodo</h4>
-       									<p>Nullam Condimentum Nibh Etiam Sem</p>
-       									<a class="btn btn-mini" href="#">» Ver detalles</a>
-       								</div>
-                                   </div>
-                               </li>
-                               <li class="col-sm-3">
-       							<div class="fff">
-       								<div class="thumbnail">
-       									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-       								</div>
-       								<div class="caption">
-       									<h4>Praesent commodo</h4>
-       									<p>Nullam Condimentum Nibh Etiam Sem</p>
-       									<a class="btn btn-mini" href="#">» Ver detalles</a>
-       								</div>
-                                   </div>
-                               </li>
+                             <?php
+
+                             for($i=0;$i<4;$i++){
+                               $rand=rand(1,$n_productos)-1;
+                               $row = pg_fetch_array ( $Productos,$rand );
+                                 echo "
+                                     <li class=\"col-sm-3\">
+                                        <div class=\"fff\">
+                                          <div class=\"thumbnail\"  >
+                                            <a href=\"Producto.php?id={$row[0]}\"><img class=\"img-responsive\" style=\"max-width:360px; max-height:240px;\" src=\"assets/img/{$row[0]}.png\" alt=\"\"></a>
+                                          </div>
+                                          <div class=\"caption\">
+                                            <h4>{$row[1]}</h4>
+                                            <p>{$row[3]}</p>
+                                            <a class=\"btn btn-mini\" href=\"Producto.php?id={$row[0]}\">» Ver detalles</a>
+                                          </div>
+                                        </div>
+                                     </li>
+                                 ";
+                              }
+                             ?>
+
                            </ul>
                      </div><!-- /Slide3 -->
                </div>
