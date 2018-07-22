@@ -312,7 +312,6 @@
                      <ul class="thumbnails">
 
                        <?php
-                       echo $n_productos;
                        for($i=0;$i<4;$i++){
                          $rand=rand(1,$n_productos)-1;
                          $row = pg_fetch_array ( $Productos,$rand );
