@@ -3,10 +3,6 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<<<<<<< HEAD
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-=======
->>>>>>> 6cde0f8a6fe4f0204a4211398c2e5b3e4cb3a0c7
 
 <link rel="stylesheet" type="text/css" href="assets/css/shop-homepage.css">
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
@@ -34,15 +30,7 @@
   <link href="assets/css/jumbotron.css" rel="stylesheet">
 </head>
 
-<<<<<<< HEAD
-  <style>
-
-</style>
-
-  <body>
-=======
 <body>
->>>>>>> 6cde0f8a6fe4f0204a4211398c2e5b3e4cb3a0c7
 
   <?php require 'includes/barranavegacion.php' ?>
 
@@ -56,68 +44,12 @@
 
     <div class="row">
 
-      <div class="col-md-3">
+      <div class="col-md-2">
 
         <div class="panel panel-default">
           <div class="panel-heading"><h3>Filtros</h3></div>
           <div class="panel-body">Panel Content
 
-<<<<<<< HEAD
-        </div>
-        <!-- /.col-lg-3 -->
-
-        <div class="col-lg-9">
-
-
-
-          <div class="row">
-
-            <div class="col-lg-4 col-md-6 mb-4" style="padding-bottom: 10px;">
-              <div class="table-bordered">
-                <a href="#"><img class="img-responsive" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                  <h4 class="card-title">
-                    <a href="#">Item One</a>
-                  </h4>
-                  <h5>$24.99</h5>
-                  <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-                </div>
-                <div class="card-footer">
-                  <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 mb-4" style="padding-bottom: 10px;">
-              <div class="table-bordered">
-                <a href="#"><img class="img-responsive" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                  <h4 class="card-title">
-                    <a href="#">Item Two</a>
-                  </h4>
-                  <h5>$24.99</h5>
-                  <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
-                </div>
-                <div class="card-footer">
-                  <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 mb-4" style="padding-bottom: 10px;">
-              <div class="table-bordered">
-                <a href="#"><img class="img-responsive" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                  <h4 class="card-title">
-                    <a href="#">Item Three</a>
-                  </h4>
-                  <h5>$24.99</h5>
-                  <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-                </div>
-                <div class="card-footer">
-                  <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                </div>
-=======
               <div class="row row-filtro">
                     <h4>Precio Máximo: </h4>
 
@@ -128,64 +60,16 @@
                   <p id="demo">
 
 </p>
->>>>>>> 6cde0f8a6fe4f0204a4211398c2e5b3e4cb3a0c7
               </div>
 
-<<<<<<< HEAD
-            <div class="col-lg-4 col-md-6 mb-4" style="padding-bottom: 10px;">
-              <div class="table-bordered">
-                <a href="#"><img class="img-responsive" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                  <h4 class="card-title">
-                    <a href="#">Item Four</a>
-                  </h4>
-                  <h5>$24.99</h5>
-                  <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-                </div>
-                <div class="card-footer">
-                  <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 mb-4" style="padding-bottom: 10px;">
-              <div class="table-bordered">
-                <a href="#"><img class="img-responsive" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                  <h4 class="card-title">
-                    <a href="#">Item Five</a>
-                  </h4>
-                  <h5>$24.99</h5>
-                  <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
-                </div>
-                <div class="card-footer">
-                  <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                </div>
-=======
               <div class="row row-filtro">
                     <h4>Precio Mínimo: </h4>
 
                     <div class="slidecontainer">
                       <input type="range" min="1" max="100" value="50" class="slider" id="myRange2">
                     </div>
->>>>>>> 6cde0f8a6fe4f0204a4211398c2e5b3e4cb3a0c7
               </div>
 
-<<<<<<< HEAD
-            <div class="col-lg-4 col-md-6 mb-4" style="padding-bottom: 10px;">
-              <div class="table-bordered">
-                <a href="#"><img class="img-responsive" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                  <h4 class="card-title">
-                    <a href="#">Item Six</a>
-                  </h4>
-                  <h5>$24.99</h5>
-                  <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-                </div>
-                <div class="card-footer">
-                  <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                </div>
-=======
               <div class="row row-filtro">
                     <h4>Tiendas: </h4>
 
@@ -202,14 +86,13 @@
                       placeholder="Seleccione las tiendas"
                       >
                     </multiselect>
->>>>>>> 6cde0f8a6fe4f0204a4211398c2e5b3e4cb3a0c7
               </div>
 
           </div>
         </div>
       </div>
 
-      <div class="col-md-9">
+      <div class="col-md-10">
 
         <div class="panel panel-default">
           <div class="panel-body">
@@ -301,23 +184,6 @@
 <!--END Number Navigator-->
 
     </div>
-<<<<<<< HEAD
-
-
-
-
-    <footer class="container">
-      <p>&copy; Company 2017-2018</p>
-    </footer>
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-
-    <script>window.jQuery || document.write('<script src="assets/js/jquery-slim.min.js"><\/script>')</script>
-    <script src="assets/js/popper.min.js"></script>
-  </body>
-=======
     <!-- /.row -->
 
   </div>
@@ -334,7 +200,6 @@
   <script src="assets/js/bootstrap.min.js"></script>
   <script src="assets/vue-busqueda.js"></script>
 </body>
->>>>>>> 6cde0f8a6fe4f0204a4211398c2e5b3e4cb3a0c7
 
 
 <style>
