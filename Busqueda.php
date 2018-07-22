@@ -36,7 +36,7 @@
   <?php require 'includes/barranavegacion.php' ?>
 
 
-  <div class="container" style="margin-left:5px;margin-right:5px; width:100%" id="vue-result-busq">
+  <div class="container" style="margin-left:5px;margin-right:5px; width:100%; min-height:800px" id="vue-result-busq" >
 
     <div class="row"style="margin:10px;padding-bottom:40px">
 
@@ -45,21 +45,21 @@
 
     <div class="row">
 
-      <div class="col-md-2">
+      <div class="col-md-3">
 
         <div class="panel panel-default">
           <div class="panel-heading"><h3>Filtros</h3></div>
-          <div class="panel-body">Panel Content
+          <div class="panel-body">
 
               <div class="row row-filtro">
                     <h4>Precio Máximo: </h4>
 
                     <div class="slidecontainer">
-                      <input type="range" min="1" max="100" value="20" class="slider" id="myRange">
+                      <input v-model="precioMaximoSlider" v-on:change="putValueMax" ref="sliderMaximo" type="range" min="1" max="100" value="20"  id="myRange">
                     </div>
 
-                  <p id="demo">
-
+                  <p>
+                      {{precioMaximoSlider}}
                   </p>
               </div>
 
@@ -67,8 +67,12 @@
                     <h4>Precio Mínimo: </h4>
 
                     <div class="slidecontainer">
-                      <input type="range" min="1" max="100" value="50" class="slider" id="myRange2">
+                      <input v-model="precioMinimoSlider" v-on:change="putValueMin" ref="sliderMinimo" type="range" min="1" max="100" value="50"  id="myRange2">
                     </div>
+                    <p>
+                        {{precioMinimoSlider}}
+                    </p>
+
               </div>
 
               <div class="row row-filtro">
@@ -85,7 +89,7 @@
                       :open-direction="'bottom'"
                       select-label="Seleccionar"
                       placeholder="Seleccione las tiendas"
-                      >
+                    >
                     </multiselect>
               </div>
 
@@ -93,7 +97,7 @@
         </div>
       </div>
 
-      <div class="col-md-10">
+      <div class="col-md-9">
 
         <div class="panel panel-default">
           <div class="panel-body">
@@ -116,9 +120,9 @@
 
             <div class="row">
 
-              <paginate
+              <paginate ref="paginatorProductos"
                 name="productos"
-                :list="productosQuery"
+                :list="filteredProductoPrecio"
                 :per="3"
               >
 
@@ -199,34 +203,39 @@ body{
 
 
 /*Slider style*/
+/* The slider itself */
 .slider {
-    -webkit-appearance: none;
-    width: 100%;
-    height: 15px;
-    border-radius: 5px;
-    background: #d3d3d3;
-    outline: none;
-    opacity: 0.7;
-    -webkit-transition: .2s;
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 25px; /* Specified height */
+    background: #d3d3d3; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
     transition: opacity .2s;
 }
 
+/* Mouse-over effects */
+.slider:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
 .slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
+    -webkit-appearance: none; /* Override default look */
     appearance: none;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: #4CAF50;
-    cursor: pointer;
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: #4CAF50; /* Green background */
+    cursor: pointer; /* Cursor on hover */
 }
 
 .slider::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: #4CAF50;
-    cursor: pointer;
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: #4CAF50; /* Green background */
+    cursor: pointer; /* Cursor on hover */
 }
 
 
@@ -288,6 +297,14 @@ ul.paginate-links> li{
 ul.paginate-links{
   text-align: center !important;
   padding-top: 100px;
+}
+
+.multiselect__content-wrapper{
+  max-height: auto;
+}
+
+.dropdown-menu > li{
+  display:contents;
 }
 
 </style>
