@@ -3,10 +3,11 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-
 <link rel="stylesheet" type="text/css" href="assets/css/shop-homepage.css">
-<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 <script src="https://unpkg.com/vue-multiselect@2.0.6"></script>
 <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.0.6/dist/vue-multiselect.min.css">
 <script src="assets/js/vue-paginate.js"></script>
@@ -54,12 +55,12 @@
                     <h4>Precio Máximo: </h4>
 
                     <div class="slidecontainer">
-                      <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                      <input type="range" min="1" max="100" value="20" class="slider" id="myRange">
                     </div>
 
                   <p id="demo">
 
-</p>
+                  </p>
               </div>
 
               <div class="row row-filtro">
