@@ -141,16 +141,17 @@
 
               </paginate>
 
-              <paginate-links
-    for="productos"
-    :simple="{
-      prev: 'Back',
-      next: 'Next'
-    }"
-  ></paginate-links>
+
+
+
+
 
             </div>
             <!-- /.row -->
+
+            <div class="row">
+                <paginate-links for="productos" :show-step-links="true"></paginate-links>
+            </div>
 
 <!-- End Panel body -->
         </div>
@@ -167,20 +168,7 @@
 
       <!-- /.col-lg-9 -->
 
-      <!-- Number Navigator-->
 
-      <div class="text-center">
-        <ul class="pagination justify-content-center">
-          <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1">Previous</a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-
-          <li class="page-item disabled">
-            <a class="page-link" href="#">Next</a>
-          </li>
-        </ul>
-      </div>
 
 <!--END Number Navigator-->
 
@@ -245,6 +233,29 @@ body{
 .row-filtro{
 margin: 10px;
 }
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.paginate-list {
+  width: 159px;
+  margin: 0 auto;
+  text-align: left;
+  li {
+    display: block;
+    &:before {
+      content: '⚬ ';
+      font-weight: bold;
+      color: slategray;
+    }
+  }
+}
 
 .paginate-links.productos {
   user-select: none;
@@ -265,16 +276,19 @@ margin: 10px;
   }
 }
 
-paginate-links.productos>ul {
-  list-style-type: none;
-  padding: 0;
+a {
+  color: #42b983;
 }
 
-paginate-links.productos>li {
-  display: inline-block;
-  margin: 0 10px;
+
+ul.paginate-links> li{
+  cursor: pointer !important;
 }
 
+ul.paginate-links{
+  text-align: center !important;
+  padding-top: 100px;
+}
 
 </style>
 </html>
