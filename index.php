@@ -29,12 +29,12 @@
 
 $db = pg_connect("host=plop.inf.udec.cl port=5432 dbname=bdi2017d user=bdi2017d password=bdi2017d");
 
-$Productos=pg_query($db,  "select *
-                                 from interfaces.producto as p, interfaces.precios as pr, interfaces.supermercado as s
-                                 where p.id = pr.id_producto AND s.id = pr.id_super AND pr.precio_oferta = (SELECT min(interfaces.precios.precio_oferta)
-                                                                                                            FROM interfaces.precios
-                                                                                                            )
-                                " );
+$Productos=pg_query($db, "SELECT p.id, p.nombre, p.marca, s.nombre, l.m
+                            FROM interfaces.producto as p, interfaces.supermercado as s,interfaces.precios as pr, ( SELECT  pr.id_producto, min(pr.precio_oferta) as m
+                                                                                                                    FROM interfaces.precios as pr
+                                                                                                                    GROUP BY pr.id_producto) l
+                            where  p.id = pr.id_producto AND s.id = pr.id_super and pr.precio_oferta= l.m
+                            ");
 
 $n_productos = pg_num_rows($Productos);
 
@@ -81,9 +81,9 @@ $n_productos = pg_num_rows($Productos);
                                          <a href=\"Producto.php?id={$row[0]}\"><img class=\"img-responsive\" style=\"max-width:360px; max-height:240px;\" src=\"assets/img/{$row[0]}.png\" alt=\"\"></a>
                                        </div>
                                        <div class=\"caption\">
-                                         <h4>{$row[1]} {$row[3]}</h4>
-                                         <p>{$row[9]}</p>
-                                         <h3   style=\"color: #FE2E2E\">$ {$row[6]}</h4>
+                                         <h4>{$row[1]} {$row[2]}</h4>
+                                         <p>{$row[3]}</p>
+                                         <h3   style=\"color: #FE2E2E\">$ {$row[4]}</h4>
 
                                          <a class=\"btn btn-mini\" href=\"Producto.php?id={$row[0]}\">» Ver detalles</a>
                                        </div>
@@ -114,9 +114,9 @@ $n_productos = pg_num_rows($Productos);
                                          <a href=\"Producto.php?id={$row[0]}\"><img class=\"img-responsive\" style=\"max-width:360px; max-height:240px;\" src=\"assets/img/{$row[0]}.png\" alt=\"\"></a>
                                        </div>
                                        <div class=\"caption\">
-                                         <h4>{$row[1]} {$row[3]}</h4>
-                                         <p>{$row[9]}</p>
-                                         <h3   style=\"color: #FE2E2E\">$ {$row[6]}</h4>
+                                         <h4>{$row[1]} {$row[2]}</h4>
+                                         <p>{$row[3]}</p>
+                                         <h3   style=\"color: #FE2E2E\">$ {$row[4]}</h4>
 
                                          <a class=\"btn btn-mini\" href=\"Producto.php?id={$row[0]}\">» Ver detalles</a>
                                        </div>
@@ -144,9 +144,9 @@ $n_productos = pg_num_rows($Productos);
                                          <a href=\"Producto.php?id={$row[0]}\"><img class=\"img-responsive\" style=\"max-width:360px; max-height:240px;\" src=\"assets/img/{$row[0]}.png\" alt=\"\"></a>
                                        </div>
                                        <div class=\"caption\">
-                                         <h4>{$row[1]} {$row[3]}</h4>
-                                         <p>{$row[9]}</p>
-                                         <h3   style=\"color: #FE2E2E\">$ {$row[6]}</h4>
+                                         <h4>{$row[1]} {$row[2]}</h4>
+                                         <p>{$row[3]}</p>
+                                         <h3   style=\"color: #FE2E2E\">$ {$row[4]}</h4>
 
                                          <a class=\"btn btn-mini\" href=\"Producto.php?id={$row[0]}\">» Ver detalles</a>
                                        </div>
@@ -205,9 +205,9 @@ $n_productos = pg_num_rows($Productos);
                                      <a href=\"Producto.php?id={$row[0]}\"><img class=\"img-responsive\" style=\"max-width:360px; max-height:240px;\" src=\"assets/img/{$row[0]}.png\" alt=\"\"></a>
                                    </div>
                                    <div class=\"caption\">
-                                     <h4>{$row[1]} {$row[3]}</h4>
-                                     <p>{$row[9]}</p>
-                                     <h3   style=\"color: #FE2E2E\">$ {$row[6]}</h4>
+                                     <h4>{$row[1]} {$row[2]}</h4>
+                                     <p>{$row[3]}</p>
+                                     <h3   style=\"color: #FE2E2E\">$ {$row[4]}</h4>
 
                                      <a class=\"btn btn-mini\" href=\"Producto.php?id={$row[0]}\">» Ver detalles</a>
                                    </div>
@@ -238,9 +238,9 @@ $n_productos = pg_num_rows($Productos);
                                      <a href=\"Producto.php?id={$row[0]}\"><img class=\"img-responsive\" style=\"max-width:360px; max-height:240px;\" src=\"assets/img/{$row[0]}.png\" alt=\"\"></a>
                                    </div>
                                    <div class=\"caption\">
-                                     <h4>{$row[1]} {$row[3]}</h4>
-                                     <p>{$row[9]}</p>
-                                     <h3   style=\"color: #FE2E2E\">$ {$row[6]}</h4>
+                                     <h4>{$row[1]} {$row[2]}</h4>
+                                     <p>{$row[3]}</p>
+                                     <h3   style=\"color: #FE2E2E\">$ {$row[4]}</h4>
 
                                      <a class=\"btn btn-mini\" href=\"Producto.php?id={$row[0]}\">» Ver detalles</a>
                                    </div>
@@ -271,9 +271,9 @@ $n_productos = pg_num_rows($Productos);
                                      <a href=\"Producto.php?id={$row[0]}\"><img class=\"img-responsive\" style=\"max-width:360px; max-height:240px;\" src=\"assets/img/{$row[0]}.png\" alt=\"\"></a>
                                    </div>
                                    <div class=\"caption\">
-                                     <h4>{$row[1]} {$row[3]}</h4>
-                                     <p>{$row[9]}</p>
-                                     <h3   style=\"color: #FE2E2E\">$ {$row[6]}</h4>
+                                     <h4>{$row[1]} {$row[2]}</h4>
+                                     <p>{$row[3]}</p>
+                                     <h3   style=\"color: #FE2E2E\">$ {$row[4]}</h4>
 
                                      <a class=\"btn btn-mini\" href=\"Producto.php?id={$row[0]}\">» Ver detalles</a>
                                    </div>

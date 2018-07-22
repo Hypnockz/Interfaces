@@ -39,18 +39,35 @@
   }
   else echo "ERROR";
 
-  $Productos=pg_query($db,  "select *
-                                   from interfaces.producto as p, interfaces.precios as pr, interfaces.supermercado as s
-                                   where p.id = pr.id_producto AND s.id = pr.id_super AND pr.precio_oferta = (SELECT min(interfaces.precios.precio_oferta)
-                                                                                                              FROM interfaces.precios
-                                                                                                              )
-                                  " );
+  $asd=pg_query($db, "SELECT p.id,p.nombre, p.marca,s.nombre , min(pr.precio_oferta)
+                              FROM interfaces.precios as pr,interfaces.producto as p, interfaces.supermercado as s
+                              where  p.id = pr.id_producto AND s.id = pr.id_super
+                              GROUP BY p.id,p.nombre,p.marca,s.nombre,pr.id_producto");
+
+  $Productos=pg_query($db, "SELECT p.id, p.nombre, p.marca, s.nombre, l.m
+                              FROM interfaces.producto as p, interfaces.supermercado as s,interfaces.precios as pr, ( SELECT  pr.id_producto, min(pr.precio_oferta) as m
+                                                                                                                      FROM interfaces.precios as pr
+                                                                                                                      GROUP BY pr.id_producto) l
+                              where  p.id = pr.id_producto AND s.id = pr.id_super and pr.precio_oferta= l.m
+                              ");
+
+
 
   $consulta=pg_query_params($db,  "select *
-                                   from interfaces.precios as p , interfaces.supermercado as s
-                                   where p.id_producto = $1 and s.id = p.id_super",array($id_producto));
+                                   from interfaces.precios as p , interfaces.supermercado as s, interfaces.producto as pr
+                                   where p.id_producto = $1 and s.id = p.id_super and p.id_producto = pr.id ",array($id_producto));
 
   $n_supermercados= pg_num_rows($consulta);
+
+  $test= pg_num_rows($Productos);
+
+
+  $test2 = pg_fetch_array ( $Productos,1);
+
+
+
+
+  $test2 = pg_fetch_array ( $Productos,1 );
 
   $n_productos = pg_num_rows($Productos);
 
@@ -184,16 +201,10 @@
 
             <div class="col-md-4">
             <ul>
-              <li>Marca : Soprole</li>
-              <li>Envase : Caja 1 L</li>
-              <li>País de origen : Chile</li>
-              <li>Producto : Leche</li>
-              <li>Tipo : Entera</li>
-              <li>Sabor : Natural</li>
-              <li>Duración : 6 meses</li>
-              <li>Almacenamiento : Para abrir levante y corte por la línea punteada. Una vez abierto el envase su duración es de 4 días.</li>
-              <li>Modo de empleo : Agitar antes de consumir.</li>
-              <li>Servicio de atención al cliente 800 200 011</li>
+              <?php
+              $desc = pg_fetch_array ( $consulta,0 );
+              echo $desc[10];
+              ?>
             </ul>
           </div>
         </div>
@@ -301,7 +312,7 @@
                      <ul class="thumbnails">
 
                        <?php
-
+                       echo $n_productos;
                        for($i=0;$i<4;$i++){
                          $rand=rand(1,$n_productos)-1;
                          $row = pg_fetch_array ( $Productos,$rand );
@@ -314,9 +325,9 @@
                                       <a href=\"Producto.php?id={$row[0]}\"><img class=\"img-responsive\" style=\"max-width:360px; max-height:240px;\" src=\"assets/img/{$row[0]}.png\" alt=\"\"></a>
                                     </div>
                                     <div class=\"caption\">
-                                      <h4>{$row[1]} {$row[3]}</h4>
-                                      <p>{$row[9]}</p>
-                                      <h3   style=\"color: #FE2E2E\">$ {$row[6]}</h4>
+                                      <h4>{$row[1]} {$row[2]}</h4>
+                                      <p>{$row[3]}</p>
+                                      <h3   style=\"color: #FE2E2E\">$ {$row[4]}</h4>
 
                                       <a class=\"btn btn-mini\" href=\"Producto.php?id={$row[0]}\">» Ver detalles</a>
                                     </div>
@@ -347,9 +358,9 @@
                                       <a href=\"Producto.php?id={$row[0]}\"><img class=\"img-responsive\" style=\"max-width:360px; max-height:240px;\" src=\"assets/img/{$row[0]}.png\" alt=\"\"></a>
                                     </div>
                                     <div class=\"caption\">
-                                      <h4>{$row[1]} {$row[3]}</h4>
-                                      <p>{$row[9]}</p>
-                                      <h3   style=\"color: #FE2E2E\">$ {$row[6]}</h4>
+                                      <h4>{$row[1]} {$row[2]}</h4>
+                                      <p>{$row[3]}</p>
+                                      <h3   style=\"color: #FE2E2E\">$ {$row[4]}</h4>
 
                                       <a class=\"btn btn-mini\" href=\"Producto.php?id={$row[0]}\">» Ver detalles</a>
                                     </div>
@@ -380,9 +391,9 @@
                                       <a href=\"Producto.php?id={$row[0]}\"><img class=\"img-responsive\" style=\"max-width:360px; max-height:240px;\" src=\"assets/img/{$row[0]}.png\" alt=\"\"></a>
                                     </div>
                                     <div class=\"caption\">
-                                      <h4>{$row[1]} {$row[3]}</h4>
-                                      <p>{$row[9]}</p>
-                                      <h3   style=\"color: #FE2E2E\">$ {$row[6]}</h4>
+                                      <h4>{$row[1]} {$row[2]}</h4>
+                                      <p>{$row[3]}</p>
+                                      <h3   style=\"color: #FE2E2E\">$ {$row[4]}</h4>
 
                                       <a class=\"btn btn-mini\" href=\"Producto.php?id={$row[0]}\">» Ver detalles</a>
                                     </div>
