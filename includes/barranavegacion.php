@@ -28,8 +28,19 @@
 
     <ul class="nav navbar-nav navbar-right">
       <li><a href="index.php"><span class="glyphicon glyphicon-home"></span> inicio</a></li>
-      <li><a href="#"><span class="glyphicon glyphicon-list-alt"></span> Mis Listas</a></li>
-      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Mi Cuenta</a></li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-list-alt"></span> Mis Listas
+      <span class="caret"></span></a>
+      <ul class="dropdown-menu">
+        <li><a href="#">Lista 1</a></li>
+      </ul>
+      </li>
+      <li class="dropdown" ><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class=" glyphicon glyphicon-user"></span> Mi Cuenta
+      <span class="caret"></span></a>
+      <ul class="dropdown-menu">
+        <li><a href="#">Seguidos</a></li>
+        <li><a href="#">Cerrar Sesión</a></li>
+      </ul>
+      </li>
     </ul>
   </div>
 </nav>
