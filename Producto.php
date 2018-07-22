@@ -245,21 +245,25 @@
             {
               name : \"Jumbo\",
               type: \"spline\",
+              showInLegend: true,
               dataPoints: {$encode2}
             },
             {
               name : \"Santa Isabel\",
               type: \"spline\",
+              showInLegend: true,
               dataPoints: {$encode3}
             },
             {
               name : \"Tottus\",
               type: \"spline\",
+              showInLegend: true,
               dataPoints: {$encode4}
             },
             {
               name : \"Unimarc\",
               type: \"spline\",
+              showInLegend: true,
               dataPoints: {$encode5}
             }
           ]
