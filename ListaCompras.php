@@ -35,13 +35,13 @@
   }
   else echo "ERROR";
 
-  $lista=pg_query($db,  "select nombre
-                                   from interfaces.lista_de_compra where id=$id_lista
-                                  " );
+  $lista=pg_query_params($db,  "select nombre
+                                   from interfaces.lista_de_compra where id=$1
+                                  ",array($id_lista) );
 
-  $Productos=pg_query($db,  "select *
-                                   from interfaces.producto as p, interfaces.pertenece_compra as c where c.id_lista=$id_lista
-                                  " );
+  $Productos=pg_query_params($db,  "select *
+                                   from interfaces.producto as p, interfaces.pertenece_compra as c where c.id_lista=$1 and c.id_producto=p.id
+                                  " ,array($id_lista));
   $n_productos = pg_num_rows($Productos);
   $nom_lista=pg_fetch_row($lista);
 
@@ -50,7 +50,51 @@
 
 
   ?>
-    
+    <script type="text/javascript">
+
+                  $(document).ready(function() {
+                    // scan complete table, find all pricces
+                    $('table').find('.price').each(function() {
+                       // look for the row
+                       var row = $(this).closest('tr');
+                       // set the price as a data attribute
+                       // to optimize this, set the attribute
+                       // when generating the html, so no loop is
+                       // required here...
+                       row.find("input[type='number']")
+                        .attr('data-price', $(this).text());
+                    });
+                    
+                    function updatePrice() {
+                        var sum, price = parseFloat($(this).attr('data-price')),
+                            num = parseInt($(this).val(),10),
+                            row = $(this).closest('tr');
+                        if(num) {
+                          sum = num * price;
+                          row.find('.subtotal').text(sum.toFixed(0));
+
+                        }
+                    }
+                    
+                    $(document).on("change, onload, mouseup, keyup","table input[type='number']", updatePrice);
+                    
+                });
+    </script>
+    <script type="text/javascript">
+      function updateTotal(){
+      $(document).ready(function(e){
+        $("input").change(function(){
+          var tot=0;
+          $("td[class='subtotal']").each(function(){
+            tot=tot+ parseInt($(this).val());
+          })
+            document.getElementById('total').interHTML=tot;
+        });
+
+
+      });
+    }
+    </script>
   <?php require 'includes/barranavegacion.php' ?>
 
       <main role="main">
@@ -64,16 +108,6 @@
             <div class="row">
               <div class="col-xs-6">
                 <h5><span class="glyphicon glyphicon-list-alt"></span> Lista de Compras <span>></span> <?php  print($nom_lista[0]) ?>  </h5>
-              </div>
-              <div class="col-xs-6">
-                <button type="button" class="btn btn-primary btn-sm btn-block">
-                  <span class="glyphicon glyphicon-arrow-left"></span> Siga Cotizando
-                </button>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-xs-6">
-                
               </div>
               <div class="col-xs-6">
                 <div class="col-xs-6 text-right">¿Te ayudamos?</div>
@@ -97,8 +131,8 @@
           <!--      producto   inicio        -->
           
           <div class="table-responsive">
-        <table class="table table-bordered">
-          <tr>
+        <table class="table table-bordered" id="table" >
+          <tr class="titlerow">
             <th width="30%">Nombre</th>
             <th width="5%">Cantidad</th>
             <th width="20%">Tienda</th>
@@ -110,31 +144,39 @@
           
           
             $total = 0;
-            for($i=0;$i<$n_productos;$i++)
+            $i=0;
+            while($producto=pg_fetch_row($Productos))
             {
+
           ?>
           <tr>
-            <td><?php #nombre ?></td>
-            <td><input type="text" name="cantidad" value="1" class="form-control" id=$i /></td>
+            <td><?php print($producto[1]) #nombre ?></td>
+            <td><form name="form" action="" method="get">
+              <input type="number" name="cantidad" value="1" class="form-control" id="cantidad" min="1" onchange="updateTotal()" />
+            </form></td>
+
             <td><select class="form-control" id="sel1">
-                          <option>Lider</option>
-                          <option>Jumbo</option>
-                          <option>Santa Isabel</option>
-                          <option>Tottus</option>
-                          <option>Unimarc</option>
+                          <option value="1">Lider</option>
+                          <option value="2">Jumbo</option>
+                          <option value="3">Santa Isabel</option>
+                          <option value="4">Tottus</option>
+                          <option value="5">Unimarc</option>
                           
                     </select></td>
-            <td>$ <?php #precio ?></td>
-            <td>$ <?php #total  ?></td>
-            <td><a><span class="text-danger">Remove</span></a></td>
+            <td class="price" align="right"> <?php $precios=pg_query_params($db,"Select * from interfaces.precios where id_producto=$1 and id_super=1",array($producto[0]));
+                        $precio=pg_fetch_row($precios);
+                        print($precio[3]);  #precio ?></td>
+            <td align="right" class="subtotal"></td>
+            <td><a><span class="text-danger">Eliminar</span></a></td>
           </tr>
           <?php
               $total = $total ;
+              $i++;
             }
           ?>
           <tr>
-            <td colspan="3" align="right">Total</td>
-            <td align="right">$ <?php echo number_format($total, 2); ?></td>
+            <td colspan="4" align="right">Total</td>
+            <td class="total" id="total" align="right"> </td>
             <td></td>
           </tr>
           <?php
@@ -149,7 +191,7 @@
           <div class="row">
             <div class="text-center">
               <div class="col-xs-9">
-                <h6 class="text-right">¿Agrego más artículos?</h6>
+                <h6 class="text-right">¿Agregó más artículos?</h6>
               </div>
               <div class="col-xs-3">
                 <button type="button" class="btn btn-default btn-sm btn-block">
