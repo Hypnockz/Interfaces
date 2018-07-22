@@ -26,7 +26,16 @@
   </head>
 
   <body>
+    <?php  
+    $dbconn3 = pg_pconnect("host=plop.inf.udec.cl port=5432 dbname=bdi2017d user=bdi2017d password=bdi2017d");
+    $result = pg_query($dbconn3, "SELECT nombre FROM interfaces.producto");
 
+    while ($row = pg_fetch_row($result)) {
+        echo "$row[0]  ";
+          echo "<br />\n";
+    }
+    ?>
+    
   <?php require 'includes/barranavegacion.php' ?>
 
       <main role="main">
@@ -39,7 +48,12 @@
           <div class="panel-title">
             <div class="row">
               <div class="col-xs-6">
-                <h5><span class="glyphicon glyphicon-list-alt"></span> Lista de Compras <span>></span> lista1 </h5>
+                <h5><span class="glyphicon glyphicon-list-alt"></span> Lista de Compras <span>></span> <?php $result = pg_query($dbconn3, "SELECT nombre FROM interfaces.lista_de_compra");
+
+    while ($row = pg_fetch_row($result)) {
+        echo "$row[0]";
+    } ?> 
+  </h5>
               </div>
               <div class="col-xs-6">
                 <button type="button" class="btn btn-primary btn-sm btn-block">
