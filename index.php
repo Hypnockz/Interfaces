@@ -25,6 +25,23 @@
     <link href="assets/css/jumbotron.css" rel="stylesheet">
   </head>
 
+<?php
+
+$db = pg_connect("host=plop.inf.udec.cl port=5432 dbname=bdi2017d user=bdi2017d password=bdi2017d");
+
+$Productos=pg_query($db,  "select *
+                                 from interfaces.producto as p, interfaces.precios as pr, interfaces.supermercado as s
+                                 where p.id = pr.id_producto AND s.id = pr.id_super AND pr.precio_oferta = (SELECT min(interfaces.precios.precio_oferta)
+                                                                                                            FROM interfaces.precios
+                                                                                                            )
+                                " );
+
+$n_productos = pg_num_rows($Productos);
+
+
+ ?>
+
+
   <body>
 
   <?php require 'includes/barranavegacion.php' ?>
@@ -46,164 +63,103 @@
           </div>
 
           <div class="carousel slide" id="myCarousel">
-              <div class="carousel-inner">
-                  <div class="item active">
-                          <ul class="thumbnails">
-                              <li class="col-sm-3">
-          						<div class="fff">
-      								<div class="thumbnail">
-      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-      								</div>
-      								<div class="caption">
-      									<h4>Praesent commodo</h4>
-      									<p>Nullam Condimentum Nibh Etiam Sem</p>
-      									<a class="btn btn-mini" href="#">» Ver detalles</a>
-      								</div>
-                                  </div>
-                              </li>
-                              <li class="col-sm-3">
-      							<div class="fff">
-      								<div class="thumbnail">
-      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-      								</div>
-      								<div class="caption">
-      									<h4>Praesent commodo</h4>
-      									<p>Nullam Condimentum Nibh Etiam Sem</p>
-      									<a class="btn btn-mini" href="#">» Ver detalles</a>
-      								</div>
-                                  </div>
-                              </li>
-                              <li class="col-sm-3">
-      							<div class="fff">
-      								<div class="thumbnail">
-      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-      								</div>
-      								<div class="caption">
-      									<h4>Praesent commodo</h4>
-      									<p>Nullam Condimentum Nibh Etiam Sem</p>
-      									<a class="btn btn-mini" href="#">» Ver detalles</a>
-      								</div>
-                                  </div>
-                              </li>
-                              <li class="col-sm-3">
-      							<div class="fff">
-      								<div class="thumbnail">
-      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-      								</div>
-      								<div class="caption">
-      									<h4>Praesent commodo</h4>
-      									<p>Nullam Condimentum Nibh Etiam Sem</p>
-      									<a class="btn btn-mini" href="#">» Ver detalles</a>
-      								</div>
-                                  </div>
-                              </li>
-                          </ul>
-                    </div><!-- /Slide1 -->
-                  <div class="item">
-                          <ul class="thumbnails">
-                              <li class="col-sm-3">
-      							<div class="fff">
-      								<div class="thumbnail">
-      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-      								</div>
-      								<div class="caption">
-      									<h4>Praesent commodo</h4>
-      									<p>Nullam Condimentum Nibh Etiam Sem</p>
-      									<a class="btn btn-mini" href="#">» Ver detalles</a>
-      								</div>
-                                  </div>
-                              </li>
-                              <li class="col-sm-3">
-      							<div class="fff">
-      								<div class="thumbnail">
-      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-      								</div>
-      								<div class="caption">
-      									<h4>Praesent commodo</h4>
-      									<p>Nullam Condimentum Nibh Etiam Sem</p>
-      									<a class="btn btn-mini" href="#">» Ver detalles</a>
-      								</div>
-                                  </div>
-                              </li>
-                              <li class="col-sm-3">
-      							<div class="fff">
-      								<div class="thumbnail">
-      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-      								</div>
-      								<div class="caption">
-      									<h4>Praesent commodo</h4>
-      									<p>Nullam Condimentum Nibh Etiam Sem</p>
-      									<a class="btn btn-mini" href="#">» Ver detalles</a>
-      								</div>
-                                  </div>
-                              </li>
-                              <li class="col-sm-3">
-      							<div class="fff">
-      								<div class="thumbnail">
-      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-      								</div>
-      								<div class="caption">
-      									<h4>Praesent commodo</h4>
-      									<p>Nullam Condimentum Nibh Etiam Sem</p>
-      									<a class="btn btn-mini" href="#">» Ver detalles</a>
-      								</div>
-                                  </div>
-                              </li>
-                          </ul>
-                    </div><!-- /Slide2 -->
-                  <div class="item">
-                          <ul class="thumbnails">
-                              <li class="col-sm-3">
-      							<div class="fff">
-      								<div class="thumbnail">
-      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-      								</div>
-      								<div class="caption">
-      									<h4>Praesent commodo</h4>
-      									<p>Nullam Condimentum Nibh Etiam Sem</p>
-      									<a class="btn btn-mini" href="#">» Ver detalles</a>
-      								</div>
-                                  </div>
-                              </li>
-                              <li class="col-sm-3">
-      							<div class="fff">
-      								<div class="thumbnail">
-      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-      								</div>
-      								<div class="caption">
-      									<h4>Praesent commodo</h4>
-      									<p>Nullam Condimentum Nibh Etiam Sem</p>
-      									<a class="btn btn-mini" href="#">» Ver detalles</a>
-      								</div>
-                                  </div>
-                              </li>
-                              <li class="col-sm-3">
-      							<div class="fff">
-      								<div class="thumbnail">
-      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-      								</div>
-      								<div class="caption">
-      									<h4>Praesent commodo</h4>
-      									<p>Nullam Condimentum Nibh Etiam Sem</p>
-      									<a class="btn btn-mini" href="#">» Ver detalles</a>
-      								</div>
-                                  </div>
-                              </li>
-                              <li class="col-sm-3">
-      							<div class="fff">
-      								<div class="thumbnail">
-      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-      								</div>
-      								<div class="caption">
-      									<h4>Praesent commodo</h4>
-      									<p>Nullam Condimentum Nibh Etiam Sem</p>
-      									<a class="btn btn-mini" href="#">» Ver detalles</a>
-      								</div>
-                                  </div>
-                              </li>
-                          </ul>
-                    </div><!-- /Slide3 -->
-              </div>
+            <div class="carousel-inner">
+                <div class="item active">
+                        <ul class="thumbnails">
+
+                          <?php
+
+                          for($i=0;$i<4;$i++){
+                            $rand=rand(1,$n_productos)-1;
+                            $row = pg_fetch_array ( $Productos,$rand );
+
+
+                              echo "
+                                  <li class=\"col-sm-3\">
+                                     <div class=\"fff\">
+                                       <div class=\"thumbnail\"  >
+                                         <a href=\"Producto.php?id={$row[0]}\"><img class=\"img-responsive\" style=\"max-width:360px; max-height:240px;\" src=\"assets/img/{$row[0]}.png\" alt=\"\"></a>
+                                       </div>
+                                       <div class=\"caption\">
+                                         <h4>{$row[1]} {$row[3]}</h4>
+                                         <p>{$row[9]}</p>
+                                         <h3   style=\"color: #FE2E2E\">$ {$row[6]}</h4>
+
+                                         <a class=\"btn btn-mini\" href=\"Producto.php?id={$row[0]}\">» Ver detalles</a>
+                                       </div>
+                                     </div>
+                                  </li>
+                              ";
+                           }
+                          ?>
+
+
+
+                        </ul>
+                  </div><!-- /Slide1 -->
+                <div class="item">
+                        <ul class="thumbnails">
+
+                          <?php
+
+                          for($i=0;$i<4;$i++){
+                            $rand=rand(1,$n_productos)-1;
+                            $row = pg_fetch_array ( $Productos,$rand );
+
+
+                              echo "
+                                  <li class=\"col-sm-3\">
+                                     <div class=\"fff\">
+                                       <div class=\"thumbnail\"  >
+                                         <a href=\"Producto.php?id={$row[0]}\"><img class=\"img-responsive\" style=\"max-width:360px; max-height:240px;\" src=\"assets/img/{$row[0]}.png\" alt=\"\"></a>
+                                       </div>
+                                       <div class=\"caption\">
+                                         <h4>{$row[1]} {$row[3]}</h4>
+                                         <p>{$row[9]}</p>
+                                         <h3   style=\"color: #FE2E2E\">$ {$row[6]}</h4>
+
+                                         <a class=\"btn btn-mini\" href=\"Producto.php?id={$row[0]}\">» Ver detalles</a>
+                                       </div>
+                                     </div>
+                                  </li>
+                              ";
+                           }
+                          ?>
+
+                        </ul>
+                  </div><!-- /Slide2 -->
+                <div class="item">
+                        <ul class="thumbnails">
+                          <?php
+
+                          for($i=0;$i<4;$i++){
+                            $rand=rand(1,$n_productos)-1;
+                            $row = pg_fetch_array ( $Productos,$rand );
+
+
+                              echo "
+                                  <li class=\"col-sm-3\">
+                                     <div class=\"fff\">
+                                       <div class=\"thumbnail\"  >
+                                         <a href=\"Producto.php?id={$row[0]}\"><img class=\"img-responsive\" style=\"max-width:360px; max-height:240px;\" src=\"assets/img/{$row[0]}.png\" alt=\"\"></a>
+                                       </div>
+                                       <div class=\"caption\">
+                                         <h4>{$row[1]} {$row[3]}</h4>
+                                         <p>{$row[9]}</p>
+                                         <h3   style=\"color: #FE2E2E\">$ {$row[6]}</h4>
+
+                                         <a class=\"btn btn-mini\" href=\"Producto.php?id={$row[0]}\">» Ver detalles</a>
+                                       </div>
+                                     </div>
+                                  </li>
+                              ";
+                           }
+                          ?>
+
+                        </ul>
+                  </div><!-- /Slide3 -->
+            </div>
+
 
 
       	   <nav>
@@ -233,160 +189,103 @@
           <div class="carousel slide" id="myCarouse2">
               <div class="carousel-inner">
                   <div class="item active">
-                          <ul class="thumbnails">
-                              <li class="col-sm-3">
-          						<div class="fff">
-      								<div class="thumbnail">
-      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-      								</div>
-      								<div class="caption">
-      									<h4>Praesent commodo</h4>
-      									<p>Nullam Condimentum Nibh Etiam Sem</p>
-      									<a class="btn btn-mini" href="#">» Ver detalles</a>
-      								</div>
-                                  </div>
+                    <ul class="thumbnails">
+
+                      <?php
+
+                      for($i=0;$i<4;$i++){
+                        $rand=rand(1,$n_productos)-1;
+                        $row = pg_fetch_array ( $Productos,$rand );
+
+
+                          echo "
+                              <li class=\"col-sm-3\">
+                                 <div class=\"fff\">
+                                   <div class=\"thumbnail\"  >
+                                     <a href=\"Producto.php?id={$row[0]}\"><img class=\"img-responsive\" style=\"max-width:360px; max-height:240px;\" src=\"assets/img/{$row[0]}.png\" alt=\"\"></a>
+                                   </div>
+                                   <div class=\"caption\">
+                                     <h4>{$row[1]} {$row[3]}</h4>
+                                     <p>{$row[9]}</p>
+                                     <h3   style=\"color: #FE2E2E\">$ {$row[6]}</h4>
+
+                                     <a class=\"btn btn-mini\" href=\"Producto.php?id={$row[0]}\">» Ver detalles</a>
+                                   </div>
+                                 </div>
                               </li>
-                              <li class="col-sm-3">
-      							<div class="fff">
-      								<div class="thumbnail">
-      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-      								</div>
-      								<div class="caption">
-      									<h4>Praesent commodo</h4>
-      									<p>Nullam Condimentum Nibh Etiam Sem</p>
-      									<a class="btn btn-mini" href="#">» Ver detalles</a>
-      								</div>
-                                  </div>
-                              </li>
-                              <li class="col-sm-3">
-      							<div class="fff">
-      								<div class="thumbnail">
-      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-      								</div>
-      								<div class="caption">
-      									<h4>Praesent commodo</h4>
-      									<p>Nullam Condimentum Nibh Etiam Sem</p>
-      									<a class="btn btn-mini" href="#">» Ver detalles</a>
-      								</div>
-                                  </div>
-                              </li>
-                              <li class="col-sm-3">
-      							<div class="fff">
-      								<div class="thumbnail">
-      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-      								</div>
-      								<div class="caption">
-      									<h4>Praesent commodo</h4>
-      									<p>Nullam Condimentum Nibh Etiam Sem</p>
-      									<a class="btn btn-mini" href="#">» Ver detalles</a>
-      								</div>
-                                  </div>
-                              </li>
-                          </ul>
+                          ";
+                       }
+                      ?>
+
+
+
+                    </ul>
                     </div><!-- /Slide1 -->
                   <div class="item">
-                          <ul class="thumbnails">
-                              <li class="col-sm-3">
-      							<div class="fff">
-      								<div class="thumbnail">
-      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-      								</div>
-      								<div class="caption">
-      									<h4>Praesent commodo</h4>
-      									<p>Nullam Condimentum Nibh Etiam Sem</p>
-      									<a class="btn btn-mini" href="#">» Ver detalles</a>
-      								</div>
-                                  </div>
+                    <ul class="thumbnails">
+
+                      <?php
+
+                      for($i=0;$i<4;$i++){
+                        $rand=rand(1,$n_productos)-1;
+                        $row = pg_fetch_array ( $Productos,$rand );
+
+
+                          echo "
+                              <li class=\"col-sm-3\">
+                                 <div class=\"fff\">
+                                   <div class=\"thumbnail\"  >
+                                     <a href=\"Producto.php?id={$row[0]}\"><img class=\"img-responsive\" style=\"max-width:360px; max-height:240px;\" src=\"assets/img/{$row[0]}.png\" alt=\"\"></a>
+                                   </div>
+                                   <div class=\"caption\">
+                                     <h4>{$row[1]} {$row[3]}</h4>
+                                     <p>{$row[9]}</p>
+                                     <h3   style=\"color: #FE2E2E\">$ {$row[6]}</h4>
+
+                                     <a class=\"btn btn-mini\" href=\"Producto.php?id={$row[0]}\">» Ver detalles</a>
+                                   </div>
+                                 </div>
                               </li>
-                              <li class="col-sm-3">
-      							<div class="fff">
-      								<div class="thumbnail">
-      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-      								</div>
-      								<div class="caption">
-      									<h4>Praesent commodo</h4>
-      									<p>Nullam Condimentum Nibh Etiam Sem</p>
-      									<a class="btn btn-mini" href="#">» Ver detalles</a>
-      								</div>
-                                  </div>
-                              </li>
-                              <li class="col-sm-3">
-      							<div class="fff">
-      								<div class="thumbnail">
-      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-      								</div>
-      								<div class="caption">
-      									<h4>Praesent commodo</h4>
-      									<p>Nullam Condimentum Nibh Etiam Sem</p>
-      									<a class="btn btn-mini" href="#">» Ver detalles</a>
-      								</div>
-                                  </div>
-                              </li>
-                              <li class="col-sm-3">
-      							<div class="fff">
-      								<div class="thumbnail">
-      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-      								</div>
-      								<div class="caption">
-      									<h4>Praesent commodo</h4>
-      									<p>Nullam Condimentum Nibh Etiam Sem</p>
-      									<a class="btn btn-mini" href="#">» Ver detalles</a>
-      								</div>
-                                  </div>
-                              </li>
-                          </ul>
+                          ";
+                       }
+                      ?>
+
+
+
+                    </ul>
                     </div><!-- /Slide2 -->
                   <div class="item">
-                          <ul class="thumbnails">
-                              <li class="col-sm-3">
-      							<div class="fff">
-      								<div class="thumbnail">
-      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-      								</div>
-      								<div class="caption">
-      									<h4>Praesent commodo</h4>
-      									<p>Nullam Condimentum Nibh Etiam Sem</p>
-      									<a class="btn btn-mini" href="#">» Ver detalles</a>
-      								</div>
-                                  </div>
+                    <ul class="thumbnails">
+
+                      <?php
+
+                      for($i=0;$i<4;$i++){
+                        $rand=rand(1,$n_productos)-1;
+                        $row = pg_fetch_array ( $Productos,$rand );
+
+
+                          echo "
+                              <li class=\"col-sm-3\">
+                                 <div class=\"fff\">
+                                   <div class=\"thumbnail\"  >
+                                     <a href=\"Producto.php?id={$row[0]}\"><img class=\"img-responsive\" style=\"max-width:360px; max-height:240px;\" src=\"assets/img/{$row[0]}.png\" alt=\"\"></a>
+                                   </div>
+                                   <div class=\"caption\">
+                                     <h4>{$row[1]} {$row[3]}</h4>
+                                     <p>{$row[9]}</p>
+                                     <h3   style=\"color: #FE2E2E\">$ {$row[6]}</h4>
+
+                                     <a class=\"btn btn-mini\" href=\"Producto.php?id={$row[0]}\">» Ver detalles</a>
+                                   </div>
+                                 </div>
                               </li>
-                              <li class="col-sm-3">
-      							<div class="fff">
-      								<div class="thumbnail">
-      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-      								</div>
-      								<div class="caption">
-      									<h4>Praesent commodo</h4>
-      									<p>Nullam Condimentum Nibh Etiam Sem</p>
-      									<a class="btn btn-mini" href="#">» Ver detalles</a>
-      								</div>
-                                  </div>
-                              </li>
-                              <li class="col-sm-3">
-      							<div class="fff">
-      								<div class="thumbnail">
-      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-      								</div>
-      								<div class="caption">
-      									<h4>Praesent commodo</h4>
-      									<p>Nullam Condimentum Nibh Etiam Sem</p>
-      									<a class="btn btn-mini" href="#">» Ver detalles</a>
-      								</div>
-                                  </div>
-                              </li>
-                              <li class="col-sm-3">
-      							<div class="fff">
-      								<div class="thumbnail">
-      									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-      								</div>
-      								<div class="caption">
-      									<h4>Praesent commodo</h4>
-      									<p>Nullam Condimentum Nibh Etiam Sem</p>
-      									<a class="btn btn-mini" href="#">» Ver detalles</a>
-      								</div>
-                                  </div>
-                              </li>
-                          </ul>
+                          ";
+                       }
+                      ?>
+
+
+
+                    </ul>
                     </div><!-- /Slide3 -->
               </div>
 
