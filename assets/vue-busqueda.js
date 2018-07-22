@@ -113,12 +113,65 @@ methods:{
         this.$refs.sliderMaximo.max= precioMax;
         this.$refs.sliderMaximo.value= precioMax;
         this.precioMaximoSlider= precioMax;
+      },
+
+      obtenerProductos:function(){
+        $.ajax({
+          url: 'php/buscar_productos.php',
+          type: 'post',
+          dataType: 'json'
+        }).done(
+          data => {
+            console.log(data);
+            this.productosQuery = data;
+            this.obtenerPreciosProducto();
+          }
+        ).fail(
+          function() {
+            //alert("failed");
+          }
+        ).always(
+          function(data) {}
+        );
+      },
+
+      obtenerPreciosProducto:function(){
+        console.log("Obtener Precio Producto");
+          for (var i = 0; i < this.productosQuery.length; i++) {
+//            console.log(JSON.stringify(this.productosQuery[0]));
+        var send_data = {
+          id_producto :this.productosQuery[i].id
+        };
+
+        $.ajax({
+          url: 'php/buscar_precios_producto.php',
+          type: 'post',
+          data:send_data,
+          dataType: 'json'
+        }).done(
+          data => {
+            console.log(id_producto);
+            console.log(data);
+
+          }
+        ).fail(
+          function() {
+            //alert("failed");
+          }
+        ).always(
+          function(data) {}
+        );
+
+          }
+
       }
 
   },
 
 mounted(){
 this.inicialRangoPrecios();
+this.obtenerProductos();
+
 
 }
 
