@@ -26,15 +26,30 @@
   </head>
 
   <body>
-    <?php  
-    $dbconn3 = pg_pconnect("host=plop.inf.udec.cl port=5432 dbname=bdi2017d user=bdi2017d password=bdi2017d");
-    $result = pg_query($dbconn3, "SELECT nombre FROM interfaces.producto");
+    <?php
+  $db = pg_connect("host=plop.inf.udec.cl port=5432 dbname=bdi2017d user=bdi2017d password=bdi2017d");
 
-    while ($row = pg_fetch_row($result)) {
-        echo "$row[0]  ";
-          echo "<br />\n";
-    }
-    ?>
+  if(isset($_GET["id"])){
+     // echo $_GET["nombre_D"];
+      $id_lista = $_GET["id"];
+  }
+  else echo "ERROR";
+
+  $lista=pg_query($db,  "select nombre
+                                   from interfaces.lista_de_compra where id=$id_lista
+                                  " );
+
+  $Productos=pg_query($db,  "select *
+                                   from interfaces.producto as p, interfaces.pertenece_compra as c where c.id_lista=$id_lista
+                                  " );
+  $n_productos = pg_num_rows($Productos);
+  $nom_lista=pg_fetch_row($lista);
+
+
+
+
+
+  ?>
     
   <?php require 'includes/barranavegacion.php' ?>
 
@@ -48,12 +63,7 @@
           <div class="panel-title">
             <div class="row">
               <div class="col-xs-6">
-                <h5><span class="glyphicon glyphicon-list-alt"></span> Lista de Compras <span>></span> <?php $result = pg_query($dbconn3, "SELECT nombre FROM interfaces.lista_de_compra");
-
-    while ($row = pg_fetch_row($result)) {
-        echo "$row[0]";
-    } ?> 
-  </h5>
+                <h5><span class="glyphicon glyphicon-list-alt"></span> Lista de Compras <span>></span> <?php  print($nom_lista[0]) ?>  </h5>
               </div>
               <div class="col-xs-6">
                 <button type="button" class="btn btn-primary btn-sm btn-block">
@@ -79,57 +89,61 @@
                   </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-xs-2"></div>
-              <div class="col-xs-4 ">
-                Nombre
-              </div>
-              <div class="col-xs-2 ">
-                cantidad
-              </div>
-              <div class="col-xs-2 ">
-                Tienda
-              </div>
-              <div class="col-xs-2 text-center">
-                Precio
-              </div>
-            </div>
+            
           </div>
         </div>
         <div class="panel-body">
-          <div class="row">
-            <div class="col-xs-2"><img class="img-responsive" src="http://placehold.it/100x70">
-            </div>
-            <div class="col-xs-4">
-              <h4 class="product-name"><strong>Product name</strong></h4><h4><small>Product description</small></h4>
-            </div>
-            <div class="col-xs-2">
-              <div class="col-xs-6">
-                <input type="text" class="form-control input-sm" value="1">
-              </div>
-              </div>
-            <div class="col-xs-2 form-group">
-              <select class="form-control" id="sel1">
+
+          <!--      producto   inicio        -->
+          
+          <div class="table-responsive">
+        <table class="table table-bordered">
+          <tr>
+            <th width="30%">Nombre</th>
+            <th width="5%">Cantidad</th>
+            <th width="20%">Tienda</th>
+            <th width="15%">Precio</th>
+            <th width="15%">Total</th>
+            <th width="5%"></th>
+          </tr>
+          <?php
+          
+          
+            $total = 0;
+            for($i=0;$i<$n_productos;$i++)
+            {
+          ?>
+          <tr>
+            <td><?php #nombre ?></td>
+            <td><input type="text" name="cantidad" value="1" class="form-control" id=$i /></td>
+            <td><select class="form-control" id="sel1">
                           <option>Lider</option>
                           <option>Jumbo</option>
                           <option>Santa Isabel</option>
                           <option>Tottus</option>
                           <option>Unimarc</option>
                           
-                    </select>
-            </div>
-            <div class="col-xs-2">
-              <div class="col-xs-8 text-right">
-                <h6><strong>18.500 </strong></h6>
-              </div>
-              
-              <div class="col-xs-4">
-                <button type="button" class="btn btn-danger">
-                  <span class="glyphicon glyphicon-remove"> </span>
-                </button>
-              </div>
-            </div>
-          </div>
+                    </select></td>
+            <td>$ <?php #precio ?></td>
+            <td>$ <?php #total  ?></td>
+            <td><a><span class="text-danger">Remove</span></a></td>
+          </tr>
+          <?php
+              $total = $total ;
+            }
+          ?>
+          <tr>
+            <td colspan="3" align="right">Total</td>
+            <td align="right">$ <?php echo number_format($total, 2); ?></td>
+            <td></td>
+          </tr>
+          <?php
+          
+          ?>
+            
+        </table>
+      </div>
+          <!--       fin de producto           -->
           <hr>
           
           <div class="row">
@@ -147,12 +161,7 @@
           </div>
         </div>
         <div class="panel-footer">
-          <div class="row text-center">
-            <div class="col-xs-9"></div>
-            <div class="col-xs-3">
-              <h4 class="text-right">Total <strong>$50.00</strong></h4>
-            </div>
-          </div>
+          
           <div class="row">  
             <div class="col-xs-6">
               <button type="button" class="btn btn-info">Exportar</button>
