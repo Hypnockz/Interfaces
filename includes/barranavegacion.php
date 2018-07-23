@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default" id="barra-nav">
   <div class="container-fluid">
     <div class="navbar-header" style="width:15%">
       <a class="navbar-brand" href="index.php">DealsWatcher</a>
@@ -9,9 +9,9 @@
         <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="width:100%">Categorías
               <span class="caret"></span></a>
         <ul class="dropdown-menu" style="width:100%">
-          <li><a href="#">Lácteos</a></li>
-          <li><a href="#">Frutas</a></li>
-          <li><a href="#">Carnes</a></li>
+          <li style="text-transform:capitalize" v-for="cat in categorias"><a href="#">{{cat.categoria}}</a></li>
+
+
       </li>
 
       </ul>
@@ -44,3 +44,5 @@
     </ul>
   </div>
 </nav>
+
+<script src="assets/vue-lista-categorias.js"></script>

@@ -23,6 +23,8 @@
 
     <!-- Custom styles for this template -->
     <link href="assets/css/jumbotron.css" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
   </head>
 
 <?php
@@ -42,7 +44,7 @@ $n_productos = pg_num_rows($Productos);
  ?>
 
 
-  <body>
+  <body id="pagina-inicio">
 
   <?php require 'includes/barranavegacion.php' ?>
 
