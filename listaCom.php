@@ -28,24 +28,7 @@
 </head>
 
   <body>
-  	<?php
-  $db = pg_connect("host=plop.inf.udec.cl port=5432 dbname=bdi2017d user=bdi2017d password=bdi2017d");
 
-  if(isset($_GET["id"])){
-     // echo $_GET["nombre_D"];
-      $id_lista = $_GET["id"];
-  }
-  $lista=pg_query_params($db,  "select nombre
-                                   from interfaces.lista_de_compra where id=$1
-                                  ",array($id_lista) );
-  $Productos=pg_query_params($db,  "select *
-                                   from interfaces.producto as p, interfaces.pertenece_compra as c where c.id_lista=$1 and c.id_producto=p.id
-                                  " ,array($id_lista));
-  $supermercados=pg_query_params("select p.id, s.nombre as nombre_super, precio_oferta
-from pertenece_compra as pc,producto as p, precios as pr, supermercado as s
-where pc.id_producto=p.id and pr.id_producto=p.id and pr.id_super=s.id
-ORDER BY p.id, id_super ASC");
-  ?>
   	<?php require 'includes/barranavegacion.php' ?>
 
   	<main role="main" id="lista-compras">
@@ -78,17 +61,17 @@ ORDER BY p.id, id_super ASC");
                   @select="reordenarProductos"
                   >
                 </multiselect>
-                  </div> 
+                  </div>
                   </div>
               </div>
             </div>
-            
+
           </div>
         </div>
         <div class="panel-body">
 
           <!--      producto   inicio        -->
-          
+
           <div class="table-responsive">
         <table class="table table-bordered" id="table" >
           <tr class="titlerow">
@@ -99,7 +82,7 @@ ORDER BY p.id, id_super ASC");
             <th width="15%">Total</th>
             <th width="5%"></th>
           </tr>
-          
+
           <tr v-for="producto in producto" :key="producto.id">
             <td>{{producto.nombre}}</td>
             <td><form name="form" action="" method="get">
@@ -114,30 +97,30 @@ ORDER BY p.id, id_super ASC");
             <td align="right" class="subtotal">{{producto.super.precio * producto.cantidad}}</td>
             <td><a><button class="btn btn-danger">Eliminar</button></a></td>
           </tr>
-         
+
           <tr>
             <td colspan="4" align="right">Total</td>
             <td class="total" id="total" align="right"> </td>
             <td></td>
           </tr>
-            
+
         </table>
       </div>
           <!--       fin de producto           -->
-      
-          
-          
+
+
+
         </div>
         <div class="panel-footer">
-          
-          <div class="row">  
+
+          <div class="row">
             <div class="col-xs-6">
               <button type="button" class="btn btn-info">Exportar</button>
               <button type="button" class="btn btn-info">Generar Captura de Pantalla</button>
               <button type="button" class="btn btn-danger">Eliminar</button>
             </div>
             <div class="col-xs-3">
-              
+
             </div>
             <div class="col-xs-3">
               <button type="button" class="btn btn-success btn-block">
@@ -157,7 +140,11 @@ ORDER BY p.id, id_super ASC");
   <script src="assets/js/popper.min.js"></script>
   <script src="assets/js/bootstrap.min.js"></script>
 
-  <script src="assets/vue-lista-compra.js"></script>
 
+
+  <?php
+  echo '<script>var id_lista = ' . json_encode($_GET['id']) . '; console.log("Query"+id_lista);</script>';
+   ?>
+  <script src="assets/vue-lista-compra.js"></script>
 </body>
 </html>
