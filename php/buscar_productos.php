@@ -7,29 +7,29 @@ while ($row = pg_fetch_object($consulta)) {
   //var_dump($row);
 
   array_push($return,$row);
+
 }
 
-//echo $consulta;
-/*
-    for($i=1; $i <= $numberOfCases ; $i++){
-      try {
-        $query = $con->prepare("SELECT rutafoto FROM foto_caso_emblematico WHERE id_caso = :id_query");
-        $query-> bindParam(':id_query',$i,PDO::PARAM_STR);
-        $query-> execute();
-        $data = $query -> fetchAll(PDO::FETCH_ASSOC);
 
-        $return['infoCaso'][$i-1]['fotos'] = $data;
+    foreach ($return as $producto) {
+/*      echo "-----------------";
+      echo "\n";
+      //var_dump($producto);
 
-      } catch (Exception $e) {
-              $return['error']['code'] = $e-> getCode();
-              $return['error']['status'] = true;
-              $return['error']['msj'] = $e;
-          }
+      echo "\n";
+      echo "-----------------";/*/
 
+      $producto->precios = array();
+      $aidi = $producto->id;
+      $consulta=pg_query_params($db,  "Select s.id,s.nombre,p.precio,p.precio_oferta from interfaces.precios as p inner join interfaces.supermercado as s on p.id_super = s.id WHERE id_producto = $1",array($aidi));
 
+      while ($rowP = pg_fetch_object($consulta)) {
+      //var_dump($rowP);
+
+        array_push($producto->precios,$rowP);
       }
 
-*/
+    }
 
 echo json_encode($return, JSON_PRETTY_PRINT);
 

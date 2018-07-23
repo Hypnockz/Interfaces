@@ -25,7 +25,7 @@ data:{
   precioMinimoSlider:0,
   precioMaximoSlider:100000,
 
-
+  infoPrecios : [],
   textoBusqueda:'Leche Colún',
   supermercadosSeleccionados:[],
   supermercados:[
@@ -124,7 +124,7 @@ methods:{
           data => {
             console.log(data);
             this.productosQuery = data;
-            this.obtenerPreciosProducto();
+            this.setPreciosProductos();
           }
         ).fail(
           function() {
@@ -135,24 +135,16 @@ methods:{
         );
       },
 
-      obtenerPreciosProducto:function(){
-        console.log("Obtener Precio Producto");
-          for (var i = 0; i < this.productosQuery.length; i++) {
-//            console.log(JSON.stringify(this.productosQuery[0]));
-        var send_data = {
-          id_producto :this.productosQuery[i].id
-        };
-
+      obtenerSupermercados:function(){
         $.ajax({
-          url: 'php/buscar_precios_producto.php',
+          url: 'php/buscar_supermercados.php',
           type: 'post',
-          data:send_data,
           dataType: 'json'
         }).done(
           data => {
-            console.log(id_producto);
             console.log(data);
-
+            this.supermercados = data;
+            this.supermercadosSeleccionados = data;
           }
         ).fail(
           function() {
@@ -161,19 +153,48 @@ methods:{
         ).always(
           function(data) {}
         );
+      },
+
+      setPreciosProductos:function(){
+        for (var i = 0; i < this.productosQuery.length; i++) {
+          var precioMinimoProducto =1000000;
+        //  var precioMaxProducto =-1;
+          console.log(i);
+          this.productosQuery[i].supermercados=[];
+          for (var j =0 ; j <this.productosQuery[i].precios.length; j++) {
+            var temp = new Object;
+            console.log("T1" + JSON.stringify(temp));
+            console.log(" Precio J" +JSON.stringify(this.productosQuery[i].precios[j]));
+            temp['id'] = this.productosQuery[i].precios[j].id;
+            temp['nombre']= this.productosQuery[i].precios[j].nombre;
+
+            console.log( "T2" +JSON.stringify(temp));
+            this.productosQuery[i].supermercados.push(temp);
+
+
+
+            if(this.productosQuery[i].precios[j].precio_oferta < precioMinimoProducto){
+              precioMinimoProducto = this.productosQuery[i].precios[j].precio_oferta;
+            }
 
           }
-
+          this.productosQuery[i].precio = precioMinimoProducto;
+        }
+        this.inicialRangoPrecios();
       }
+
+
+
 
   },
 
-mounted(){
-this.inicialRangoPrecios();
-this.obtenerProductos();
 
+
+mounted()
+{
+  this.obtenerProductos();
+  this.obtenerSupermercados();
 
 }
-
 
 });
