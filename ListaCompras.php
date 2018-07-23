@@ -42,6 +42,7 @@
   $Productos=pg_query_params($db,  "select *
                                    from interfaces.producto as p, interfaces.pertenece_compra as c where c.id_lista=$1 and c.id_producto=p.id
                                   " ,array($id_lista));
+
   $n_productos = pg_num_rows($Productos);
   $nom_lista=pg_fetch_row($lista);
 
@@ -141,13 +142,15 @@
             <th width="5%"></th>
           </tr>
           <?php
-          
+            
           
             $total = 0;
             $i=0;
             while($producto=pg_fetch_row($Productos))
             {
-
+                $precios=pg_query_params($db,"select p.id_producto, id_super, precio_oferta, nombre 
+                            from interfaces.pertenece_compra as c, interfaces.precios as p, interfaces.supermercado as s 
+                            where c.id_lista=$1 and c.id_producto=p.id_producto and p.id_producto=$2 and p.id_super=s.id",array($id_lista,$producto[0]));
           ?>
           <tr>
             <td><?php print($producto[1]) #nombre ?></td>
@@ -156,18 +159,18 @@
             </form></td>
 
             <td><select class="form-control" id="sel1">
-                          <option value="1">Lider</option>
-                          <option value="2">Jumbo</option>
-                          <option value="3">Santa Isabel</option>
-                          <option value="4">Tottus</option>
-                          <option value="5">Unimarc</option>
+                      <?php while($super=pg_fetch_row($precios)){
+                       ?>
+                        
+                          <option value=<?php echo($super[1]); ?>> <?php print($super[3]) ?></option>");
+                           <?php } ?>
                           
                     </select></td>
             <td class="price" align="right"> <?php $precios=pg_query_params($db,"Select * from interfaces.precios where id_producto=$1 and id_super=1",array($producto[0]));
                         $precio=pg_fetch_row($precios);
                         print($precio[3]);  #precio ?></td>
             <td align="right" class="subtotal"></td>
-            <td><a><span class="text-danger">Eliminar</span></a></td>
+            <td><a><button class="btn btn-danger">Eliminar</button></a></td>
           </tr>
           <?php
               $total = $total ;
