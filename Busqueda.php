@@ -123,7 +123,7 @@
               <paginate ref="paginatorProductos"
                 name="productos"
                 :list="filteredProductoPrecio"
-                :per="3"
+                :per="9"
               >
 
                   <div v-for="product in paginated('productos')" class="col-lg-4 col-md-6 mb-4">
