@@ -116,13 +116,19 @@ methods:{
       },
 
       obtenerProductos:function(){
+
+
+        let send_query ={
+          producto: this.capitalizeFirstLetter(query)
+        };
         $.ajax({
           url: 'php/buscar_productos.php',
-          type: 'post',
+          type: 'get',
+          data:send_query,
           dataType: 'json'
         }).done(
           data => {
-            console.log(data);
+            console.log("Productos Coincidentes "+data)
             this.productosQuery = data;
             this.setPreciosProductos();
           }
@@ -181,7 +187,13 @@ methods:{
           this.productosQuery[i].precio = precioMinimoProducto;
         }
         this.inicialRangoPrecios();
-      }
+      },
+
+     capitalizeFirstLetter:function(string) {
+          string = string.toLowerCase();
+          console.log(string);
+          return string.charAt(0).toUpperCase() + string.slice(1);
+        }
 
 
 
@@ -194,6 +206,12 @@ mounted()
 {
   this.obtenerProductos();
   this.obtenerSupermercados();
+
+},
+
+created(){
+this.textoBusqueda = query;
+
 
 }
 

@@ -21,7 +21,7 @@
 
     <form class="navbar-form navbar-left" action="Busqueda.php" style="width:40%">
       <div class="form-group" style="width:75%">
-        <input type="text" class="form-control" placeholder="¿Qué estás buscando?" style="width:100%">
+        <input type="text" name="query" class="form-control" placeholder="¿Qué estás buscando?" style="width:100%">
       </div>
       <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
     </form>

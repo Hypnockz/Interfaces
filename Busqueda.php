@@ -40,7 +40,7 @@
 
     <div class="row"style="margin:10px;padding-bottom:40px">
 
-      <h1> Resultados de búsqueda : {{textoBusqueda}}</h1>
+      <h1> Buscando : {{textoBusqueda}}</h1>
     </div>
 
     <div class="row">
@@ -191,7 +191,14 @@
   <script>window.jQuery || document.write('<script src="assets/js/jquery-slim.min.js"><\/script>')</script>
   <script src="assets/js/popper.min.js"></script>
   <script src="assets/js/bootstrap.min.js"></script>
+  <?php
+  echo '<script>var query = ' . json_encode($_GET['query']) . '; console.log("Query"+query);</script>';
+   ?>
+
+
   <script src="assets/vue-busqueda.js"></script>
+
+
 </body>
 
 

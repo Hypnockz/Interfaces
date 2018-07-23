@@ -1,16 +1,18 @@
 <?php
 $return=[];
+
+$var = $_GET['producto'];
 $db = pg_connect("host=plop.inf.udec.cl port=5432 dbname=bdi2017d user=bdi2017d password=bdi2017d");
-$consulta=pg_query($db,  "Select * from interfaces.producto");
+$consulta = pg_query_params($db, "Select * from interfaces.producto where LOWER(nombre) LIKE LOWER('%' || $1 || '%') OR LOWER(marca) LIKE '%' || LOWER($1) || '%'", array($var));
+
+//echo pg_num_rows($consulta);
+//$consulta=pg_query($db,  "Select * from interfaces.producto as p ");
 
 while ($row = pg_fetch_object($consulta)) {
   //var_dump($row);
-
   array_push($return,$row);
 
 }
-
-
     foreach ($return as $producto) {
 /*      echo "-----------------";
       echo "\n";
