@@ -80,21 +80,14 @@
                     $(document).on("change, onload, mouseup, keyup","table input[type='number']", updatePrice);
                     
                 });
+                
     </script>
     <script type="text/javascript">
-      function updateTotal(){
-      $(document).ready(function(e){
-        $("input").change(function(){
-          var tot=0;
-          $("td[class='subtotal']").each(function(){
-            tot=tot+ parseInt($(this).val());
-          })
-            document.getElementById('total').interHTML=tot;
+      jQuery(document).ready(function($){
+        $('table').find('.sel1').change(function(){
+          $('.price').text($(this).find(':selected').val());
         });
-
-
-      });
-    }
+});
     </script>
   <?php require 'includes/barranavegacion.php' ?>
 
@@ -144,21 +137,21 @@
           <?php
             
           
-            $total = 0;
-            $i=0;
+            
+            
             while($producto=pg_fetch_row($Productos))
             {
                 $supermer=pg_query_params($db,"select p.id_producto, id_super, precio_oferta, nombre 
                             from interfaces.pertenece_compra as c, interfaces.precios as p, interfaces.supermercado as s 
-                            where c.id_lista=$1 and c.id_producto=p.id_producto and p.id_producto=$2 and p.id_super=s.id",array($id_lista,$producto[0]));
+                            where c.id_lista=$1 and c.id_producto=p.id_producto and p.id_producto=$2 and p.id_super=s.id ORDER BY id_super ASC",array($id_lista,$producto[0]));
           ?>
           <tr>
             <td><?php print($producto[1]) #nombre ?></td>
             <td><form name="form" action="" method="get">
-              <input type="number" name="cantidad" value="1" class="form-control" id="cantidad" min="1" onchange="updateTotal()" />
+              <input type="number" name="cantidad" value="1" class="form-control" id="cantidad" min="1" />
             </form></td>
 
-            <td><select class="form-control" id="sel1">
+            <td><select class="form-control" id="sel1" name="sel1" value="">
                       <?php while($super=pg_fetch_row($supermer)){
                        ?>
                         
@@ -169,15 +162,15 @@
             <td class="price" align="right"> 
               <?php $precios=pg_query_params($db,"Select * 
                                                   from interfaces.precios 
-                                                  where id_producto=$1 and id_super=$2",array($producto[0],"1"));
-                        $precio=pg_fetch_row($precios);
-                        print($precio[3]);  #precio ?></td>
+                                                  where id_producto=$1 and id_super=$2",array($producto[0],1));
+                      while($precio=pg_fetch_row($precios)){
+                        
+                        print($precio[3]);
+                      }  #precio ?></td>
             <td align="right" class="subtotal"></td>
             <td><a><button class="btn btn-danger">Eliminar</button></a></td>
           </tr>
-          <?php
-              $total = $total ;
-              $i++;
+          <?php  
             }
           ?>
           <tr>
@@ -185,28 +178,13 @@
             <td class="total" id="total" align="right"> </td>
             <td></td>
           </tr>
-          <?php
-          
-          ?>
             
         </table>
       </div>
           <!--       fin de producto           -->
-          <hr>
+      
           
-          <div class="row">
-            <div class="text-center">
-              <div class="col-xs-9">
-                <h6 class="text-right">¿Agregó más artículos?</h6>
-              </div>
-              <div class="col-xs-3">
-                <button type="button" class="btn btn-default btn-sm btn-block">
-                  <span class="glyphicon glyphicon-repeat"></span>
-                  Actualize la lista
-                </button>
-              </div>
-            </div>
-          </div>
+          
         </div>
         <div class="panel-footer">
           
