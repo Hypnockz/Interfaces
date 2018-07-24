@@ -122,7 +122,8 @@
           <div class="row row-product" v-for="producto in filteredProducto" :key="producto.id" >
 
             <div class="col-md-1  row-content-product" >
-               <span class="glyphicon glyphicon-arrow-down indicador" v-bind:class="{'bajo-precio': productoEstaEnDcto(producto.precioOferta,producto.precioAnterior), 'aumento-precio': !productoEstaEnDcto(producto.precioOferta,producto.precioAnterior)}"></span>
+               <span v-if="productoEstaEnDcto(producto.precioOferta,producto.precioAnterior)" class="glyphicon glyphicon-arrow-down indicador" v-bind:class="{'bajo-precio': productoEstaEnDcto(producto.precioOferta,producto.precioAnterior), 'aumento-precio': !productoEstaEnDcto(producto.precioOferta,producto.precioAnterior)}"></span>
+               <span v-else class="glyphicon glyphicon-arrow-up indicador" v-bind:class="{'bajo-precio': productoEstaEnDcto(producto.precioOferta,producto.precioAnterior), 'aumento-precio': !productoEstaEnDcto(producto.precioOferta,producto.precioAnterior)}"></span>
             </div>
 
             <div class="col-md-1  row-content-product">
@@ -157,8 +158,8 @@
     <tbody>
       <tr v-for= "valores in producto.precios" :key="valores.id">
         <td>{{valores.nombre}}</td>
-        <td v-bind:class="{'bajo-precio': productoEstaEnDcto(valores.precioOferta,valores.precio), 'aumento-precio': !productoEstaEnDcto(valores.precioOferta,valores.precio)}">{{valores.precio_oferta}}</td>
-        <td>{{valores.precio}}</td>
+        <td v-bind:class="{'bajo-precio': colorPrecioTabla(valores.precio_oferta,valores.precio), 'aumento-precio': !colorPrecioTabla(valores.precio_oferta,valores.precio)}">${{valores.precio_oferta}}</td>
+        <td>${{valores.precio}}</td>
 
       </tr>
     </tbody>
@@ -229,7 +230,7 @@
 </body>
 
 <footer class="container">
-  <p>&copy; Company 2017-2018</p>
+  
 </footer>
 
 <style>

@@ -140,11 +140,23 @@ new Vue({
     },
 
     productoEstaEnDcto:function(precioOferta, precioAnterior){
+      console.log("Precio Oferta: "+ precioOferta +", Precio: "+precioAnterior);
+      console.log(parseInt(precioOferta)- parseInt(precioAnterior) >= 0);
       if(parseInt(precioOferta)- parseInt(precioAnterior) >= 0){
         return false;
       }
       else{return true}
     },
+
+    colorPrecioTabla:function(precioOferta, precioAnterior){
+      console.log("Color ||| Precio tabla: "+ precioOferta +", Precio: "+precioAnterior);
+      console.log(parseInt(precioOferta)- parseInt(precioAnterior) >= 0);
+      if(parseInt(precioOferta)- parseInt(precioAnterior) >= 0){
+        return false;
+      }
+      else{return true}
+    },
+
 
     eliminacionConfirmadaDeLista:function(){
       console.log("Por eliminar "+ this.porEliminar);
