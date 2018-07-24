@@ -30,8 +30,19 @@
       <li><a href="index.php"><span class="glyphicon glyphicon-home"></span>&nbsp; Inicio</a></li>
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-list-alt"></span> Mis Listas
       <span class="caret"></span></a>
+<<<<<<< HEAD
       <ul class="dropdown-menu">
         <li><a href="listaCom.php?id=1">Lista 1</a></li>
+=======
+      <ul class="dropdown-menu" id="#myidnavbar">
+        <?php
+        for($i=0;$i<$n_listas;$i++){
+          $row = pg_fetch_array ( $listas,$i );
+          echo "<li><a href=\"#\" id=\"\" onclick=\"AddtoList({$row[0]},{$id_producto})\" >{$row[1]}</a></li>";
+        }
+
+         ?>
+>>>>>>> master
       </ul>
       </li>
       <li class="dropdown" ><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class=" glyphicon glyphicon-user"></span> Mi Cuenta
@@ -51,5 +62,6 @@
 
 .navbar{
   font-size: 18px;
+  font-size: 18px !important;
 }
 </style>

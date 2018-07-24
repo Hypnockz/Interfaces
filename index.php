@@ -16,14 +16,16 @@
     <link rel="icon" href="../../../../favicon.ico">
 
 
-    <title>Welcome to DealsWatchers!</title>
+    <title>¡Bienvenido a DealsWatcher!</title>
+
+
 
     <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="assets/css/jumbotron.css" rel="stylesheet">
-    
+
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
   </head>
 
@@ -53,10 +55,14 @@ $n_productos = pg_num_rows($Productos);
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
         <div class="container">
-          <h1 class="display-3">Bienvenido a nuestro intento de tienda!</h1>
-        </div>
-      </div>
+          <h1 class="display-3" style="color:#42b983">¡Bienvenido a DealsWatcher!</h1>
 
+
+
+        </div>
+
+      </div>
+<h2 style="margin-left:30px;">Dealswatcher le permite cotizar los productos consultando los precios de distintos supermercados.</h2>
       <div class="container" id="sales">
       <div class="col-xs-12">
 
