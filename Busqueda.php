@@ -124,10 +124,10 @@
 
                   <div v-for="product in paginated('productos')" class="col-lg-4 col-md-6 mb-4">
                     <div class="card h-100">
-                      <a href="#"> <img class="card-img-top" :src="getImagenProducto(product.id)" alt=""></a>
+                      <a @click="irADetalleProducto(product.id)"> <img class="card-img-top" :src="getImagenProducto(product.id)" alt=""></a>
                       <div class="card-body">
                         <h3 class="card-title">
-                          <a href="#">{{product.nombre}}</a>
+                          <a @click="irADetalleProducto(product.id)">{{product.nombre}}</a>
                         </h3>
                         <p style="font-size:30px;"> $ {{product.precio}}</p>
                         <p class="card-text">Menor precio en: <span style="text-transform:capitalize">{{product.masBaratoEn}}</span></p>
@@ -148,7 +148,7 @@
             <!-- /.row -->
 
             <div class="row">
-                <paginate-links for="productos" :show-step-links="true"></paginate-links>
+                <paginate-links for="productos" :show-step-links="true" style="font-size: 20px;"></paginate-links>
             </div>
 
 <!-- End Panel body -->
@@ -354,5 +354,9 @@ ul.paginate-links{
 }
 
 [v-cloak] {display: none}
+
+.multiselect__tag{
+  text-transform: capitalize;
+}
 </style>
 </html>

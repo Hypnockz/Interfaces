@@ -240,6 +240,10 @@ methods:{
         getImagenProducto:function(id){
 
             return 'assets/img/'+id+'.png';
+        },
+
+        irADetalleProducto:function(id){
+          window.location.href ="Producto.php?id="+id;
         }
 
 
