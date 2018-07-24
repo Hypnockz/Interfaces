@@ -50,6 +50,6 @@
 <style>
 
 .navbar{
-  font-size: 18px;
+  font-size: 18px !important;
 }
 </style>
