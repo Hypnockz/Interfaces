@@ -117,7 +117,7 @@ methods:{
             console.log("Productos Coincidentes "+data)
             this.productosQuery = data;
             this.setPreciosProductos();
-            this.loadingComplete = true;
+          this.loadingComplete = true;
           }
         ).fail(
           function() {
@@ -155,6 +155,7 @@ methods:{
         //  var precioMaxProducto =-1;
           console.log(i);
           this.productosQuery[i].supermercados=[];
+          this.productosQuery[i].masBaratoEn = "a";
           for (var j =0 ; j <this.productosQuery[i].precios.length; j++) {
             var temp = new Object;
             console.log("T1" + JSON.stringify(temp));
@@ -169,6 +170,7 @@ methods:{
 
             if(this.productosQuery[i].precios[j].precio_oferta < precioMinimoProducto){
               precioMinimoProducto = this.productosQuery[i].precios[j].precio_oferta;
+              this.productosQuery[i].masBaratoEn  = this.productosQuery[i].precios[j].nombre;
             }
 
           }
@@ -207,6 +209,11 @@ methods:{
 
             }
             return estaSupermercado;
+        },
+
+        getImagenProducto:function(id){
+
+            return 'assets/img/'+id+'.png';
         }
 
 

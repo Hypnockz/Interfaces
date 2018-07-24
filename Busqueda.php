@@ -117,17 +117,15 @@
 
                   <div v-for="product in paginated('productos')" class="col-lg-4 col-md-6 mb-4">
                     <div class="card h-100">
-                      <a href="#"><img class="card-img-top" src="" alt=""></a>
+                      <a href="#"><img class="card-img-top" :src="getImagenProducto(product.id)" alt=""></a>
                       <div class="card-body">
-                        <h4 class="card-title">
+                        <h3 class="card-title">
                           <a href="#">{{product.nombre}}</a>
-                        </h4>
-                        <h5>{{product.precio}}</h5>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+                        </h3>
+                        <p style="font-size:30px;"> $ {{product.precio}}</p>
+                        <p class="card-text">Menor precio en: <span style="text-transform:capitalize">{{product.masBaratoEn}}</span></p>
                       </div>
-                      <div class="card-footer">
-                        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                      </div>
+
                     </div>
                   </div>
 
@@ -149,8 +147,18 @@
 <!-- End Panel body -->
         </div>
 
-        <div v-show="!loadingComplete" class="panel-body">
-          <moon-loader></moon-loader>
+        <div v-show="!loadingComplete" style="text-align:center;width:100%">
+
+          <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                        <moon-loader ></moon-loader>
+            </div>
+
+          </div>
+
+
+
+
         </div>
 
 
@@ -311,5 +319,31 @@ ul.paginate-links{
   display:contents;
 }
 
+.card{
+  padding: 10px;
+
+
+}
+
+.card-img-top{
+  width: 200px;
+  height: 200px;
+  object-fit: scale-down;
+}
+
+.v-spinner{
+  margin-left: 200px;
+  padding-top: 100px;
+  padding-bottom: 100px;
+
+}
+
+.panel-body{
+  text-align: center;
+}
+
+.card-title{
+  font-size: 30px;
+}
 </style>
 </html>
