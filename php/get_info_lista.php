@@ -26,7 +26,7 @@ $id_lista=1;
       $consulta=pg_query_params($db,  "select s.nombre, precio_oferta as precio
                               from precios as pr, supermercado as s
                               where pr.id_producto=$1 and s.id=pr.id_super
-                              ORDER BY pr.id_producto, id_super ASC",array($aidi));
+                              ORDER BY pr.id_producto, precio_oferta ASC",array($aidi));
 
        while ($rowP = pg_fetch_object($consulta)) {
         //var_dump($rowP);

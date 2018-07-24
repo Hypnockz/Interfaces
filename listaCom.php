@@ -93,7 +93,7 @@
             </form></td>
 
             <td> <multiselect
-                  multiselect v-model="producto.super" deselect-label="Can't remove this value" track-by="nombre" label="nombre" placeholder="Select one" :options="producto.supermercados" :searchable="false" :allow-empty="false"
+                  multiselect v-model="producto.super" id="producto.nombre" deselect-label="Can't remove this value" track-by="nombre" label="nombre" placeholder="Select one" :options="producto.supermercados" :searchable="false" :allow-empty="false"
                   >
                 </multiselect>  </td>
             <td class="price" align="right">{{producto.super.precio}} </td>
