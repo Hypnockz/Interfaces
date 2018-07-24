@@ -12,6 +12,11 @@
 <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.0.6/dist/vue-multiselect.min.css">
 <script src="assets/js/vue-paginate.js"></script>
 
+<script src="assets/js/vue-spinner.js"></script>
+<script>
+  var MoonLoader = VueSpinner.MoonLoader
+</script>
+
 
 
 <head>
@@ -43,7 +48,7 @@
       <h1> Buscando : {{textoBusqueda}}</h1>
     </div>
 
-    <div class="row">
+    <div class="row" >
 
       <div class="col-md-3">
 
@@ -100,23 +105,7 @@
       <div class="col-md-9">
 
         <div class="panel panel-default">
-          <div class="panel-body">
-            <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
-              <ol class="carousel-indicators">
-                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-              </ol>
-
-              <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-              </a>
-              <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-              </a>
-            </div>
+          <div class="panel-body" v-show="loadingComplete">
 
             <div class="row">
 
@@ -159,6 +148,12 @@
 
 <!-- End Panel body -->
         </div>
+
+        <div v-show="!loadingComplete" class="panel-body">
+          <moon-loader></moon-loader>
+        </div>
+
+
         </div>
 
 
@@ -177,6 +172,8 @@
 <!--END Number Navigator-->
 
     </div>
+
+
     <!-- /.row -->
 
   </div>

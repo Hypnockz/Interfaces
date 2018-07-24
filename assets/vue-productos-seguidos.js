@@ -17,7 +17,7 @@ components: {
  },
 
 data:{
-
+  loadingComplete:false,
   queryNombre:'',
   opcionesOrdernarPor:['Nombre','Mayor Oferta','Aumento de Precio'
   ],
@@ -25,39 +25,7 @@ data:{
   ordenarPor:['Nombre'],
 
 
-  seguidos:[
-
-    {id:1,nombre:'Leche Soprole 1L',
-     precioActual:660,
-     mejorPrecioAnterior:710,
-    listaPrecio:[{supermercado:'Tottus', precio:660},
-        {supermercado:'Lider', precio:700},
-        {supermercado:'Jumbo', precio:670}
-      ]
-    },
-
-    {id:2,nombre:'Bebida Coca Cola 2lt',
-     precioActual:1990,
-     mejorPrecioAnterior:1890,
-    listaPrecio:
-        [{supermercado:'Lider', precio:2120},
-        {supermercado:'Santa Isabel', precio:2000},
-        {supermercado:'Jumbo', precio:1990}
-        ]
-
-    },
-
-    {id:3,nombre:'Papas Fritas Lays Onduladas 320gr',
-     precioActual:1790,
-     mejorPrecioAnterior:1790,
-    listaPrecio:
-        [{supermercado:'Lider', precio:1790},
-        {supermercado:'Santa Isabel', precio:2000},
-        {supermercado:'Jumbo', precio:1890}
-        ]
-
-    }
-  ]
+  seguidos:[]
 },
 
 
