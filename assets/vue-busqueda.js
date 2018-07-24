@@ -12,7 +12,7 @@ components: {
      filteredProductoPrecio: function(){
        //console.log('Buscar por nombre');
        return this.productosQuery.filter(producto=>{
-         return parseInt(producto.precio) >= parseInt(this.precioMinimoSlider) &&  parseInt(producto.precio) <= parseInt(this.precioMaximoSlider)
+         return parseInt(producto.precio) >= parseInt(this.precioMinimoSlider) &&  parseInt(producto.precio) <= parseInt(this.precioMaximoSlider) && (this.productoEstaEnTiendaSeleccionada(producto));
        })
      },
 
@@ -138,6 +138,7 @@ methods:{
             console.log(data);
             this.supermercados = data;
             this.supermercadosSeleccionados = data;
+            //this.productoEstaEnTiendaSeleccionada();
           }
         ).fail(
           function() {
@@ -179,7 +180,33 @@ methods:{
      capitalizeFirstLetter:function(string) {
           string = string.toLowerCase();
           console.log(string);
-          return string.charAt(0).toUpperCase() + string.slice(1);
+
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        },
+
+        productoEstaEnTiendaSeleccionada:function(producto){
+          var estaSupermercado= false;
+            console.log("PP "+JSON.stringify(producto));
+            console.log("PP "+JSON.stringify(producto.supermercados));
+            console.log("Producto tienda seleccionada");
+            console.log(this.supermercadosSeleccionados.length);
+
+          //  console.log("array "+ arrayS);
+            for (var i = 0; i < this.supermercadosSeleccionados.length; i++) {
+              console.log("S%B "+this.supermercadosSeleccionados[i].nombre);
+              for (var j= 0; j < producto.supermercados.length; j++) {
+                console.log("S%A "+producto.supermercados[j].nombre);
+
+                if (producto.supermercados[j].nombre === this.supermercadosSeleccionados[i].nombre) {
+                    estaSupermercado = true;
+                    console.log("Match");
+                    break;
+                }
+
+              }
+
+            }
+            return estaSupermercado;
         }
 
 
