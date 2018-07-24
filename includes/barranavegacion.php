@@ -38,7 +38,11 @@
       <span class="caret"></span></a>
       <ul class="dropdown-menu">
         <li><a href="Seguidos.php">Seguidos</a></li>
+<<<<<<< HEAD
         <li><a href="#">Cerrar Sesión</a></li>
+=======
+        <li><a href="" style="disabled:true">Cerrar Sesión</a></li>
+>>>>>>> master
       </ul>
       </li>
     </ul>

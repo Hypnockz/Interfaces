@@ -1,4 +1,4 @@
-new Vue({
+var barraNavJS = new Vue({
 
 el:'#barra-nav',
 

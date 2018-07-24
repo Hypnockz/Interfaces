@@ -116,7 +116,7 @@
         this.paginateList()
       },
       list: function list () {
-        if (this.currentPage >= this.lastPage) {
+      if (this.currentPage >= this.lastPage && this.lastPage) {
           this.currentPage = this.lastPage - 1
         }
         this.paginateList()

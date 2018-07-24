@@ -10,11 +10,12 @@ components: {
 
  computed:{
      filteredProductoPrecio: function(){
-       //console.log('Buscar por nombre');
-       return this.productosQuery.filter(producto=>{
-         return parseInt(producto.precio) >= parseInt(this.precioMinimoSlider) &&  parseInt(producto.precio) <= parseInt(this.precioMaximoSlider)
-       })
-     },
+       var r =this.productosQuery.filter(producto=>{
+         return parseInt(producto.precio) >= parseInt(this.precioMinimoSlider) &&  parseInt(producto.precio) <= parseInt(this.precioMaximoSlider) && (this.productoEstaEnTiendaSeleccionada(producto));
+       });
+          this.productosMatch = r.length;
+          return r;
+     }
 
  },
 
@@ -24,7 +25,7 @@ data:{
   loadingComplete:false,
   precioMinimoSlider:0,
   precioMaximoSlider:100000,
-
+productosMatch:0,
   infoPrecios : [],
   textoBusqueda:'Leche Colún',
   supermercadosSeleccionados:[],
@@ -61,9 +62,19 @@ methods:{
   },
 
   goToFirstPage:function() {
-   if (this.$refs.paginatorProductos) {
-     this.$refs.paginatorProductos.goToPage(1);
-   }
+    if (this.$refs.paginatorProductos) {
+      console.log("GO "+ this.$refs.paginatorProductos);
+     console.log("GOL "+this.$refs.paginatorProductos.lastPage);
+     if (this.$refs.paginatorProductos.lastPage==0) {
+       //this.$refs.paginatorProductos.goToPage(0);
+       //this.$refs.paginatorProductos.goToPage(1);
+     }
+           else{
+             this.$refs.paginatorProductos.goToPage(1);
+             this.filte
+           }
+      console.log("Go First Page");
+    }
  },
 
   checkRangoValido:function(){
@@ -154,6 +165,7 @@ methods:{
         //  var precioMaxProducto =-1;
           console.log(i);
           this.productosQuery[i].supermercados=[];
+          this.productosQuery[i].masBaratoEn = "a";
           for (var j =0 ; j <this.productosQuery[i].precios.length; j++) {
             var temp = new Object;
             console.log("T1" + JSON.stringify(temp));
@@ -168,6 +180,7 @@ methods:{
 
             if(this.productosQuery[i].precios[j].precio_oferta < precioMinimoProducto){
               precioMinimoProducto = this.productosQuery[i].precios[j].precio_oferta;
+              this.productosQuery[i].masBaratoEn  = this.productosQuery[i].precios[j].nombre;
             }
 
           }
@@ -175,12 +188,46 @@ methods:{
         }
         this.inicialRangoPrecios();
       },
-
      capitalizeFirstLetter:function(string) {
           string = string.toLowerCase();
           console.log(string);
           return string.charAt(0).toUpperCase() + string.slice(1);
+        },
+
+        productoEstaEnTiendaSeleccionada:function(producto){
+          var estaSupermercado= false;
+            console.log("PP "+JSON.stringify(producto));
+            console.log("PP "+JSON.stringify(producto.supermercados));
+            console.log("Producto tienda seleccionada");
+            console.log(this.supermercadosSeleccionados.length);
+
+          //  console.log("array "+ arrayS);
+            for (var i = 0; i < this.supermercadosSeleccionados.length; i++) {
+              console.log("S%B "+this.supermercadosSeleccionados[i].nombre);
+              for (var j= 0; j < producto.supermercados.length; j++) {
+                console.log("S%A "+producto.supermercados[j].nombre);
+
+                if (producto.supermercados[j].nombre === this.supermercadosSeleccionados[i].nombre) {
+                    estaSupermercado = true;
+                    console.log("Match");
+                    break;
+                }
+
+              }
+
+            }
+            return estaSupermercado;
+        },
+
+        getImagenProducto:function(id){
+
+            return 'assets/img/'+id+'.png';
+        },
+
+        irADetalleProducto:function(id){
+          window.location.href ="Producto.php?id="+id;
         }
+
 
 
 
