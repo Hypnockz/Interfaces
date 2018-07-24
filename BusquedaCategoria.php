@@ -52,7 +52,7 @@
 
       <div class="col-md-3">
 
-        <div class="panel panel-default">
+          <div v-show="productosQuery.length != 0"class="panel panel-default">
           <div class="panel-heading"><h3>Filtros</h3></div>
           <div class="panel-body">
 
@@ -109,27 +109,31 @@
 
             <div class="row">
 
+              <div style="padding:40px">
+                <h4  v-if="productosMatch != 0" style="text-align:left"> {{productosMatch}} productos encontrados.</h4>
+
+                <h3 v-else style="color:orange" >No se han encontrado productos.</h3>
+              </div>
+
               <paginate ref="paginatorProductos"
                 name="productos"
                 :list="filteredProductoPrecio"
                 :per="9"
               >
 
-                  <div v-for="product in paginated('productos')" class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                      <a href="#"><img class="card-img-top" src="" alt=""></a>
-                      <div class="card-body">
-                        <h4 class="card-title">
-                          <a href="#">{{product.nombre}}</a>
-                        </h4>
-                        <h5>{{product.precio}}</h5>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-                      </div>
-                      <div class="card-footer">
-                        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                      </div>
-                    </div>
+              <div v-for="product in paginated('productos')" class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                  <a @click="irADetalleProducto(product.id)"> <img class="card-img-top" :src="getImagenProducto(product.id)" alt=""></a>
+                  <div class="card-body">
+                    <h3 class="card-title">
+                      <a @click="irADetalleProducto(product.id)">{{product.nombre}}</a>
+                    </h3>
+                    <p style="font-size:30px;"> $ {{product.precio}}</p>
+                    <p class="card-text">Menor precio en: <span style="text-transform:capitalize">{{product.masBaratoEn}}</span></p>
                   </div>
+
+                </div>
+              </div>
 
 
               </paginate>
@@ -143,7 +147,7 @@
             <!-- /.row -->
 
             <div class="row">
-                <paginate-links for="productos" :show-step-links="true"></paginate-links>
+                <paginate-links for="productos" :show-step-links="true" style="font-size: 20px;"></paginate-links>
             </div>
 
 <!-- End Panel body -->
@@ -178,7 +182,7 @@
 
   </div>
   <footer class="container">
-    <p>&copy; Company 2017-2018</p>
+
   </footer>
 
   <!-- Bootstrap core JavaScript
@@ -309,6 +313,42 @@ ul.paginate-links{
 
 .dropdown-menu > li{
   display:contents;
+}
+
+
+.card{
+  padding: 10px;
+
+
+}
+
+.card-img-top{
+  width: 200px;
+  height: 200px;
+  object-fit: scale-down;
+  cursor: pointer;
+}
+
+.v-spinner{
+  margin-left: 200px;
+  padding-top: 100px;
+  padding-bottom: 100px;
+
+}
+
+.panel-body{
+  text-align: center;
+}
+
+.card-title{
+  font-size: 30px;
+  cursor: pointer;
+}
+
+[v-cloak] {display: none}
+
+.multiselect__tag{
+  text-transform: capitalize;
 }
 
 </style>
