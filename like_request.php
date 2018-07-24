@@ -20,6 +20,10 @@ if( !isset($aResult['error']) ) {
             $res = pg_query_params($db, "DELETE FROM interfaces.lista_de_seguidos
                                           WHERE lista_de_seguidos.id_producto=$1 ",array($_POST["arguments"]));
             break;
+            case 'add_list':
+            $res = pg_query_params($db, "INSERT into interfaces.lista_de_compra
+                                          ValUES (default,$1)",array($_POST["arguments"]));
+            break;
         }
 
     }
