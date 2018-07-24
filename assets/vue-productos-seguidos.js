@@ -161,15 +161,42 @@ new Vue({
       }
       console.log(aux2);
       this.seguidos = aux2;
-     $('#ModalEliminar').modal('hide');
+      this.eliminarDeDB(aux);
 
-    }
+
+   },
+
+   eliminarDeDB:function(id){
+
+     var sendData ={
+       eliminar: id
+     };
+     $.ajax({
+       url: 'php/eliminar_producto_lista_seguidos.php',
+       data: sendData,
+       type: 'post',
+       dataType: 'json'
+     }).done(
+       data => {
+         this.getProductosSeguidos();
+         $('#ModalEliminar').modal('hide');
+       }
+     ).fail(
+       function() {
+         //alert("failed");
+       }
+     ).always(
+       function(data) {}
+     );
+
+   }
 
 
   },
 
   created() {
     this.getProductosSeguidos();
+
 
   }
 
