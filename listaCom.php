@@ -42,7 +42,7 @@
   <div class="row">
     <div class="col-xs-8 col-md-12 col-lg-12">
       <div class="panel panel-info">
-        <div class="panel-heading">
+        <div class="panel-heading" style="background-color: #eaeaea ">
           <div class="panel-title">
             <div class="row">
               <div class="col-xs-6">
@@ -99,7 +99,7 @@
                 </multiselect>  </td>
             <td class="price" align="right">{{producto.super.precio}} </td>
             <td align="right" class="subtotal">{{producto.super.precio * producto.cantidad}}</td>
-            <td><a><button class="btn btn-danger">Eliminar</button></a></td>
+            <td><a><button class="btn btn-danger"><span>Eliminar </span> </button></a></td>
           </tr>
           <tr>
             <td colspan="4" align="right">Total</td>
@@ -141,7 +141,7 @@
 
          </main>
 <script>window.jQuery || document.write('<script src="assets/js/jquery-slim.min.js"><\/script>')</script>
-  
+  <script src="assets/js/popper.min.js"></script>
   <script src="assets/js/bootstrap.min.js"></script>
 
   <?php

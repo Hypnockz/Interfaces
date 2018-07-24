@@ -12,56 +12,12 @@ new Vue({
   data: {
     opcionesOrdernarCot: ['Supermercado Más Barato', 'Menor Precio Total'],
     ordenarCot: ['Menor Precio Total'],
-    producto: [{
-        id: 1,
-        nombre: 'Leche Natural Semidescremada',
-        cantidad: 1,
-        supermercados: [{
-          nombre: 'lider',
-          precio: 700
-        }, {
-          nombre: 'jumbo',
-          precio: 740
-        }, {
-          nombre: 'santa isabel',
-          precio: 730
-        }, {
-          nombre: 'tottus',
-          precio: 740
-        }, {
-          nombre: 'unimarc',
-          precio: 760
-        }],
-        super: {
-          nombre: 'lider',
-          precio: 700
-        },
-       
-      },
-      {
-        id: 2,
-        nombre: 'Carne Abastero Cat. V',
-        cantidad: 1,
-        supermercados: [{
-          nombre: 'lider',
-          precio: 6384
-        }, {
-          nombre: 'jumbo',
-          precio: 7180
-        }, {
-          nombre: 'santa isabel',
-          precio: 6780
-        }],
-        super: {
-          nombre: 'lider',
-          precio: 6384
-        },
-        
-      }
+    producto: [
     ],
-    total: 0
+    total: 0,
+    porEliminar:''
   },
-  
+
 
   methods: {
     CalcularTotal: function(){
@@ -122,6 +78,7 @@ new Vue({
 		}
 
   },
+  
 
 	created(){
 		this.obtenerInfoLista();
