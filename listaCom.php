@@ -89,11 +89,12 @@
           <tr v-for="producto in producto" :key="producto.id">
             <td>{{producto.nombre}}</td>
             <td><form name="form" action="" method="get">
-              <input type="number" name="cantidad" value=1 class="form-control" id="cantidad" min="1" v-model="producto.cantidad" />
+              <input type="number" name="cantidad" value=1 class="form-control" id="cantidad" min="1" v-model="producto.cantidad" v-on:keyup="CalcularTotal" />
             </form></td>
 
             <td> <multiselect
                   multiselect v-model="producto.super" id="producto.nombre" deselect-label="Can't remove this value" track-by="nombre" label="nombre" placeholder="Select one" :options="producto.supermercados" :searchable="false" :allow-empty="false"
+                  @select="CalcularTotal"
                   >
                 </multiselect>  </td>
             <td class="price" align="right">{{producto.super.precio}} </td>
@@ -102,7 +103,7 @@
           </tr>
           <tr>
             <td colspan="4" align="right">Total</td>
-            <td class="total" id="total" align="right"> </td>
+            <td class="total" id="total" align="right"> {{total}} </td>
             <td></td>
           </tr>
             

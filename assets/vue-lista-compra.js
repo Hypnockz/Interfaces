@@ -6,13 +6,12 @@ new Vue({
     Multiselect: window.VueMultiselect.default
   },
   computed: {
-
-
+   
   },
 
   data: {
     opcionesOrdernarCot: ['Supermercado Más Barato', 'Menor Precio Total'],
-    ordenarCot: ['Personalizado'],
+    ordenarCot: ['Menor Precio Total'],
     producto: [{
         id: 1,
         nombre: 'Leche Natural Semidescremada',
@@ -37,7 +36,7 @@ new Vue({
           nombre: 'lider',
           precio: 700
         },
-        total: ''
+       
       },
       {
         id: 2,
@@ -57,12 +56,22 @@ new Vue({
           nombre: 'lider',
           precio: 6384
         },
-        total: ''
+        
       }
-    ]
+    ],
+    total: 0
   },
+  
 
   methods: {
+    CalcularTotal: function(){
+      var t=0;
+      for(var i=0 ; i<this.producto.length ; i++){
+        t=t+this.producto[i].cantidad*this.producto[i].super.precio;
+      }
+      this.total=t;
+    },
+
     reordenarProductos: function(opcion) {
       console.log("Ordenar por " + opcion);
 
@@ -70,14 +79,14 @@ new Vue({
 
         case 'Supermercado Más Barato':
               
-              for(var i=0 ; i<this.producto.length ; i++){
+              /*for(var i=0 ; i<this.producto.length ; i++){
                 var data=[];
                 for(var j=0 ; j<this.producto[i].supermercados.length ; j++){
                   data[j] = this.producto[i].supermercados[j];
                 }
                 console.log(data);
 
-              }
+              }*/
           break;
         case 'Menor Precio Total':
 
@@ -116,6 +125,7 @@ new Vue({
 
 	created(){
 		this.obtenerInfoLista();
+    this.CalcularTotal();
 	}
 });
 
