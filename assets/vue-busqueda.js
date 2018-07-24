@@ -63,6 +63,15 @@ methods:{
      this.goToFirstPage();
   },
 
+  productoEstaEnDcto:function(precioOferta, precioAnterior){
+    console.log("Precio Oferta: "+ precioOferta +", Precio: "+precioAnterior);
+    console.log(parseInt(precioOferta)- parseInt(precioAnterior) >= 0);
+    if(parseInt(precioOferta)- parseInt(precioAnterior) >= 0){
+      return false;
+    }
+    else{return true}
+  },
+
   goToFirstPage:function() {
 
    if (this.$refs.paginatorProductos) {

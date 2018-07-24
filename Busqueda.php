@@ -52,7 +52,7 @@
 
       <div class="col-md-3">
 
-        <div class="panel panel-default">
+        <div v-show="productosQuery.length != 0"class="panel panel-default">
           <div class="panel-heading"><h3>Filtros</h3></div>
           <div class="panel-body">
 
@@ -110,8 +110,11 @@
             <div class="row">
 
             <div style="padding:40px">
-              <h4 style="text-align:left">Se han encontrado {{productosMatch}} productos.</h4>
+              <h4  v-if="productosMatch != 0" style="text-align:left"> {{productosMatch}} productos encontrados.</h4>
+
+              <h3 v-else style="color:orange" >No se han encontrado productos.</h3>
             </div>
+
 
               <paginate ref="paginatorProductos"
                 name="productos"
@@ -121,7 +124,7 @@
 
                   <div v-for="product in paginated('productos')" class="col-lg-4 col-md-6 mb-4">
                     <div class="card h-100">
-                      <a href="#"><img class="card-img-top" :src="getImagenProducto(product.id)" alt=""></a>
+                      <a href="#"> <img class="card-img-top" :src="getImagenProducto(product.id)" alt=""></a>
                       <div class="card-body">
                         <h3 class="card-title">
                           <a href="#">{{product.nombre}}</a>
