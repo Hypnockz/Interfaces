@@ -6,7 +6,7 @@ new Vue({
     Multiselect: window.VueMultiselect.default
   },
   computed: {
-   
+
   },
 
   data: {
@@ -21,10 +21,18 @@ new Vue({
 
   methods: {
     CalcularTotal: function(){
+      console.log("Producto");
+      console.log("-- "+JSON.stringify(this.producto));
       var t=0;
-      for(var i=0 ; i<this.producto.length ; i++){
-        t=t+this.producto[i].cantidad*this.producto[i].super.precio;
+      for(var i=0 ; i <this.producto.length ; i++){
+        var cantidad = this.producto[i].cantidad;
+        var precio = this.producto[i].super[0].precio;
+        t=t+parseInt(cantidad) * parseInt(precio);
+        console.log(cantidad);
+        console.log(precio);
+
       }
+      console.log("Total "+t);
       this.total=t;
     },
 
@@ -34,15 +42,6 @@ new Vue({
       switch (opcion) {
 
         case 'Supermercado Más Barato':
-              
-              /*for(var i=0 ; i<this.producto.length ; i++){
-                var data=[];
-                for(var j=0 ; j<this.producto[i].supermercados.length ; j++){
-                  data[j] = this.producto[i].supermercados[j];
-                }
-                console.log(data);
-
-              }*/
           break;
         case 'Menor Precio Total':
 
@@ -64,8 +63,9 @@ new Vue({
 			}).done(
 				data => {
           console.log(data);
-          
+
 					this.producto = data;
+          this.CalcularTotal();
 				}
 			).fail(
 				function() {
@@ -130,13 +130,12 @@ new Vue({
      );
 
    }
-   
+
   },
-  
+
 
 	created(){
 		this.obtenerInfoLista();
-    this.CalcularTotal();
+
 	}
 });
-

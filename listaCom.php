@@ -9,7 +9,7 @@
   <link rel="icon" href="../../../../favicon.ico">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  
+
   <!-- Vue includes -->
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
   <script src="https://unpkg.com/vue-multiselect@2.0.6"></script>
@@ -31,7 +31,7 @@
                                   ",array($id_lista) );
   }
   $nom_lista=pg_fetch_row($lista);
-  
+
   ?>
 
   	<?php require 'includes/barranavegacion.php' ?>
@@ -97,8 +97,8 @@
                   @select="CalcularTotal"
                   >
                 </multiselect>  </td>
-            <td class="price" align="right">{{producto.super.precio}} </td>
-            <td align="right" class="subtotal">{{producto.super.precio * producto.cantidad}}</td>
+            <td class="price" align="right">{{producto.super[0].precio}} </td>
+            <td align="right" class="subtotal">{{producto.super[0].precio * producto.cantidad}}</td>
             <td><a><button class="btn btn-danger" v-on:click="deleteProductoLista(producto.id)"><span>Eliminar </span> </button></a></td>
           </tr>
           <tr>
@@ -106,17 +106,17 @@
             <td class="total" id="total" align="right"> {{total}} </td>
             <td></td>
           </tr>
-            
+
         </table>
       </div>
           <!--       fin de producto           -->
-      
-          
-          
+
+
+
         </div>
         <div class="panel-footer">
-          
-          <div class="row">  
+
+          <div class="row">
 
             <div class="col-xs-6">
               <button type="button" class="btn btn-info">Exportar</button>
@@ -136,7 +136,7 @@
       </div>
     </div>
   </div>
-</div>  
+</div>
 <div class="modal fade" id="ModalEliminar" role="dialog">
          <div class="modal-dialog modal-sm">
            <div class="modal-content">
