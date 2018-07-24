@@ -166,8 +166,30 @@ function showBAlert(){
   ?>
 
 
+<style >
 
+.modal-backdrop {
+z-index: -1;
+}
 
+.modal {
+  text-align: center;
+  padding: 0!important;
+}
+.modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+</style>
 
 
 
@@ -175,10 +197,16 @@ function showBAlert(){
 
   <?php require 'includes/barranavegacion.php' ?>
 
+
+
+
     <main role="main">
 
 
     </main>
+
+
+
     <div class="container" style="display:none;" id="myAlert">
         <div class="alert alert-success alert-dismissable" id="myAlert2">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -214,9 +242,45 @@ function showBAlert(){
           <div class="col-xs-6 col-sm-6 col-no-padding">
 
 
-              <a href="#">
-                <img class="thumbnail img-responsive" src="assets/img/add_list.png" />
-              </a>
+
+            <!-- Single button -->
+            <div class="btn-group">
+              <img class="btn btn-default dropdown-toggle" data-toggle="dropdown" src="assets/img/add_list.png" aria-haspopup="true" aria-expanded="false" style="padding: 4px 4px;">
+
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#myModal" data-toggle="modal">Crear nueva lista</a></li>
+              </ul>
+            </div>
+
+
+            <!-- Modal de crear lista -->
+            <div id="myModal" class="modal fade" style="" >
+                <div class="modal-dialog">
+                    <div class="modal-content" style="
+  horizontal-align: middle;
+  vertical-align: middle;">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Confirmation</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Do you want to save changes you made to document before closing?</p>
+                            <p class="text-warning"><small>If you don't save, your changes will be lost.</small></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
           </div>
         </div>
 
@@ -554,6 +618,9 @@ function showBAlert(){
 
     <script>window.jQuery || document.write('<script src="assets/js/jquery-slim.min.js"><\/script>')</script>
     <script src="assets/js/popper.min.js"></script>
+
+
+
   </body>
 
 
@@ -561,6 +628,7 @@ function showBAlert(){
 
 body{
 padding-top: 0px;
+}
 }
 
 </style>
