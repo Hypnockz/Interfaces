@@ -336,6 +336,7 @@ ul.paginate-links{
   width: 200px;
   height: 200px;
   object-fit: scale-down;
+  cursor: pointer;
 }
 
 .v-spinner{
@@ -351,6 +352,7 @@ ul.paginate-links{
 
 .card-title{
   font-size: 30px;
+  cursor: pointer;
 }
 
 [v-cloak] {display: none}

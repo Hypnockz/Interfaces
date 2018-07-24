@@ -37,8 +37,8 @@
       <li class="dropdown" ><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class=" glyphicon glyphicon-user"></span> Mi Cuenta
       <span class="caret"></span></a>
       <ul class="dropdown-menu">
-        <li><a href="#">Seguidos</a></li>
-        <li><a href="#">Cerrar Sesión</a></li>
+        <li><a href="Seguidos.php">Seguidos</a></li>
+        <li><a href="" style="disabled:true">Cerrar Sesión</a></li>
       </ul>
       </li>
     </ul>
