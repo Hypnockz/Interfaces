@@ -144,30 +144,35 @@
                         case 0:
                             for($j=25;$j<=31;$j++) {
                               if ($j==31 ){$dataPoints_lider[] = array("y"=> $row[3], "label"=> "Jul {$j}"); continue; }
+                              else if ($j==30 ){$dataPoints_lider[] = array("y"=> $row[2], "label"=> "Jul {$j}"); continue; }
                               $dataPoints_lider[] = array("y"=> rand($minprice,$maxprice) , "label"=> "Jul {$j}");
                             }
                             break;
                         case 1:
                             for($j=25;$j<=31;$j++) {
                               if ($j==31 ){$dataPoints_jumbo[] = array("y"=> $row[3], "label"=> "Jul {$j}"); continue; }
+                              else if ($j==30 ){$dataPoints_jumbo[] = array("y"=> $row[2], "label"=> "Jul {$j}"); continue; }
                               $dataPoints_jumbo[] = array("y"=> rand($minprice,$maxprice) , "label"=> "Jul {$j}");
                             }
                             break;
                         case 2:
                             for($j=25;$j<=31;$j++) {
                               if ($j==31 ){$dataPoints_santaisabel[] = array("y"=> $row[3], "label"=> "Jul {$j}"); continue; }
+                              else if ($j==30 ){$dataPoints_santaisabel[] = array("y"=> $row[2], "label"=> "Jul {$j}"); continue; }
                               $dataPoints_santaisabel[] = array("y"=> rand($minprice,$maxprice) , "label"=> "Jul {$j}");
                             }
                             break;
                         case 3:
                             for($j=25;$j<=31;$j++) {
                               if ($j==31 ){$dataPoints_tottus[] = array("y"=> $row[3], "label"=> "Jul {$j}"); continue; }
+                              else if ($j==30 ){$dataPoints_tottus[] = array("y"=> $row[2], "label"=> "Jul {$j}"); continue; }
                               $dataPoints_tottus[] = array("y"=> rand($minprice,$maxprice) , "label"=> "Jul {$j}");
                             }
                             break;
                         case 4:
                             for($j=25;$j<=31;$j++) {
                               if ($j==31 ){$dataPoints_unimarc[] = array("y"=> $row[3], "label"=> "Jul {$j}"); continue; }
+                              else if ($j==30 ){$dataPoints_unimarc[] = array("y"=> $row[2], "label"=> "Jul {$j}"); continue; }
                               $dataPoints_unimarc[] = array("y"=> rand($minprice,$maxprice) , "label"=> "Jul {$j}");
                             }
                             break;
