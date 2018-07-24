@@ -80,9 +80,45 @@ function showBAlert(){
   $("#myBAlert").css("display", "");
 
   $("#myBAlert").fadeTo(2000, 500).slideUp(500, function(){
-    $("#myBAlert").slideUp(500);
-});
+    $("#myBAlert").slideUp(500); });
 
+
+}
+
+function showCAlert(){
+  if($("#myCAlert").find("div#myCAlert2").length==0){
+    $("#myCAlert").append("<div class='alert alert-success alert-dismissable' id='myCAlert2'> <button type='button' class='close' data-dismiss='alert'  aria-hidden='true'>&times;</button> Lista creada! Guardado correctamente.</div>");
+  }
+  $("#myCAlert").css("display", "");
+
+  $("#myCAlert").fadeTo(2000, 500).slideUp(500, function(){
+    $("#myCAlert").slideUp(500); });
+
+
+}
+
+
+function CreateNewList() {
+    var input = document.getElementById('Inputlista'),
+        fileName = input.value;
+
+        jQuery.ajax({
+            type: "POST",
+            url: 'like_request.php',
+            dataType: 'json',
+            data: {functionname: 'add_list', arguments: fileName },
+
+            success: function (obj, textstatus) {
+                          if( !('error' in obj) ) {
+                              yourVariable = obj.result;
+                          }
+                          else {
+                              console.log(obj.error);
+                          }
+                    }
+        });
+
+showCAlert();
 
 }
 
@@ -223,6 +259,14 @@ z-index: -1;
 
     </div>
 
+    <div class="container" style="display:none;" id="myCAlert">
+        <div class="alert alert-success alert-dismissable" id="myCAlert2">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            Lista creada! Guardado correctamente.
+        </div>
+
+    </div>
+
     <div class="container" id="change">
 
       <div class="col-md-4">
@@ -235,11 +279,11 @@ z-index: -1;
           <div class="col-xs-6 col-sm-6 col-no-padding">
 
             <a href="#">
-              <img id="like" class="thumbnail img-responsive" onclick="changeImage(<?php echo $id_producto; ?>)" src="assets/img/like.png" />
+              <img id="like" class="thumbnail img-responsive" onclick="changeImage(<?php echo $id_producto; ?>)" src="assets/img/like.png" style="margin: auto;" />
             </a>
 
           </div>
-          <div class="col-xs-6 col-sm-6 col-no-padding">
+          <div class="col-xs-6 col-sm-6 col-no-padding" style="text-align: center;">
 
 
 
@@ -260,20 +304,20 @@ z-index: -1;
             <!-- Modal de crear lista -->
             <div id="myModal" class="modal fade" style="" >
                 <div class="modal-dialog">
-                    <div class="modal-content" style="
-  horizontal-align: middle;
-  vertical-align: middle;">
+                    <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <h4 class="modal-title">Confirmation</h4>
                         </div>
-                        <div class="modal-body">
-                            <p>Do you want to save changes you made to document before closing?</p>
-                            <p class="text-warning"><small>If you don't save, your changes will be lost.</small></p>
+
+                        <div class="form-group">
+                          <input type="text" class="form-control" id="Inputlista" aria-describedby="listaHelp" placeholder="Ingresa Nombre">
+                          <small id="listaHelp" class="form-text text-muted">Ponle un nombre a tu nueva lista.</small>
                         </div>
+
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-primary" onclick="CreateNewList()" data-dismiss="modal">Save changes</button>
                         </div>
                     </div>
                 </div>
