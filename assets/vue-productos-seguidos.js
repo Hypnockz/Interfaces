@@ -69,6 +69,10 @@ new Vue({
       return 0;
     },
 
+    irADetalleProducto:function(id){
+      window.location.href ="Producto.php?id="+id;
+    },
+
     compareByDiscount: function(a, b) {
       var temp1 = a.precioOferta - a.precioAnterior;
       var temp2 = b.precioOferta - b.precioAnterior;
@@ -140,31 +144,75 @@ new Vue({
     },
 
     productoEstaEnDcto:function(precioOferta, precioAnterior){
+      console.log("Precio Oferta: "+ precioOferta +", Precio: "+precioAnterior);
+      console.log(parseInt(precioOferta)- parseInt(precioAnterior) >= 0);
       if(parseInt(precioOferta)- parseInt(precioAnterior) >= 0){
         return false;
       }
       else{return true}
     },
 
+    colorPrecioTabla:function(precioOferta, precioAnterior){
+      console.log("Color ||| Precio tabla: "+ precioOferta +", Precio: "+precioAnterior);
+      console.log(parseInt(precioOferta)- parseInt(precioAnterior) >= 0);
+      if(parseInt(precioOferta)- parseInt(precioAnterior) >= 0){
+        return false;
+      }
+      else{return true}
+    },
+
+
     eliminacionConfirmadaDeLista:function(){
-      console.log(this.porEliminar);
-      console.log(this.seguidos.filter(function(item) {
-        return item.id !== this.porEliminar;
-      }));
+      console.log("Por eliminar "+ this.porEliminar);
+      var aux = this.porEliminar;
+      console.log("Item eliminar:"+parseInt(aux));
+      var aux2 = [];
+      for (var i = 0; i < this.seguidos.length; i++) {
+        if(parseInt(this.seguidos[i].id) == parseInt(aux)){
+          console.log("Eliminar "+ this.seguidos[i].id);
+        }
+        else{
+          aux2.push(this.seguidos[i]);
+        }
+      }
+      console.log(aux2);
+      this.seguidos = aux2;
+      this.eliminarDeDB(aux);
 
-    this.seguidos = this.seguidos.filter(function(item) {
-      console.log(JSON.stringify(item)+ '\n');
-      return item.id !== this.porEliminar;
-    });
-     $('#ModalEliminar').modal('hide');
 
-    }
+   },
+
+   eliminarDeDB:function(id){
+
+     var sendData ={
+       eliminar: id
+     };
+     $.ajax({
+       url: 'php/eliminar_producto_lista_seguidos.php',
+       data: sendData,
+       type: 'post',
+       dataType: 'json'
+     }).done(
+       data => {
+         this.getProductosSeguidos();
+         $('#ModalEliminar').modal('hide');
+       }
+     ).fail(
+       function() {
+         //alert("failed");
+       }
+     ).always(
+       function(data) {}
+     );
+
+   }
 
 
   },
 
   created() {
     this.getProductosSeguidos();
+
 
   }
 

@@ -41,18 +41,18 @@
   <?php require 'includes/barranavegacion.php' ?>
 
 
-  <div class="container" style="margin-left:5px;margin-right:5px; width:100%; min-height:800px" id="vue-result-busq" >
+  <div class="container"   style="margin-left:5px;margin-right:5px; width:100%; min-height:800px" id="vue-result-busq" >
 
-    <div class="row"style="margin:10px;padding-bottom:40px">
+    <div v-cloak  class="row"style="margin:10px;padding-bottom:40px">
 
       <h1> Buscando : {{textoBusqueda}}</h1>
     </div>
 
-    <div class="row" >
+    <div v-cloak  class="row" >
 
       <div class="col-md-3">
 
-        <div class="panel panel-default">
+        <div v-show="productosQuery.length != 0"class="panel panel-default">
           <div class="panel-heading"><h3>Filtros</h3></div>
           <div class="panel-body">
 
@@ -109,6 +109,13 @@
 
             <div class="row">
 
+            <div style="padding:40px">
+              <h4  v-if="productosMatch != 0" style="text-align:left"> {{productosMatch}} productos encontrados.</h4>
+
+              <h3 v-else style="color:orange" >No se han encontrado productos.</h3>
+            </div>
+
+
               <paginate ref="paginatorProductos"
                 name="productos"
                 :list="filteredProductoPrecio"
@@ -117,10 +124,10 @@
 
                   <div v-for="product in paginated('productos')" class="col-lg-4 col-md-6 mb-4">
                     <div class="card h-100">
-                      <a href="#"><img class="card-img-top" :src="getImagenProducto(product.id)" alt=""></a>
+                      <a @click="irADetalleProducto(product.id)"> <img class="card-img-top" :src="getImagenProducto(product.id)" alt=""></a>
                       <div class="card-body">
                         <h3 class="card-title">
-                          <a href="#">{{product.nombre}}</a>
+                          <a @click="irADetalleProducto(product.id)">{{product.nombre}}</a>
                         </h3>
                         <p style="font-size:30px;"> $ {{product.precio}}</p>
                         <p class="card-text">Menor precio en: <span style="text-transform:capitalize">{{product.masBaratoEn}}</span></p>
@@ -141,7 +148,7 @@
             <!-- /.row -->
 
             <div class="row">
-                <paginate-links for="productos" :show-step-links="true"></paginate-links>
+                <paginate-links for="productos" :show-step-links="true" style="font-size: 20px;"></paginate-links>
             </div>
 
 <!-- End Panel body -->
@@ -329,6 +336,7 @@ ul.paginate-links{
   width: 200px;
   height: 200px;
   object-fit: scale-down;
+  cursor: pointer;
 }
 
 .v-spinner{
@@ -344,6 +352,13 @@ ul.paginate-links{
 
 .card-title{
   font-size: 30px;
+  cursor: pointer;
+}
+
+[v-cloak] {display: none}
+
+.multiselect__tag{
+  text-transform: capitalize;
 }
 </style>
 </html>
