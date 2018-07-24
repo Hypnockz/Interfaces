@@ -12,7 +12,7 @@ components: {
      filteredProductoPrecio: function(){
        //console.log('Buscar por nombre');
        var r =this.productosQuery.filter(producto=>{
-         return parseInt(producto.precio) >= parseInt(this.precioMinimoSlider) &&  parseInt(producto.precio) <= parseInt(this.precioMaximoSlider) && (this.productoEstaEnTiendaSeleccionada(producto));
+         return parseInt(producto.precio) >= parseInt(this.precioMinimoSlider) &&  parseInt(producto.precio) <= parseInt(this.precioMaximoSlider) && (this.productoEstaEnTiendaSeleccionada(producto)) && (producto.nombre.toLowerCase().indexOf(this.queryNombre.toLowerCase()) > -1);
        });
           this.productosMatch = r.length;
           return r;
@@ -31,9 +31,13 @@ data:{
   infoPrecios : [],
   textoBusqueda:'Leche Colún',
   supermercadosSeleccionados:[],
+  queryNombre:'',
   supermercados:[
 
   ],
+
+  opcionesOrdernarPor: ['Nombre', 'Menor Precio Primero', 'Mayor Precio Primero'],
+  ordenarPor: ['Nombre'],
 
   paginate:['productos'],
 
@@ -242,9 +246,50 @@ methods:{
             return 'assets/img/'+id+'.png';
         },
 
-        irADetalleProducto:function(id){
-          window.location.href ="Producto.php?id="+id;
-        }
+        sortProductsByName: function() {
+
+          this.productosQuery.sort(this.compareByName);
+        },
+
+        compareByName: function(a, b) {
+          if (a.nombre < b.nombre)
+            return -1;
+          if (a.nombre > b.nombre)
+            return 1;
+          return 0;
+        },
+
+        compareByDiscount: function(a, b) {
+          console.log("WW " +JSON.stringify(a));
+          var temp1 = a.precio;
+          var temp2 = b.precio;
+          console.log(temp1);
+          console.log(temp2);
+          if (temp1 < temp2)
+            return -1;
+          if (temp1 > temp2)
+            return 1;
+          return 0;
+        },
+        reordenarProductos: function(opcion) {
+          console.log("Ordenar por " + opcion);
+
+          switch (opcion) {
+            case 'Nombre':
+              this.sortProductsByName();
+              break;
+            case 'Menor Precio Primero':
+              this.productosQuery.sort(this.compareByDiscount);
+              this.productosQuery.reverse();
+              break;
+            case 'Mayor Precio Primero':
+              this.productosQuery.sort(this.compareByDiscount);
+
+              break;
+            default:
+              console.log("WOlolo");
+          }
+        },
 
 
 
