@@ -147,15 +147,20 @@ new Vue({
     },
 
     eliminacionConfirmadaDeLista:function(){
-      console.log(this.porEliminar);
-      console.log(this.seguidos.filter(function(item) {
-        return item.id !== this.porEliminar;
-      }));
-
-    this.seguidos = this.seguidos.filter(function(item) {
-      console.log(JSON.stringify(item)+ '\n');
-      return item.id !== this.porEliminar;
-    });
+      console.log("Por eliminar "+ this.porEliminar);
+      var aux = this.porEliminar;
+      console.log("Item eliminar:"+parseInt(aux));
+      var aux2 = [];
+      for (var i = 0; i < this.seguidos.length; i++) {
+        if(parseInt(this.seguidos[i].id) == parseInt(aux)){
+          console.log("Eliminar "+ this.seguidos[i].id);
+        }
+        else{
+          aux2.push(this.seguidos[i]);
+        }
+      }
+      console.log(aux2);
+      this.seguidos = aux2;
      $('#ModalEliminar').modal('hide');
 
     }
