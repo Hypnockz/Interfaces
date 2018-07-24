@@ -90,6 +90,7 @@ new Vue({
 				dataType: 'json'
 			}).done(
 				data => {
+          this.lista = data.lista;
 					this.producto = data.productos;
 				}
 			).fail(

@@ -96,7 +96,7 @@
             <td> <multiselect
                   multiselect v-model="producto.super" deselect-label="Can't remove this value" track-by="nombre" label="nombre" placeholder="Select one" :options="producto.supermercados" :searchable="false" :allow-empty="false"
                   >
-                </multiselect> </td>
+                </multiselect>  </td>
             <td class="price" align="right">{{producto.super.precio}} </td>
             <td align="right" class="subtotal">{{producto.super.precio * producto.cantidad}}</td>
             <td><a><button class="btn btn-danger">Eliminar</button></a></td>
@@ -141,7 +141,7 @@
 
          </main>
 <script>window.jQuery || document.write('<script src="assets/js/jquery-slim.min.js"><\/script>')</script>
-  <script src="assets/js/popper.min.js"></script>
+  
   <script src="assets/js/bootstrap.min.js"></script>
 
   <?php
