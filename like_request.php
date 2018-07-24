@@ -1,7 +1,6 @@
 <?php
 
  header('Content-Type: application/json');
-$aResult = array("holi");
 
 $db = pg_connect("host=plop.inf.udec.cl port=5432 dbname=bdi2017d user=bdi2017d password=bdi2017d");
 
@@ -22,11 +21,19 @@ if( !isset($aResult['error']) ) {
             break;
             case 'add_list':
             $res = pg_query_params($db, "INSERT into interfaces.lista_de_compra
-                                          ValUES (default,$1)",array($_POST["arguments"]));
+                                          VALUES (default,$1)",array($_POST["arguments"]));
+            $query = pg_query($db,"SELECT max(interfaces.lista_de_compra.id)
+                                  FROM interfaces.lista_de_compra");
+            $last = pg_fetch_array ( $query,0);
+            break;
+
+            case 'addto_list':
+            $res = pg_query_params($db, "INSERT into interfaces.pertenece_compra
+                                          VALUES ($1,$2,default)",array($_POST["arguments"][0], $_POST["arguments"][1] ));
             break;
         }
 
     }
-    echo json_encode($aResult);
 
+    echo $last;
  ?>
