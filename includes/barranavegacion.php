@@ -9,7 +9,7 @@
         <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="width:100%">Categorías
               <span class="caret"></span></a>
         <ul class="dropdown-menu" style="width:100%">
-          <li style="text-transform:capitalize" v-for="cat in categorias"><a href="#">{{cat.categoria}}</a></li>
+          <li style="text-transform:capitalize" v-for="cat in categorias" :key="cat.categoria"><a @click="irBusquedaCategoria(cat.categoria)" href="#">{{cat.categoria}}</a></li>
 
 
       </li>

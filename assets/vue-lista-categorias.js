@@ -30,6 +30,11 @@ methods:{
     );
 
 
+  },
+
+  irBusquedaCategoria:function(cat){
+    console.log(cat);
+    window.location.href = 'BusquedaCategoria.php?c='+cat
   }
 },
 

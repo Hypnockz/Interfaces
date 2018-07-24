@@ -45,7 +45,7 @@
 
     <div class="row"style="margin:10px;padding-bottom:40px">
 
-      <h1> Buscando : {{textoBusqueda}}</h1>
+      <h1> Buscando en Categoria : {{textoBusqueda}}</h1>
     </div>
 
     <div class="row" >
@@ -189,11 +189,11 @@
   <script src="assets/js/popper.min.js"></script>
   <script src="assets/js/bootstrap.min.js"></script>
   <?php
-  echo '<script>var query = ' . json_encode($_GET['query']) . '; console.log("Query"+query);</script>';
+  echo '<script>var categoria = ' . json_encode($_GET['c']) . ';</script>';
    ?>
 
 
-  <script src="assets/vue-busqueda.js"></script>
+  <script src="assets/vue-busqueda-categoria.js"></script>
 
 
 </body>

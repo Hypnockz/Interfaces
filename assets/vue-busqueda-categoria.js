@@ -105,10 +105,10 @@ methods:{
 
 
         let send_query ={
-          producto: this.capitalizeFirstLetter(query)
+          categoriaQ:categoria
         };
         $.ajax({
-          url: 'php/buscar_productos.php',
+          url: 'php/buscar_productos_categoria.php',
           type: 'get',
           data:send_query,
           dataType: 'json'
@@ -197,7 +197,7 @@ mounted()
 },
 
 created(){
-this.textoBusqueda = query;
+this.textoBusqueda = categoria;
 
 
 }
