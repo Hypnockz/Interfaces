@@ -250,6 +250,9 @@ methods:{
 
           this.productosQuery.sort(this.compareByName);
         },
+        irADetalleProducto:function(id){
+          window.location.href ="Producto.php?id="+id;
+        },
 
         compareByName: function(a, b) {
           if (a.nombre < b.nombre)

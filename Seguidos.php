@@ -139,9 +139,9 @@
                ${{producto.precioOferta}}
               </p>
 
-              <p style="font-size:20px">Anterior: ${{producto.precioAnterior}} <br /><span style="font-size:16px"> Ahorras $ {{producto.precioAnterior - producto.precioOferta}}</span></p>
+              <p  v-if="productoEstaEnDcto(producto.precioOferta,producto.precioAnterior)" style="font-size:20px">Anterior: ${{producto.precioAnterior}} <br /><span style="font-size:16px"> Ahorras $ {{producto.precioAnterior - producto.precioOferta}}</span></p>
 
-
+              <p  v-else style="font-size:20px;color:orange">Anterior: ${{producto.precioAnterior}} <br /><span style="font-size:16px"> $ {{ producto.precioOferta - producto.precioAnterior}} más caro</span></p>
 
             </div>
 

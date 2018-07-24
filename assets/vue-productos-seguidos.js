@@ -127,14 +127,21 @@ new Vue({
         var precioMinNormal = 1000000;
         this.seguidos[i].masBaratoEn = "a";
         for (var j = 0; j < this.seguidos[i].precios.length; j++) {
-          if (this.seguidos[i].precios[j].precio_oferta < precioMinOferta) {
+          console.log("Min Producto:"+ this.seguidos[i].nombre);
+          console.log("Min Producto:"+ this.seguidos[i].precios.length);
+
+          if (parseInt(this.seguidos[i].precios[j].precio_oferta) <= parseInt(precioMinOferta)) {
+            console.log("Min "+precioMinOferta);
+
             precioMinOferta = this.seguidos[i].precios[j].precio_oferta;
+            this.seguidos[i].masBaratoEn = this.seguidos[i].precios[j].nombre;
+            console.log("MinAhora "+precioMinOferta);
             this.seguidos[i].masBaratoEn = this.seguidos[i].precios[j].nombre;
           }
 
-          if (this.seguidos[i].precios[j].precio < precioMinNormal) {
+          if (parseInt(this.seguidos[i].precios[j].precio) <= parseInt(precioMinNormal)) {
             precioMinNormal = this.seguidos[i].precios[j].precio;
-            //this.seguidos[i].masBaratoEn = this.seguidos[i].precios[j].nombre;
+
           }
 
         }
