@@ -99,7 +99,7 @@
                 </multiselect>  </td>
             <td class="price" align="right">{{producto.super.precio}} </td>
             <td align="right" class="subtotal">{{producto.super.precio * producto.cantidad}}</td>
-            <td><a><button class="btn btn-danger"><span>Eliminar </span> </button></a></td>
+            <td><a><button class="btn btn-danger" v-on:click="deleteProductoLista(producto.id)"><span>Eliminar </span> </button></a></td>
           </tr>
           <tr>
             <td colspan="4" align="right">Total</td>
@@ -136,7 +136,28 @@
       </div>
     </div>
   </div>
-</div>
+</div>  
+<div class="modal fade" id="ModalEliminar" role="dialog">
+         <div class="modal-dialog modal-sm">
+           <div class="modal-content">
+             <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal">&times;</button>
+               <h4 class="modal-title">Eliminar de la Lista</h4>
+             </div>
+             <div class="modal-body">
+               <p>El producto ya no aparecerá en la lista de compras.</p>
+               <p style="font-weight: bold">
+                 ¿Esta seguro de que quiere realizar esta acción?
+               </p>
+             </div>
+             <div class="modal-footer">
+               <button type="button " style="float: left;background-color: rgb(171, 171, 171);color:white" class="btn btn-default" data-dismiss="modal" >Cancelar</button>
+               <button v-on:click="eliminacionConfirmadaDeLista" type="button" class="btn btn-default" style="background-color: red;color:white">Si, eliminar</button>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
 
 
          </main>

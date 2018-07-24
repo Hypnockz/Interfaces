@@ -75,8 +75,62 @@ new Vue({
 				function(data) {}
 			);
 
-		}
+		},
+      deleteProductoLista(id_producto) {
+      console.log(id_producto);
 
+      $("#ModalEliminar").modal({
+        backdrop: 'static'
+      });
+      $("#ModalEliminar").on('shown.bs.modal');
+      this.porEliminar= id_producto;
+
+
+    },
+    eliminacionConfirmadaDeLista:function(){
+      console.log("Por eliminar "+ this.porEliminar);
+      var aux = this.porEliminar;
+      console.log("Item eliminar:"+parseInt(aux));
+      var aux2 = [];
+      for (var i = 0; i < this.producto.length; i++) {
+        if(parseInt(this.producto[i].id) == parseInt(aux)){
+          console.log("Eliminar "+ this.producto[i].id);
+        }
+        else{
+          aux2.push(this.producto[i]);
+        }
+      }
+      console.log(aux2);
+      this.producto = aux2;
+      this.eliminarDeDB(aux);
+
+
+   },
+   eliminarDeDB:function(id){
+
+     var sendData ={
+       eliminar: id
+     };
+     $.ajax({
+       url: 'php/eliminar_producto_lista_compra.php',
+       data: sendData,
+       type: 'post',
+       dataType: 'json'
+     }).done(
+       data => {
+        $('#ModalEliminar').modal('hide');
+         this.obtenerInfoLista();
+       }
+     ).fail(
+       function() {
+         //alert("failed");
+       }
+     ).always(
+       function(data) {}
+     );
+
+   }
+   
   },
   
 
