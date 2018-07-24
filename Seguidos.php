@@ -94,11 +94,11 @@
           <div class="row row-content" id="headers">
 
             <div class="col-md-1">
-              Boton
+
             </div>
 
             <div class="col-md-1">
-                Imagen
+
             </div>
             <div class="col-md-3">
                 Producto
@@ -114,7 +114,7 @@
             </div>
 
             <div class="col-md-1">
-                Eliminar
+              
             </div>
           </div>
 
@@ -122,23 +122,25 @@
           <div class="row row-product" v-for="producto in filteredProducto" :key="producto.id" >
 
             <div class="col-md-1  row-content-product" >
-               <span class="glyphicon glyphicon-arrow-down" style="font-size:30px"></span>
+               <span class="glyphicon glyphicon-arrow-down indicador" v-bind:class="{'bajo-precio': productoEstaEnDcto(producto.precioOferta,producto.precioAnterior), 'aumento-precio': !productoEstaEnDcto(producto.precioOferta,producto.precioAnterior)}"></span>
             </div>
 
             <div class="col-md-1  row-content-product">
-                Imagen
+                <img  class="seguidos-imagen" :src="getImagenProducto(producto.id)"/>
             </div>
             <div class="col-md-3">
-                {{producto.nombre}}
+                <h3>{{producto.nombre}}</h3>
             </div>
 
 
             <div class="col-md-3">
-              <p >
-                {{producto.precioActual}}
+              <p style="font-size:30px" v-bind:class="{'bajo-precio': productoEstaEnDcto(producto.precioOferta,producto.precioAnterior), 'aumento-precio': !productoEstaEnDcto(producto.precioOferta,producto.precioAnterior)}">
+               ${{producto.precioOferta}}
               </p>
 
-              <span>{{producto.mejorPrecioAnterior}}</span>
+              <p style="font-size:20px">Anterior: ${{producto.precioAnterior}} <br /><span style="font-size:16px"> Ahorras $ {{producto.precioAnterior - producto.precioOferta}}</span></p>
+
+
 
             </div>
 
@@ -148,12 +150,14 @@
     <thead>
       <tr>
         <th>Tienda</th>
+        <th>Precio Actual</th>
         <th>Precio</th>
         </tr>
     </thead>
     <tbody>
-      <tr v-for= "valores in producto.listaPrecio" :key="valores.supermercado">
-        <td>{{valores.supermercado}}</td>
+      <tr v-for= "valores in producto.precios" :key="valores.id">
+        <td>{{valores.nombre}}</td>
+        <td v-bind:class="{'bajo-precio': productoEstaEnDcto(valores.precioOferta,valores.precio), 'aumento-precio': !productoEstaEnDcto(valores.precioOferta,valores.precio)}">{{valores.precio_oferta}}</td>
         <td>{{valores.precio}}</td>
 
       </tr>
@@ -168,11 +172,7 @@
           </div>
 
 
-          <div class="panel-body">Panel Content
 
-
-
-          </div>
         </div>
       </div>
 
@@ -228,16 +228,23 @@ body{
   padding-top: 20px;
   padding-bottom:20px;
   text-align: center;
+  position: relative;
+  display: grid;
+display: flex;
+  align-items: center;
+
 
 }
 
 .row-content-product{
-  vertical-align: middle;
+
+/*height:inherit;*/
+
 }
 
 #headers{
 
-  text-align: center;
+text-align: center;
   padding-top: 20px;
   padding-bottom: 20px;
   background-color: #e5e5e5;
@@ -245,6 +252,34 @@ body{
   font-size: 20px;
 }
 
+td {
+  text-align: center;
+  vertical-align: middle;
+  text-transform: capitalize;
+}
+
+th {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.seguidos-imagen{
+  width: 100px;
+  height:100px;
+  object-fit: scale-down;
+}
+
+.aumento-precio{
+  color: red;
+}
+
+.bajo-precio{
+  color: #2fe331
+}
+
+.indicador{
+  font-size:40px;
+}
 </style>
 
 </html>
