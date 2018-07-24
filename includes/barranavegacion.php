@@ -30,6 +30,7 @@
       <li><a href="index.php"><span class="glyphicon glyphicon-home"></span>&nbsp; Inicio</a></li>
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-list-alt"></span> Mis Listas
       <span class="caret"></span></a>
+
       <ul class="dropdown-menu" id="#myidnavbar">
         <?php
         for($i=0;$i<$n_listas;$i++){
@@ -38,6 +39,7 @@
         }
 
          ?>
+
       </ul>
       </li>
       <li class="dropdown" ><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class=" glyphicon glyphicon-user"></span> Mi Cuenta
@@ -56,6 +58,7 @@
 <style>
 
 .navbar{
+  font-size: 18px;
   font-size: 18px !important;
 }
 </style>
