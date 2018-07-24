@@ -11,54 +11,9 @@ new Vue({
   },
 
   data: {
-    
-    lista: {
-      id: 1,
-      nombre: 'lista 1'
-    },
-		infoLista:[],
     opcionesOrdernarCot: ['Supermercado Más Barato', 'Menor Precio Total'],
     ordenarCot: ['Personalizado'],
-    producto: [{
-        id: 1,
-        nombre: 'Leche Natural Semidescremada',
-        cantidad: 1,
-        supermercados: [{
-          nombre: 'lider',
-          precio: 700
-        }, {
-          nombre: 'jumbo',
-          precio: 740
-        }, {
-          nombre: 'santa isabel',
-          precio: 730
-        }, {
-          nombre: 'tottus',
-          precio: 740
-        }, {
-          nombre: 'unimarc',
-          precio: 760
-        }],
-        super: '',
-        total: ''
-      },
-      {
-        id: 2,
-        nombre: 'Carne Abastero Cat. V',
-        cantidad: 1,
-        supermercados: [{
-          nombre: 'lider',
-          precio: 6384
-        }, {
-          nombre: 'jumbo',
-          precio: 7180
-        }, {
-          nombre: 'santa isabel',
-          precio: 6780
-        }],
-        super: '',
-        total: ''
-      }
+    producto: [
     ]
   },
 
@@ -86,13 +41,12 @@ new Vue({
 			$.ajax({
 				url: 'php/get_info_lista.php',
 				type: 'get',
-				data:send_query,
+				data: send_query,
 				dataType: 'json'
 			}).done(
 				data => {
           console.log(data);
-          this.lista = data.lista;
-					this.producto = data.productos;
+					this.producto = data;
 				}
 			).fail(
 				function() {

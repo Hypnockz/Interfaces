@@ -26,13 +26,12 @@
   if(isset($_GET["id"])){
      // echo $_GET["nombre_D"];
       $id_lista = $_GET["id"];
-  }
-  $lista=pg_query_params($db,  "select nombre
+      $lista=pg_query_params($db,  "select *
                                    from interfaces.lista_de_compra where id=$1
                                   ",array($id_lista) );
-  $Productos=pg_query_params($db,  "select *
-                                   from interfaces.producto as p, interfaces.pertenece_compra as c where c.id_lista=$1 and c.id_producto=p.id
-                                  " ,array($id_lista));
+  }
+  $nom_lista=pg_fetch_row($lista);
+  
   ?>
 
   	<?php require 'includes/barranavegacion.php' ?>
@@ -47,7 +46,7 @@
           <div class="panel-title">
             <div class="row">
               <div class="col-xs-6">
-                <h5><span class="glyphicon glyphicon-list-alt"></span> Lista de Compras <span>></span> {{lista.nombre}} </h5>
+                <h5><span class="glyphicon glyphicon-list-alt"></span> Lista de Compras <span>></span> <?php print($nom_lista[1]); ?> </h5>
               </div>
               <div class="col-xs-6">
                 <div class="col-xs-6 text-right">¿Te ayudamos?</div>
