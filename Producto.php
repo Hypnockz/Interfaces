@@ -124,8 +124,9 @@ function CreateNewList(idprod) {
             success: function (obj) {
                           if( !('error' in obj) ) {
                               var text = "<li><a href=\"#\" id=\"\" onclick=\"AddtoList(" + obj.result + "," + idprod + ")\" >" + fileName + "</a></li>";
-                              $(text).insertBefore('#myiddivider'); // esto deberia estar adentro de el jquery
-                              
+                              $(text).insertBefore('#myiddivider');
+                              var elementExists = document.getElementById("#myidnavbar");  
+                              $(elementExists).append(text);
                           }
                           else {
                               console.log(obj.error);
