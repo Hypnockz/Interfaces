@@ -19,6 +19,7 @@ new Vue({
 
   data: {
     loadingComplete: false,
+    porEliminar:0,
     queryNombre: '',
     opcionesOrdernarPor: ['Nombre', 'Mayor Oferta', 'Aumento de Precio'],
 
@@ -102,10 +103,13 @@ new Vue({
     deleteProductoSeguido(id_producto) {
       console.log(id_producto);
 
-
-      this.seguidos = this.seguidos.filter(function(item) {
-        return item.id !== id_producto;
+      $("#ModalEliminar").modal({
+        backdrop: 'static'
       });
+      $("#ModalEliminar").on('shown.bs.modal');
+      this.porEliminar= id_producto;
+
+
     },
 
     getImagenProducto: function(id) {
@@ -140,6 +144,20 @@ new Vue({
         return false;
       }
       else{return true}
+    },
+
+    eliminacionConfirmadaDeLista:function(){
+      console.log(this.porEliminar);
+      console.log(this.seguidos.filter(function(item) {
+        return item.id !== this.porEliminar;
+      }));
+
+    this.seguidos = this.seguidos.filter(function(item) {
+      console.log(JSON.stringify(item)+ '\n');
+      return item.id !== this.porEliminar;
+    });
+     $('#ModalEliminar').modal('hide');
+
     }
 
 

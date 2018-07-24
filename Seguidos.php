@@ -114,7 +114,7 @@
             </div>
 
             <div class="col-md-1">
-              
+
             </div>
           </div>
 
@@ -182,11 +182,38 @@
       <!-- /.col-lg-9 -->
 
 
+      <!-- Modal -->
 
+      <div class="modal fade" id="ModalEliminar" role="dialog">
+         <div class="modal-dialog modal-sm">
+           <div class="modal-content">
+             <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal">&times;</button>
+               <h4 class="modal-title">Eliminar de la Lista</h4>
+             </div>
+             <div class="modal-body">
+               <p>El producto ya no aparecerá en la lista y ya no recibirá notificaciones de los cambios de precio.</p>
+               <p style="font-weight: bold">
+                 ¿Esta seguro de que quiere realizar esta acción?
+               </p>
+             </div>
+             <div class="modal-footer">
+               <button type="button " style="float: left;background-color: rgb(171, 171, 171);color:white" class="btn btn-default" data-dismiss="modal" >Cancelar</button>
+               <button v-on:click="eliminacionConfirmadaDeLista" type="button" class="btn btn-default" style="background-color: red;color:white">Si, eliminar</button>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+
+  <!--  end modal-->
 <!--END Number Navigator-->
 
     </div>
     <!-- /.row -->
+
+
+
 
   </div>
 
@@ -279,6 +306,9 @@ th {
 
 .indicador{
   font-size:40px;
+}
+#ModalEliminar{
+  padding-top: 200px;
 }
 </style>
 
