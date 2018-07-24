@@ -104,7 +104,44 @@
 
       <div class="col-md-9">
 
+
+
         <div class="panel panel-default">
+
+          <div class="row row-content"  >
+            <div class="col-md-5"></div>
+
+              <div class="col-md-3" style="margin:auto !important">
+                <multiselect
+                  v-model="ordenarPor"
+                  :options="opcionesOrdernarPor"
+                  :multiple="false"
+
+
+                  :hide-selected="false"
+                  :allow-empty="false"
+                  :open-direction="'bottom'"
+                  select-label="Seleccionar"
+                  placeholder="Ordenar Por"
+                  @select="reordenarProductos"
+                  style="margin-top:5px"
+                  >
+                </multiselect>
+              </div>
+
+              <div class="col-md-4">
+                <form class="navbar-form" role="search">
+
+                  <div class="input-group" style="width:100%">
+                    <input v-model="queryNombre" class="form-control input-md" placeholder="Buscar en la selección" type="text">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                  </div>
+                </form>
+              </div>
+
+
+
+          </div>
           <div class="panel-body" v-show="loadingComplete">
 
             <div class="row">
@@ -119,22 +156,27 @@
               <paginate ref="paginatorProductos"
                 name="productos"
                 :list="filteredProductoPrecio"
-                :per="9"
+                :per="6"
               >
+              <div class="wrapper">
 
-                  <div v-for="product in paginated('productos')" class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                      <a @click="irADetalleProducto(product.id)"> <img class="card-img-top" :src="getImagenProducto(product.id)" alt=""></a>
-                      <div class="card-body">
-                        <h3 class="card-title">
-                          <a @click="irADetalleProducto(product.id)">{{product.nombre}}</a>
-                        </h3>
-                        <p style="font-size:30px;"> $ {{product.precio}}</p>
-                        <p class="card-text">Menor precio en: <span style="text-transform:capitalize">{{product.masBaratoEn}}</span></p>
-                      </div>
 
-                    </div>
-                  </div>
+<div v-for="product in paginated('productos')" >
+  <div class="card h-100">
+    <a @click="irADetalleProducto(product.id)"> <img class="card-img-top" :src="getImagenProducto(product.id)" alt=""></a>
+    <div class="card-body">
+      <h3 class="card-title">
+        <a @click="irADetalleProducto(product.id)">{{product.nombre}}</a>
+      </h3>
+      <p style="font-size:30px;"> $ {{product.precio}}</p>
+      <p class="card-text">Menor precio en: <span style="text-transform:capitalize">{{product.masBaratoEn}}</span></p>
+    </div>
+
+  </div>
+</div>
+              </div>
+
+
 
 
               </paginate>
@@ -333,8 +375,8 @@ ul.paginate-links{
 }
 
 .card-img-top{
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: 100px;
   object-fit: scale-down;
   cursor: pointer;
 }
@@ -359,6 +401,12 @@ ul.paginate-links{
 
 .multiselect__tag{
   text-transform: capitalize;
+}
+
+.wrapper {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+grid-gap: 10px;
 }
 </style>
 </html>
