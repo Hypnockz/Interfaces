@@ -97,8 +97,20 @@ function showCAlert(){
 
 }
 
+function showDAlert(){
+  if($("#myDAlert").find("div#myDAlert2").length==0){
+    $("#myDAlert").append("<div class='alert alert-success alert-dismissable' id='myDAlert2'> <button type='button' class='close' data-dismiss='alert'  aria-hidden='true'>&times;</button> Agregado a tu lista! Guardado correctamente.</div>");
+  }
+  $("#myDAlert").css("display", "");
 
-function CreateNewList() {
+  $("#myDAlert").fadeTo(2000, 500).slideUp(500, function(){
+    $("#myDAlert").slideUp(500); });
+
+
+}
+
+
+function CreateNewList(idprod) {
     var input = document.getElementById('Inputlista'),
         fileName = input.value;
 
@@ -111,6 +123,9 @@ function CreateNewList() {
             success: function (obj, textstatus) {
                           if( !('error' in obj) ) {
                               yourVariable = obj.result;
+                              console.log(obj);
+
+
                           }
                           else {
                               console.log(obj.error);
@@ -118,7 +133,33 @@ function CreateNewList() {
                     }
         });
 
+$("<li><a href=\"#\" id=\"\" >Mi Supuesta Lista Creada</a></li>").insertBefore('#myiddivider'); // esto deberia estar adentro de el jquery 
+
+
 showCAlert();
+
+}
+
+function AddtoList(idlist,idprod) {
+
+
+        jQuery.ajax({
+            type: "POST",
+            url: 'like_request.php',
+            dataType: 'json',
+            data: {functionname: 'addto_list', arguments:  [idlist, idprod] },
+
+            success: function (obj, textstatus) {
+                          if( !('error' in obj) ) {
+                              yourVariable = obj.result;
+                          }
+                          else {
+                              console.log(obj.error);
+                          }
+                    }
+        });
+
+showDAlert();
 
 }
 
@@ -163,6 +204,11 @@ showCAlert();
                               where  p.id = pr.id_producto AND s.id = pr.id_super
                               GROUP BY p.id,p.nombre,p.marca,s.nombre,pr.id_producto");
 
+
+  $listas = pg_query($db, "SELECT *
+                            FROM interfaces.lista_de_compra
+  ");
+
   $Productos=pg_query($db, "SELECT p.id, p.nombre, p.marca, s.nombre, l.m
                               FROM interfaces.producto as p, interfaces.supermercado as s,interfaces.precios as pr, ( SELECT  pr.id_producto, min(pr.precio_oferta) as m
                                                                                                                       FROM interfaces.precios as pr
@@ -175,6 +221,8 @@ showCAlert();
   $consulta=pg_query_params($db,  "select *
                                    from interfaces.precios as p , interfaces.supermercado as s, interfaces.producto as pr
                                    where p.id_producto = $1 and s.id = p.id_super and p.id_producto = pr.id ",array($id_producto));
+
+  $n_listas= pg_num_rows($listas);
 
   $n_supermercados= pg_num_rows($consulta);
 
@@ -267,6 +315,14 @@ z-index: -1;
 
     </div>
 
+    <div class="container" style="display:none;" id="myDAlert">
+        <div class="alert alert-success alert-dismissable" id="myDAlert2">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            Agregado a tu lista! Guardado correctamente.
+        </div>
+
+    </div>
+
     <div class="container" id="change">
 
       <div class="col-md-4">
@@ -291,11 +347,15 @@ z-index: -1;
             <div class="btn-group">
               <img class="btn btn-default dropdown-toggle" data-toggle="dropdown" src="assets/img/add_list.png" aria-haspopup="true" aria-expanded="false" style="padding: 4px 4px;">
 
-              <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li role="separator" class="divider"></li>
+              <ul class="dropdown-menu" >
+                <?php
+                for($i=0;$i<$n_listas;$i++){
+                  $row = pg_fetch_array ( $listas,$i );
+                  echo "<li><a href=\"#\" id=\"\" onclick=\"AddtoList({$row[0]},{$id_producto})\" >{$row[1]}</a></li>";
+                }
+
+                 ?>
+                <li role="separator" class="divider" id="myiddivider"></li>
                 <li><a href="#myModal" data-toggle="modal">Crear nueva lista</a></li>
               </ul>
             </div>
