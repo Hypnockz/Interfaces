@@ -80,9 +80,45 @@ function showBAlert(){
   $("#myBAlert").css("display", "");
 
   $("#myBAlert").fadeTo(2000, 500).slideUp(500, function(){
-    $("#myBAlert").slideUp(500);
-});
+    $("#myBAlert").slideUp(500); });
 
+
+}
+
+function showCAlert(){
+  if($("#myCAlert").find("div#myCAlert2").length==0){
+    $("#myCAlert").append("<div class='alert alert-success alert-dismissable' id='myCAlert2'> <button type='button' class='close' data-dismiss='alert'  aria-hidden='true'>&times;</button> Lista creada! Guardado correctamente.</div>");
+  }
+  $("#myCAlert").css("display", "");
+
+  $("#myCAlert").fadeTo(2000, 500).slideUp(500, function(){
+    $("#myCAlert").slideUp(500); });
+
+
+}
+
+
+function CreateNewList() {
+    var input = document.getElementById('Inputlista'),
+        fileName = input.value;
+
+        jQuery.ajax({
+            type: "POST",
+            url: 'like_request.php',
+            dataType: 'json',
+            data: {functionname: 'add_list', arguments: fileName },
+
+            success: function (obj, textstatus) {
+                          if( !('error' in obj) ) {
+                              yourVariable = obj.result;
+                          }
+                          else {
+                              console.log(obj.error);
+                          }
+                    }
+        });
+
+showCAlert();
 
 }
 
@@ -166,8 +202,30 @@ function showBAlert(){
   ?>
 
 
+<style >
 
+.modal-backdrop {
+z-index: -1;
+}
 
+.modal {
+  text-align: center;
+  padding: 0!important;
+}
+.modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+</style>
 
 
 
@@ -175,10 +233,16 @@ function showBAlert(){
 
   <?php require 'includes/barranavegacion.php' ?>
 
+
+
+
     <main role="main">
 
 
     </main>
+
+
+
     <div class="container" style="display:none;" id="myAlert">
         <div class="alert alert-success alert-dismissable" id="myAlert2">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -195,6 +259,14 @@ function showBAlert(){
 
     </div>
 
+    <div class="container" style="display:none;" id="myCAlert">
+        <div class="alert alert-success alert-dismissable" id="myCAlert2">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            Lista creada! Guardado correctamente.
+        </div>
+
+    </div>
+
     <div class="container" id="change">
 
       <div class="col-md-4">
@@ -207,16 +279,52 @@ function showBAlert(){
           <div class="col-xs-6 col-sm-6 col-no-padding">
 
             <a href="#">
-              <img id="like" class="thumbnail img-responsive" onclick="changeImage(<?php echo $id_producto; ?>)" src="assets/img/like.png" />
+              <img id="like" class="thumbnail img-responsive" onclick="changeImage(<?php echo $id_producto; ?>)" src="assets/img/like.png" style="margin: auto;" />
             </a>
 
           </div>
-          <div class="col-xs-6 col-sm-6 col-no-padding">
+          <div class="col-xs-6 col-sm-6 col-no-padding" style="text-align: center;">
 
 
-              <a href="#">
-                <img class="thumbnail img-responsive" src="assets/img/add_list.png" />
-              </a>
+
+            <!-- Single button -->
+            <div class="btn-group">
+              <img class="btn btn-default dropdown-toggle" data-toggle="dropdown" src="assets/img/add_list.png" aria-haspopup="true" aria-expanded="false" style="padding: 4px 4px;">
+
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#myModal" data-toggle="modal">Crear nueva lista</a></li>
+              </ul>
+            </div>
+
+
+            <!-- Modal de crear lista -->
+            <div id="myModal" class="modal fade" style="" >
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Confirmation</h4>
+                        </div>
+
+                        <div class="form-group">
+                          <input type="text" class="form-control" id="Inputlista" aria-describedby="listaHelp" placeholder="Ingresa Nombre">
+                          <small id="listaHelp" class="form-text text-muted">Ponle un nombre a tu nueva lista.</small>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="CreateNewList()" data-dismiss="modal">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
           </div>
         </div>
 
@@ -554,6 +662,9 @@ function showBAlert(){
 
     <script>window.jQuery || document.write('<script src="assets/js/jquery-slim.min.js"><\/script>')</script>
     <script src="assets/js/popper.min.js"></script>
+
+
+
   </body>
 
 
@@ -561,6 +672,7 @@ function showBAlert(){
 
 body{
 padding-top: 0px;
+}
 }
 
 </style>
