@@ -41,14 +41,14 @@
   <?php require 'includes/barranavegacion.php' ?>
 
 
-  <div class="container" style="margin-left:5px;margin-right:5px; width:100%; min-height:800px" id="vue-result-busq" >
+  <div class="container"   style="margin-left:5px;margin-right:5px; width:100%; min-height:800px" id="vue-result-busq" >
 
-    <div class="row"style="margin:10px;padding-bottom:40px">
+    <div v-cloak  class="row"style="margin:10px;padding-bottom:40px">
 
       <h1> Buscando : {{textoBusqueda}}</h1>
     </div>
 
-    <div class="row" >
+    <div v-cloak  class="row" >
 
       <div class="col-md-3">
 
@@ -108,6 +108,10 @@
           <div class="panel-body" v-show="loadingComplete">
 
             <div class="row">
+
+            <div style="padding:40px">
+              <h4 style="text-align:left">Se han encontrado {{productosMatch}} productos.</h4>
+            </div>
 
               <paginate ref="paginatorProductos"
                 name="productos"
@@ -345,5 +349,7 @@ ul.paginate-links{
 .card-title{
   font-size: 30px;
 }
+
+[v-cloak] {display: none}
 </style>
 </html>

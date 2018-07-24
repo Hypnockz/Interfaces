@@ -11,9 +11,12 @@ components: {
  computed:{
      filteredProductoPrecio: function(){
        //console.log('Buscar por nombre');
-       return this.productosQuery.filter(producto=>{
+       var r =this.productosQuery.filter(producto=>{
          return parseInt(producto.precio) >= parseInt(this.precioMinimoSlider) &&  parseInt(producto.precio) <= parseInt(this.precioMaximoSlider) && (this.productoEstaEnTiendaSeleccionada(producto));
-       })
+       });
+          this.productosMatch = r.length;
+          return r;
+       return
      },
 
  },
@@ -24,7 +27,7 @@ data:{
   loadingComplete:false,
   precioMinimoSlider:0,
   precioMaximoSlider:100000,
-
+  productosMatch:0,
   infoPrecios : [],
   textoBusqueda:'Leche Colún',
   supermercadosSeleccionados:[],
@@ -61,10 +64,23 @@ methods:{
   },
 
   goToFirstPage:function() {
+
    if (this.$refs.paginatorProductos) {
-     this.$refs.paginatorProductos.goToPage(1);
+     console.log("GO "+ this.$refs.paginatorProductos);
+    console.log("GOL "+this.$refs.paginatorProductos.lastPage);
+    if (this.$refs.paginatorProductos.lastPage==0) {
+      //this.$refs.paginatorProductos.goToPage(0);
+      //this.$refs.paginatorProductos.goToPage(1);
+    }
+          else{
+            this.$refs.paginatorProductos.goToPage(1);
+            this.filte
+          }
+     console.log("Go First Page");
    }
  },
+
+
 
   checkRangoValido:function(){
     console.log("PrecioMinimo "+this.precioMinimoSlider);
@@ -76,6 +92,7 @@ methods:{
         this.precioMinimoSlider = this.precioMaximoSlider;
         this.precioMaximoSlider = temp;
       }
+      this.goToFirstPage()
   },
 
   inicialRangoPrecios:function(){
