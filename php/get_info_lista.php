@@ -18,8 +18,10 @@ $id_lista=1;
 
       array_push($return,$row);
     }
+
     foreach ($return as $producto) {
       # code...
+      $i=0;
       $producto->supermercados = array();
       $producto->super=array();
       $aidi = $producto->id;
@@ -30,8 +32,11 @@ $id_lista=1;
 
        while ($rowP = pg_fetch_object($consulta)) {
         //var_dump($rowP);
-
+          if($i==0){
+            array_push($producto->super,$rowP);
+          }
           array_push($producto->supermercados,$rowP);
+          $i++;
         }
     }
 

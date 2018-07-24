@@ -33,7 +33,10 @@ new Vue({
           nombre: 'unimarc',
           precio: 760
         }],
-        super: '',
+        super: {
+          nombre: 'lider',
+          precio: 700
+        },
         total: ''
       },
       {
@@ -50,7 +53,10 @@ new Vue({
           nombre: 'santa isabel',
           precio: 6780
         }],
-        super: '',
+        super: {
+          nombre: 'lider',
+          precio: 6384
+        },
         total: ''
       }
     ]
