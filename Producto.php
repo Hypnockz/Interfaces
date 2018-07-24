@@ -114,18 +114,18 @@ function CreateNewList(idprod) {
     var input = document.getElementById('Inputlista'),
         fileName = input.value;
 
+
         jQuery.ajax({
             type: "POST",
             url: 'like_request.php',
             dataType: 'json',
             data: {functionname: 'add_list', arguments: fileName },
 
-            success: function (obj, textstatus) {
+            success: function (obj) {
                           if( !('error' in obj) ) {
-                              yourVariable = obj.result;
-                              console.log(obj);
-
-
+                              var text = "<li><a href=\"#\" id=\"\" onclick=\"AddtoList(" + obj.result + "," + idprod + ")\" >" + fileName + "</a></li>";
+                              $(text).insertBefore('#myiddivider'); // esto deberia estar adentro de el jquery
+                              
                           }
                           else {
                               console.log(obj.error);
@@ -133,7 +133,6 @@ function CreateNewList(idprod) {
                     }
         });
 
-$("<li><a href=\"#\" id=\"\" >Mi Supuesta Lista Creada</a></li>").insertBefore('#myiddivider'); // esto deberia estar adentro de el jquery 
 
 
 showCAlert();
@@ -377,7 +376,7 @@ z-index: -1;
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" onclick="CreateNewList()" data-dismiss="modal">Save changes</button>
+                            <button type="button" class="btn btn-primary" onclick="CreateNewList(<?php echo $id_producto; ?>)" data-dismiss="modal">Save changes</button>
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 <?php
 
  header('Content-Type: application/json');
-
+$return = array();
 $db = pg_connect("host=plop.inf.udec.cl port=5432 dbname=bdi2017d user=bdi2017d password=bdi2017d");
 
  if( !isset($_POST['functionname']) ) { $aResult['error'] = 'No function name!'; }
@@ -24,7 +24,8 @@ if( !isset($aResult['error']) ) {
                                           VALUES (default,$1)",array($_POST["arguments"]));
             $query = pg_query($db,"SELECT max(interfaces.lista_de_compra.id)
                                   FROM interfaces.lista_de_compra");
-            $last = pg_fetch_array ( $query,0);
+            $row = pg_fetch_array ($query,0);
+            $return ['result'] = $row[0];
             break;
 
             case 'addto_list':
@@ -34,6 +35,5 @@ if( !isset($aResult['error']) ) {
         }
 
     }
-
-    echo $last;
+     echo json_encode($return);
  ?>
