@@ -69,6 +69,10 @@ new Vue({
       return 0;
     },
 
+    irADetalleProducto:function(id){
+      window.location.href ="Producto.php?id="+id;
+    },
+
     compareByDiscount: function(a, b) {
       var temp1 = a.precioOferta - a.precioAnterior;
       var temp2 = b.precioOferta - b.precioAnterior;

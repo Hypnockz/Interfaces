@@ -16,7 +16,7 @@ components: {
        });
           this.productosMatch = r.length;
           return r;
-       return
+
      },
 
  },

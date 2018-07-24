@@ -127,10 +127,10 @@
             </div>
 
             <div class="col-md-1  row-content-product">
-                <img  class="seguidos-imagen" :src="getImagenProducto(producto.id)"/>
+                <img @click="irADetalleProducto(producto.id)"  class="seguidos-imagen linkProducto" :src="getImagenProducto(producto.id)"/>
             </div>
-            <div class="col-md-3">
-                <h3>{{producto.nombre}}</h3>
+            <div class="col-md-3 linkProducto" >
+                <h3 @click="irADetalleProducto(producto.id)">{{producto.nombre}}</h3>
             </div>
 
 
@@ -230,7 +230,7 @@
 </body>
 
 <footer class="container">
-  
+
 </footer>
 
 <style>
@@ -310,6 +310,10 @@ th {
 }
 #ModalEliminar{
   padding-top: 200px;
+}
+
+.linkProducto{
+  cursor: pointer;
 }
 </style>
 
