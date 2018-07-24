@@ -125,7 +125,7 @@ function CreateNewList(idprod) {
                           if( !('error' in obj) ) {
                               var text = "<li><a href=\"#\" id=\"\" onclick=\"AddtoList(" + obj.result + "," + idprod + ")\" >" + fileName + "</a></li>";
                               $(text).insertBefore('#myiddivider');
-                              var elementExists = document.getElementById("#myidnavbar");  
+                              var elementExists = document.getElementById("#myidnavbar");
                               $(elementExists).append(text);
                           }
                           else {
@@ -279,7 +279,7 @@ z-index: -1;
 
   <body>
 
-  <?php require 'includes/barranavegacion.php' ?>
+  <?php require 'includes/barranavegacion2.php' ?>
 
 
 

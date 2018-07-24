@@ -32,11 +32,13 @@
       <span class="caret"></span></a>
 
       <ul class="dropdown-menu" id="#myidnavbar">
-        <li v-for="l in listas">
-          <a @click="goLista(l.id)">{{l.nombre}}</a>
-        </li>
+        <?php
+        for($i=0;$i<$n_listas;$i++){
+          $row = pg_fetch_array ( $listas,$i );
+          echo "<li><a href=\"#\" id=\"\" onclick=\"AddtoList({$row[0]},{$id_producto})\" >{$row[1]}</a></li>";
+        }
 
-
+         ?>
 
       </ul>
       </li>
