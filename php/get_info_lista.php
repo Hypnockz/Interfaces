@@ -27,7 +27,8 @@ if(isset($_GET["id"])){
     }
     foreach ($return['productos'] as $producto) {
       # code...
-      $producto->super = array();
+      $producto->supermercados = array();
+      $producto->super=array();
       $aidi = $producto->id;
       $consulta=pg_query_params($db,  "s.nombre as nombre, precio_oferta as precio
                               from pertenece_compra as pc,producto as p, precios as pr, supermercado as s
@@ -37,7 +38,7 @@ if(isset($_GET["id"])){
        while ($rowP = pg_fetch_object($consulta)) {
         //var_dump($rowP);
 
-          array_push($producto->super,$rowP);
+          array_push($producto->supermercados,$rowP);
         }
     }
 
