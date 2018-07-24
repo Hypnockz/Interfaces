@@ -9,6 +9,86 @@
 <link rel="stylesheet" type="text/css" href="assets/css/grids.css">
 <link rel="stylesheet" type="text/css" href="assets/css/Carousel.css">
 
+<script>
+
+function changeImage(id_prod) {
+    var image = document.getElementById('like');
+    if (image.src.match("assets/img/like2.png")) {
+        image.src = "assets/img/like.png";
+
+        jQuery.ajax({
+            type: "POST",
+            url: 'like_request.php',
+            dataType: 'json',
+            data: {functionname: 'del_fav', arguments: id_prod },
+
+            success: function (obj, textstatus) {
+                          if( !('error' in obj) ) {
+                              yourVariable = obj.result;
+                          }
+                          else {
+                              console.log(obj.error);
+                          }
+                    }
+        });
+
+
+        showBAlert();
+    } else {
+        image.src = "assets/img/like2.png";
+
+
+        jQuery.ajax({
+            type: "POST",
+            url: 'like_request.php',
+            dataType: 'json',
+            data: {functionname: 'add_fav', arguments: id_prod },
+
+            success: function (obj, textstatus) {
+                          if( !('error' in obj) ) {
+                              yourVariable = obj.result;
+                          }
+                          else {
+                              console.log(obj.error);
+                          }
+                    }
+        });
+
+
+        showAlert();
+
+    }
+}
+
+function showAlert(){
+  if($("#myAlert").find("div#myAlert2").length==0){
+    $("#myAlert").append("<div class='alert alert-success alert-dismissable' id='myAlert2'> <button type='button' class='close' data-dismiss='alert'  aria-hidden='true'>&times;</button> Agregado a seguidos! Guardado correctamente.</div>");
+  }
+  $("#myAlert").css("display", "");
+
+  $("#myAlert").fadeTo(2000, 500).slideUp(500, function(){
+    $("#myAlert").slideUp(500);
+});
+
+
+}
+
+function showBAlert(){
+  if($("#myBAlert").find("div#myBAlert2").length==0){
+    $("#myBAlert").append("<div class='alert alert-warning alert-dismissable' id='myBAlert2'> <button type='button' class='close' data-dismiss='alert'  aria-hidden='true'>&times;</button> Eliminado de seguidos! Guardado correctamente.</div>");
+  }
+  $("#myBAlert").css("display", "");
+
+  $("#myBAlert").fadeTo(2000, 500).slideUp(500, function(){
+    $("#myBAlert").slideUp(500);
+});
+
+
+}
+
+</script>
+
+
 
 
 
@@ -38,6 +118,9 @@
       $id_producto = $_GET["id"];
   }
   else echo "ERROR";
+
+
+
 
   $asd=pg_query($db, "SELECT p.id,p.nombre, p.marca,s.nombre , min(pr.precio_oferta)
                               FROM interfaces.precios as pr,interfaces.producto as p, interfaces.supermercado as s
@@ -84,6 +167,10 @@
 
 
 
+
+
+
+
   <body>
 
   <?php require 'includes/barranavegacion.php' ?>
@@ -92,6 +179,21 @@
 
 
     </main>
+    <div class="container" style="display:none;" id="myAlert">
+        <div class="alert alert-success alert-dismissable" id="myAlert2">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            Agregado a seguidos! Guardado correctamente.
+        </div>
+
+    </div>
+
+    <div class="container" style="display:none;" id="myBAlert">
+        <div class="alert alert-warning alert-dismissable" id="myBAlert2">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            Eliminado de seguidos! Guardado correctamente.
+        </div>
+
+    </div>
 
     <div class="container" id="change">
 
@@ -103,10 +205,18 @@
         <div class="row row-no-margin">
 
           <div class="col-xs-6 col-sm-6 col-no-padding">
-              <img class="thumbnail img-responsive" src="assets/img/like.png" style="margin-top: 10px;">
+
+            <a href="#">
+              <img id="like" class="thumbnail img-responsive" onclick="changeImage(<?php echo $id_producto; ?>)" src="assets/img/like.png" />
+            </a>
+
           </div>
           <div class="col-xs-6 col-sm-6 col-no-padding">
-              <img class="thumbnail img-responsive" src="assets/img/add_list.png" style="margin-top: 10px;">
+
+
+              <a href="#">
+                <img class="thumbnail img-responsive" src="assets/img/add_list.png" />
+              </a>
           </div>
         </div>
 
