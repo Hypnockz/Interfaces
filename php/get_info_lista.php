@@ -33,7 +33,8 @@ if(isset($_GET["id"])){
        while ($rowP = pg_fetch_object($consulta)) {
         //var_dump($rowP);
           if($i==0){
-            array_push($producto->super,$rowP);
+            $row1=$rowP;
+            $producto->super=$row1;
           }
           array_push($producto->supermercados,$rowP);
           $i++;

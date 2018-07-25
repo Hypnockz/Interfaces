@@ -26,7 +26,7 @@ new Vue({
       var t=0;
       for(var i=0 ; i <this.producto.length ; i++){
         var cantidad = this.producto[i].cantidad;
-        var precio = this.producto[i].super[0].precio;
+        var precio = this.producto[i].super.precio;
         t=t+parseInt(cantidad) * parseInt(precio);
         console.log(cantidad);
         console.log(precio);

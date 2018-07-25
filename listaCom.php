@@ -97,8 +97,8 @@
                   @select="CalcularTotal"
                   >
                 </multiselect>  </td>
-            <td class="price" align="right">{{producto.super[0].precio}} </td>
-            <td align="right" class="subtotal">{{producto.super[0].precio * producto.cantidad}}</td>
+            <td class="price" align="right">{{producto.super.precio}} </td>
+            <td align="right" class="subtotal">{{producto.super.precio * producto.cantidad}}</td>
             <td><a><button class="btn btn-danger" v-on:click="deleteProductoLista(producto.id)"><span>Eliminar </span> </button></a></td>
           </tr>
           <tr>
