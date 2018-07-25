@@ -279,7 +279,7 @@ z-index: -1;
 
   <body>
 
-  <?php require 'includes/barranavegacion2.php' ?>
+  <?php require 'includes/barranavegacion.php' ?>
 
 
 
