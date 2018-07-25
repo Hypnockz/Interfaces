@@ -382,8 +382,8 @@ z-index: -1;
                         </div>
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" onclick="CreateNewList(<?php echo $id_producto; ?>)" data-dismiss="modal">Save changes</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary" onclick="CreateNewList(<?php echo $id_producto; ?>)" data-dismiss="modal">Guardar Nueva Lista</button>
                         </div>
                     </div>
                 </div>
