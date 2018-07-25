@@ -326,6 +326,12 @@ z-index: -1;
     <div class="container" id="change">
 
       <div class="col-md-4">
+
+      <?php
+      $title = pg_fetch_array ($consulta,0);
+      ?>
+
+        <h1 class="display-4" align="center"><?php echo $title[7] ?></h1>
         <div class="row row-no-margin">
           <img class="img-responsive" src="<?php  echo"assets/img/{$id_producto}.png"; ?> " alt=""></a>
         </div>
